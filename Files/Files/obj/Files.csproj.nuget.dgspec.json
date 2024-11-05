@@ -1,0 +1,64 @@
+{
+  "format": 1,
+  "restore": {
+    "/Users/marianaalvarez/Documents/GitHub/Group-14/Files/Files/Files.csproj": {}
+  },
+  "projects": {
+    "/Users/marianaalvarez/Documents/GitHub/Group-14/Files/Files/Files.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/marianaalvarez/Documents/GitHub/Group-14/Files/Files/Files.csproj",
+        "projectName": "Files",
+        "projectPath": "/Users/marianaalvarez/Documents/GitHub/Group-14/Files/Files/Files.csproj",
+        "packagesPath": "/Users/marianaalvarez/.nuget/packages/",
+        "outputPath": "/Users/marianaalvarez/Documents/GitHub/Group-14/Files/Files/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/marianaalvarez/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.401/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
