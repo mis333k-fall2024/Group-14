@@ -5,7 +5,9 @@ namespace Files.Models
 	{
 		public Review()
 		{
-		}
+            [Display(Name = "Reservation ID")]
+            public Int32 ReservationID { get; set; }
+        }
 	}
 }
 
