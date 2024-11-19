@@ -1,0 +1,8 @@
+/Users/staronadele/Documents/GitHub/Group-14/Files/Files/obj/Debug/net8.0/Files.GeneratedMSBuildEditorConfig.editorconfig
+/Users/staronadele/Documents/GitHub/Group-14/Files/Files/obj/Debug/net8.0/Files.AssemblyInfoInputs.cache
+/Users/staronadele/Documents/GitHub/Group-14/Files/Files/obj/Debug/net8.0/Files.AssemblyInfo.cs
+/Users/staronadele/Documents/GitHub/Group-14/Files/Files/obj/Debug/net8.0/Files.csproj.CoreCompileInputs.cache
+/Users/staronadele/Documents/GitHub/Group-14/Files/Files/obj/Debug/net8.0/Files.MvcApplicationPartsAssemblyInfo.cache
+/Users/staronadele/Documents/GitHub/Group-14/Files/Files/obj/Debug/net8.0/Files.RazorAssemblyInfo.cache
+/Users/staronadele/Documents/GitHub/Group-14/Files/Files/obj/Debug/net8.0/Files.RazorAssemblyInfo.cs
+/Users/staronadele/Documents/GitHub/Group-14/Files/Files/obj/Debug/net8.0/Files.sourcelink.json
