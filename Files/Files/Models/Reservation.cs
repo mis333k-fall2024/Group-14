@@ -2,7 +2,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace FA24_Group14.Models
+namespace Files.Models
 {
     public class Reservation
     {
