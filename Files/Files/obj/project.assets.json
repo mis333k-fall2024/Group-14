@@ -8,19 +8,19 @@
     "net8.0": []
   },
   "packageFolders": {
-    "/Users/marianaalvarez/.nuget/packages/": {}
+    "/Users/staronadele/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/marianaalvarez/Documents/GitHub/Group-14/Files/Files/Files.csproj",
+      "projectUniqueName": "/Users/staronadele/Documents/GitHub/Group-14/Files/Files/Files.csproj",
       "projectName": "Files",
-      "projectPath": "/Users/marianaalvarez/Documents/GitHub/Group-14/Files/Files/Files.csproj",
-      "packagesPath": "/Users/marianaalvarez/.nuget/packages/",
-      "outputPath": "/Users/marianaalvarez/Documents/GitHub/Group-14/Files/Files/obj/",
+      "projectPath": "/Users/staronadele/Documents/GitHub/Group-14/Files/Files/Files.csproj",
+      "packagesPath": "/Users/staronadele/.nuget/packages/",
+      "outputPath": "/Users/staronadele/Documents/GitHub/Group-14/Files/Files/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/marianaalvarez/.nuget/NuGet/NuGet.Config"
+        "/Users/staronadele/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
