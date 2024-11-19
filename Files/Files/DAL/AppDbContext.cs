@@ -2,11 +2,11 @@
 using Microsoft.EntityFrameworkCore;
 
 //TODO: Update this using statement to include your project name
-using [YourProjectName].Models;
+using Files.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 //TODO: Make this namespace match your project name
-namespace [YourProjectName].DAL
+namespace Files.DAL
 {
     //NOTE: This class definition references the user class for this project.  
     //If your User class is called something other than AppUser, you will need
