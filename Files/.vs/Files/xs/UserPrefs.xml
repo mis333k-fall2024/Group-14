@@ -11,13 +11,18 @@
         <State name="__root__">
           <Node name="Files">
             <Node name="Files">
-              <Node name="Controllers" expanded="True" />
-              <Node name="DAL" expanded="True" />
-              <Node name="Models" expanded="True">
-                <Node name="ViewModels" expanded="True" />
-              </Node>
+              <Node name="Models" expanded="True" />
               <Node name="Seeding" expanded="True" />
-              <Node name="Utilities" expanded="True" selected="True" />
+              <Node name="Utilities" expanded="True" />
+              <Node name="Views" expanded="True">
+                <Node name="Account" expanded="True" />
+                <Node name="Home" expanded="True" />
+                <Node name="RoleAdmin" expanded="True" />
+                <Node name="Seed" expanded="True" />
+                <Node name="Shared" expanded="True">
+                  <Node name="_LoginPartial.cshtml" selected="True" />
+                </Node>
+              </Node>
             </Node>
           </Node>
         </State>
