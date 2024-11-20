@@ -24,6 +24,9 @@ namespace Files.DAL
         }
 
         //TODO: Add Dbsets here.  Products is included as an example.  
-        public DbSet<Product> Products { get; set; }
+        public DbSet<Property> Properties { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Reservation> Reservations { get; set; }
+        public DbSet<Review> Reviews { get; set; }
     }
 }
