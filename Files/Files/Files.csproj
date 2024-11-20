@@ -16,6 +16,10 @@
     <None Remove="Seeding\" />
     <None Remove="Models\ViewModels\" />
     <None Remove="Utilities\" />
+    <None Remove="Views\Account\" />
+    <None Remove="Views\Home\" />
+    <None Remove="Views\RoleAdmin\" />
+    <None Remove="Views\Seed\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
@@ -28,6 +32,10 @@
     <Folder Include="Seeding\" />
     <Folder Include="Models\ViewModels\" />
     <Folder Include="Utilities\" />
+    <Folder Include="Views\Account\" />
+    <Folder Include="Views\Home\" />
+    <Folder Include="Views\RoleAdmin\" />
+    <Folder Include="Views\Seed\" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="wwwroot\" />

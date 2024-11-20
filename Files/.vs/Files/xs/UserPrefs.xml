@@ -10,9 +10,14 @@
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="Files">
-            <Node name="Files" expanded="True">
-              <Node name="Models" expanded="True" />
+            <Node name="Files">
+              <Node name="Controllers" expanded="True" />
+              <Node name="DAL" expanded="True" />
+              <Node name="Models" expanded="True">
+                <Node name="ViewModels" expanded="True" />
+              </Node>
               <Node name="Seeding" expanded="True" />
+              <Node name="Utilities" expanded="True" selected="True" />
             </Node>
           </Node>
         </State>
