@@ -3,13 +3,13 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 //TODO: Change these using statements to match your project
-using fa23IdentityTemplate.DAL;
-using fa23IdentityTemplate.Models;
-using fa23IdentityTemplate.Utilities;
+using Files.DAL;
+using Files.Models;
+using Files.Utilities;
 using System;
 
 //TODO: Change this namespace to match your project
-namespace fa23IdentityTemplate.Controllers
+namespace Files.Controllers
 {
     [Authorize]
     public class AccountController : Controller

@@ -4,10 +4,10 @@ using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 
 //TODO: Change these using statements to match your project
-using fa23IdentityTemplate.Models;
+using Files.Models;
 
 //TODO: Change this namespace to match your project
-namespace fa23IdentityTemplate.Controllers
+namespace Files.Controllers
 {
     //TODO: Uncomment this line once you have roles working correctly
     [Authorize(Roles = "Admin")]

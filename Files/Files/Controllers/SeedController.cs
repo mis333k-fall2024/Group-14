@@ -1,9 +1,9 @@
 ﻿//TODO: Change this using statement to match your project (LastName_FirstName_HW3)
-using Ayala_Tina_HW3.DAL;
+using Files.DAL;
 using Microsoft.AspNetCore.Mvc;
 
 //TODO: Update this namespace to match your project's name
-namespace Ayala_Tina_HW3.Controllers
+namespace Files.Controllers
 {
     public class SeedController : Controller
     {
