@@ -9,14 +9,16 @@ namespace Files.Models
         [Key]
         public int UserId { get; set; } // Primary Key
 
-        [Required(ErrorMessage = "Email is required.")]
-        [EmailAddress(ErrorMessage = "Invalid email format.")]
-        public string Email { get; set; }
+        //identity already has email and password, see: HW5 interview
 
-        [Required(ErrorMessage = "Password is required.")]
-        [MinLength(8, ErrorMessage = "Password must be at least 8 characters long.")]
-        [MaxLength(100, ErrorMessage = "Password cannot exceed 100 characters.")]
-        public string Password { get; set; }
+        //[Required(ErrorMessage = "Email is required.")]
+        //[EmailAddress(ErrorMessage = "Invalid email format.")]
+        //public string Email { get; set; }
+
+        //[Required(ErrorMessage = "Password is required.")]
+        //[MinLength(8, ErrorMessage = "Password must be at least 8 characters long.")]
+        //[MaxLength(100, ErrorMessage = "Password cannot exceed 100 characters.")]
+        //public string Password { get; set; }
 
         [Required(ErrorMessage = "First name is required.")]
         [MaxLength(50, ErrorMessage = "First name cannot exceed 50 characters.")]
