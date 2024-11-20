@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace FA24_Group14
+namespace Files.Models
 {
     public class Review
     {

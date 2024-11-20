@@ -1,16 +1,26 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-public class Category
+namespace Files.Models
 {
-    [Key]
-    public int CategoryId { get; set; } // Primary Key
+    public class Category
+    {
+        [Key]
+        [Required(ErrorMessage = "CategoryId is required")]
+        public int CategoryId { get; set; } // Primary Key
 
-    [Required]
-    public string CategoryName { get; set; }
+        [Required(ErrorMessage = "Category Name is required")]
+        [Display(Name = "Category Name")]
+        public string CategoryName { get; set; }
 
-    public string Description { get; set; }
+        [Display(Name = "Category Name")]
+        public string Description { get; set; }
 
-    // Navigation Properties
-    public virtual ICollection<Property> Properties { get; set; } // One-to-Many with Properties
+        // Navigation Properties
+        public List<Property> Properties { get; set; }
+        // One-to-Many with Properties
+    }
 }
+
+
+
