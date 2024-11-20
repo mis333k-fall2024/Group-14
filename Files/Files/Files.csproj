@@ -14,6 +14,8 @@
     <None Remove="Views\Shared\" />
     <None Remove="DAL\" />
     <None Remove="Seeding\" />
+    <None Remove="Models\ViewModels\" />
+    <None Remove="Utilities\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
@@ -24,6 +26,8 @@
     <Folder Include="wwwroot\lib\" />
     <Folder Include="DAL\" />
     <Folder Include="Seeding\" />
+    <Folder Include="Models\ViewModels\" />
+    <Folder Include="Utilities\" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="wwwroot\" />
