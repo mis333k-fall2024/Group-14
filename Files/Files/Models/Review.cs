@@ -1,16 +1,28 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Xml.Linq;
 
 namespace Files.Models
 {
     public class Review
     {
         // Properties
-        public int ReviewId { get; set; }                  
-        public int PropertyId { get; set; }               
-        public int CustomerId { get; set; }              
-        private int _rating;                           
+        [Required(ErrorMessage = "Review Id is required")]
+        public int ReviewId { get; set; }
+
+        [Required(ErrorMessage = "Property Id is required")]
+        public int PropertyId { get; set; }
+
+        [Required(ErrorMessage = "Customer Id is required")]
+        public int CustomerId { get; set; }
+
+
+        private int _rating;
+
+        [Required(ErrorMessage = "Rating is required")]
+        [Display(Name = "Rating")]
         public int Rating
         {
             get { return _rating; }
@@ -22,7 +34,11 @@ namespace Files.Models
                 UpdateAverageRating();
             }
         }
-        private string _comment;                           
+
+        private string _comment;
+
+        [Required(ErrorMessage = "Comment is required")]
+        [Display(Name = "Comment")]
         public string Comment
         {
             get { return _comment; }
@@ -33,7 +49,12 @@ namespace Files.Models
                 _comment = value;
             }
         }
+
+
+        [Required(ErrorMessage = "Date Posted is required")]
+        [Display(Name = "Date Posted")]
         public DateTime DatePosted { get; private set; }   // Date  review was posted
+
         public bool IsEditable { get; set; }               // Indicates if  review can be edited
         private static List<int> AllRatings = new List<int>();  // Stores all ratings for average calculation
         public static double AverageRating { get; private set; } // Static property for average rating
