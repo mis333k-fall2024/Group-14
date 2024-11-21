@@ -2,10 +2,10 @@
 using System.ComponentModel.DataAnnotations;
 using System;
 
-//TODO: Change this namespace to match your project
-namespace fa23IdentityTemplate.Models
+
+namespace Files.Models
 {
-    //NOTE: This is the view model used to allow the user to login
+    //This is the view model used to allow the user to login
     //The user only needs teh email and password to login
     public class LoginViewModel
     {
@@ -23,29 +23,41 @@ namespace fa23IdentityTemplate.Models
         public bool RememberMe { get; set; }
     }
 
-    //NOTE: This is the view model used to register a user
+    //This is the view model used to register a user
     //When the user registers, they only need to specify the
     //properties listed in this model
     public class RegisterViewModel
     {
-        //NOTE: Here is the property for email
+        //Here is the property for email
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
 
-        //NOTE: Here is the property for phone number
+        //Here is the property for phone number
         [Required(ErrorMessage = "Phone number is required")]
         [Phone]
         [Display(Name = "Phone Number")]
         public string PhoneNumber { get; set; }
 
 
-        //TODO: Add any fields that you need for creating a new user
+        //Add any fields that you need for creating a new user
         //First name is provided as an example
         [Required(ErrorMessage = "First name is required.")]
         [Display(Name = "First Name")]
         public String FirstName { get; set; }
+
+        [Required(ErrorMessage = "Last name is required.")]
+        [Display(Name = "Last Name")]
+        public String LastName { get; set; }
+
+        [Required(ErrorMessage = "Address is required.")]
+        [Display(Name = "Address")]
+        public String Address { get; set; }
+
+        [Required(ErrorMessage = "Date of birth is required.")]
+        [Display(Name = "Date of Birth")]
+        public String DateOfBirth { get; set; }
 
 
         //NOTE: Here is the logic for putting in a password
@@ -61,7 +73,7 @@ namespace fa23IdentityTemplate.Models
         public string ConfirmPassword { get; set; }
     }
 
-    //NOTE: This is the view model used to allow the user to 
+    //This is the view model used to allow the user to 
     //change their password
     public class ChangePasswordViewModel
     {
@@ -83,7 +95,7 @@ namespace fa23IdentityTemplate.Models
     }
 
     //NOTE: This is the view model used to display basic user information
-    //on the index page
+    //on the index page- Do we want to add anything?
     public class IndexViewModel
     {
         public bool HasPassword { get; set; }

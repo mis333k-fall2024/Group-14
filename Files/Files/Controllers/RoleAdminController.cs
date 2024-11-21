@@ -3,10 +3,10 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 
-//TODO: Change these using statements to match your project
+//Change these using statements to match your project
 using Files.Models;
 
-//TODO: Change this namespace to match your project
+//Change this namespace to match your project
 namespace Files.Controllers
 {
     //TODO: Uncomment this line once you have roles working correctly

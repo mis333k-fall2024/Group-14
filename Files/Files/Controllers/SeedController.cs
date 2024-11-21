@@ -1,8 +1,8 @@
-﻿//TODO: Change this using statement to match your project (LastName_FirstName_HW3)
+﻿
 using Files.DAL;
 using Microsoft.AspNetCore.Mvc;
 
-//TODO: Update this namespace to match your project's name
+
 namespace Files.Controllers
 {
     public class SeedController : Controller
