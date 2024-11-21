@@ -5833,19 +5833,19 @@
     ]
   },
   "packageFolders": {
-    "/Users/staronadele/.nuget/packages/": {}
+    "/Users/sophier/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/staronadele/Documents/GitHub/Group-14/Files/Files/Files.csproj",
+      "projectUniqueName": "/Users/sophier/Documents/GitHub/Group-14/Files/Files/Files.csproj",
       "projectName": "Files",
-      "projectPath": "/Users/staronadele/Documents/GitHub/Group-14/Files/Files/Files.csproj",
-      "packagesPath": "/Users/staronadele/.nuget/packages/",
-      "outputPath": "/Users/staronadele/Documents/GitHub/Group-14/Files/Files/obj/",
+      "projectPath": "/Users/sophier/Documents/GitHub/Group-14/Files/Files/Files.csproj",
+      "packagesPath": "/Users/sophier/.nuget/packages/",
+      "outputPath": "/Users/sophier/Documents/GitHub/Group-14/Files/Files/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/staronadele/.nuget/NuGet/NuGet.Config"
+        "/Users/sophier/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
