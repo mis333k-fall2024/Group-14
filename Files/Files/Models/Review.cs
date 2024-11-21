@@ -8,97 +8,29 @@ namespace Files.Models
 {
     public class Review
     {
-        // Properties
-        [Required(ErrorMessage = "Review Id is required")]
-        public int ReviewId { get; set; }
-
-        [Required(ErrorMessage = "Property Id is required")]
-        public int PropertyId { get; set; }
-
-        [Required(ErrorMessage = "Customer Id is required")]
-        public int CustomerId { get; set; }
-
-
-        private int _rating;
+        [Key]
+        public Int32 ReviewId { get; set; }
 
         [Required(ErrorMessage = "Rating is required")]
-        [Display(Name = "Rating")]
-        public int Rating
-        {
-            get { return _rating; }
-            set
-            {
-                if (value < 1 || value > 5)
-                    throw new ArgumentOutOfRangeException("Rating must be between 1 and 5.");
-                _rating = value;
-                UpdateAverageRating();
-            }
-        }
+        [Range(1, 5)]
+        public Int32 Rating { get; set; }
 
-        private string _comment;
+        [Display(Name = "Text Review")]
+        [StringLength(280)]
+        public string? TextReview { get; set; }
 
-        [Required(ErrorMessage = "Comment is required")]
-        [Display(Name = "Comment")]
-        public string Comment
-        {
-            get { return _comment; }
-            set
-            {
-                if (value != null && value.Length > 280)
-                    throw new ArgumentOutOfRangeException("Comment must be 280 characters or less.");
-                _comment = value;
-            }
-        }
+        [Display(Name = "Host Comments")]
+        [StringLength(280)]
+        public string? HostComments { get; set; }
 
+        [Display(Name = "Accepted Dispute")]
+        public Boolean? DisputeStatus { get; set; }
 
-        [Required(ErrorMessage = "Date Posted is required")]
-        [Display(Name = "Date Posted")]
-        public DateTime DatePosted { get; private set; }   // Date  review was posted
+        //one property
+        public Property Properties { get; set; }
 
-        public bool IsEditable { get; set; }               // Indicates if  review can be edited
-        private static List<int> AllRatings = new List<int>();  // Stores all ratings for average calculation
-        public static double AverageRating { get; private set; } // Static property for average rating
-
-       
-        public Review(int reviewId, int propertyId, int customerId, int rating, string comment)
-        {
-            ReviewId = reviewId;
-            PropertyId = propertyId;
-            CustomerId = customerId;
-            Rating = rating;
-            Comment = comment;
-            DatePosted = DateTime.Now;
-            IsEditable = true;
-
-            AllRatings.Add(rating);
-            UpdateAverageRating();
-        }
-
-        // update average rating
-        private static void UpdateAverageRating()
-        {
-            AverageRating = Math.Round(AllRatings.Average(), 1);
-        }
-
-        // edit the review
-        public void EditReview(int newRating, string newComment)
-        {
-            if (!IsEditable)
-                throw new InvalidOperationException("This review cannot be edited.");
-
-            AllRatings.Remove(_rating);  // Remove old rating from calculation
-            Rating = newRating;          // Set new rating
-            Comment = newComment;        // Update comment if provided
-
-            AllRatings.Add(newRating);   // Add new rating to calculation
-            UpdateAverageRating();
-        }
-
-        // to dispute management
-        public void ToggleEditable()
-        {
-            IsEditable = !IsEditable;
-        }
+        //one user
+        public AppUser AppUsers { get; set; }
     }
 }
 

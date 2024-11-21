@@ -13,7 +13,6 @@ namespace Files.Models
         private static int _nextConfirmationNumber = START_CONFIRMATION_NUMBER;
 
         [Key]
-        [Required(ErrorMessage = "Reservation ID is required")]
         [Display(Name = "Reservation ID")]
         public Int32 ReservationID { get; set; }
 
@@ -49,7 +48,7 @@ namespace Files.Models
         public Decimal DiscountRate { get; set; }
 
         [Required(ErrorMessage = "Reservation Status is required")]
-        [Display(Name = "Reservation Status")]
+        [Display(Name = "Active Reservation")]
         public Boolean ReservationStatus { get; set; }
 
         [Required(ErrorMessage = "Confirmation Number is required")]
@@ -67,5 +66,11 @@ namespace Files.Models
         {
             return _nextConfirmationNumber++;
         }
+
+        //one property
+        public Property Properties { get; set; }
+
+        //one user
+        public AppUser AppUsers { get; set; }
     }
 }

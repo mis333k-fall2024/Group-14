@@ -29,13 +29,12 @@ namespace Files.Models
         [Required(ErrorMessage = "Address is required.")]
         public DateTime Address { get; set; }
 
-        [Required(ErrorMessage = "Hire Status is required.")]
         [Display(Name = "Hire Status")]
-        public HireStatus Status { get; set; }
+        public HireStatus? Status { get; set; }
 
         // Navigation Properties
-        public List<Reservation> Reservations { get; set; } // One-to-Many with Reservations
-        public List<Property> Properties { get; set; } // One-to-Many with Properties (Host role)
-        public List<Review> Reviews { get; set; } // One-to-Many with Reviews
+        public List<Reservation> Reservations { get; } = new List<Reservation>();// One-to-Many with Reservations
+        public List<Property> Properties { get; } = new List<Property>(); // One-to-Many with Properties (Host role)
+        public List<Review> Reviews { get; } = new List<Review>(); // One-to-Many with Reviews
     }
 }

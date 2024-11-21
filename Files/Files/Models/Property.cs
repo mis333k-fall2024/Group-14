@@ -23,7 +23,7 @@ namespace Files.Models
 
         //[Required(ErrorMessage = "Property Number is required")]
         [Display(Name = "Property Number")]
-        public int PropertyNumber { get; set; } //req
+        public Int32 PropertyNumber { get; set; } //req
 
         [Required(ErrorMessage = "Street Address is required")]
         [Display(Name = "Street Address")]
@@ -89,6 +89,10 @@ namespace Files.Models
         [DisplayFormat(DataFormatString = "{0:MMMM d, yyyy}")]
         public DateTime UnavailableDates { get; set; } //multiple dates tho??
 
+        [Required(ErrorMessage = "Property Status is required")]
+        [Display(Name = "Active Property")]
+        public Boolean PropertyStatus { get; set; }
+
         // Setting the PropIDNumber
         public Property()
         {
@@ -102,9 +106,9 @@ namespace Files.Models
         }
 
         // Navigation property to the (it can have many Reservations)
-        public List<Reservation> Reservations { get; set; }
+        public List<Reservation> Reservations { get; } = new List<Reservation>();
         //many reviews to one prop
-        public List<Review> Reviews { get; set; }
+        public List<Review> Reviews { get; } = new List<Review>();
         //one category
         public Category Categories { get; set; }
         //users
