@@ -57,7 +57,11 @@ namespace Files.Models
 
         [Required(ErrorMessage = "Date of birth is required.")]
         [Display(Name = "Date of Birth")]
-        public String DateOfBirth { get; set; }
+        public DateTime DOB { get; set; }
+
+        
+        [Display(Name = "status")]
+        public HireStatus? Status { get; set; }
 
 
         //NOTE: Here is the logic for putting in a password

@@ -15,3 +15,4 @@
 /Users/sophier/Documents/GitHub/Group-14/Files/Files/obj/Debug/net8.0/Files.RazorAssemblyInfo.cs
 /Users/sophier/Documents/GitHub/Group-14/Files/Files/obj/Debug/net8.0/Files.sourcelink.json
 /Users/staronadele/Documents/GitHub/Group-14/Files/Files/obj/Debug/net8.0/Files.csproj.AssemblyReference.cache
+/Users/sophier/Documents/GitHub/Group-14/Files/Files/obj/Debug/net8.0/Files.csproj.AssemblyReference.cache
