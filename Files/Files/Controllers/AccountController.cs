@@ -56,9 +56,13 @@ namespace Files.Controllers
                 Email = rvm.Email,
                 PhoneNumber = rvm.PhoneNumber,
 
-                //TODO: Add the rest of the custom user fields here
+                //Add the rest of the custom user fields here
                 //FirstName is included as an example
                 FirstName = rvm.FirstName,
+                LastName = rvm.LastName,
+                Address = rvm.Address,
+                DOB = rvm.DOB,
+                Status = rvm.Status,
 
             };
 
