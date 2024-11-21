@@ -26,7 +26,7 @@ namespace Files.Models
         public DateTime DOB { get; set; }
 
         [Required(ErrorMessage = "Address is required.")]
-        public DateTime Address { get; set; }
+        public string Address { get; set; }
 
         [Display(Name = "Hire Status")]
         public HireStatus? Status { get; set; }
