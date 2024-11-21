@@ -1,7 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Identity;
 
-//TODO: Update this namespace to match your project's name
 namespace Files.Models
 {
     public enum HireStatus { Hired, Fired}

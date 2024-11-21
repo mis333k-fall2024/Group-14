@@ -2,13 +2,13 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
-//TODO: Change these using statements to match your project
+
 using Files.DAL;
 using Files.Models;
 using Files.Utilities;
 using System;
 
-//TODO: Change this namespace to match your project
+//Change this namespace to match your project
 namespace Files.Controllers
 {
     [Authorize]
