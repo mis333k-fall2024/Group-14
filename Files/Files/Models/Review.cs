@@ -6,10 +6,11 @@ using System.Xml.Linq;
 
 namespace Files.Models
 {
+    public enum StatusDispute { Accepted , Rejected}
     public class Review
     {
         [Key]
-        public Int32 ReviewId { get; set; }
+        public Int32 ReviewID { get; set; }
 
         [Required(ErrorMessage = "Rating is required")]
         [Range(1, 5)]
@@ -23,8 +24,8 @@ namespace Files.Models
         [StringLength(280)]
         public string? HostComments { get; set; }
 
-        [Display(Name = "Accepted Dispute")]
-        public Boolean? DisputeStatus { get; set; }
+        [Display(Name = "Dispute Status")]
+        public StatusDispute DisputeStatus { get; set; }
 
         //one property
         public Property Properties { get; set; }

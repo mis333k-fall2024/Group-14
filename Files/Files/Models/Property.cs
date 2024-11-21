@@ -77,6 +77,7 @@ namespace Files.Models
         public decimal CleaningFee { get; set; } //int/dec in 2 dec place
 
         //[DisplayFormat(DataFormatString = "{0:C}")]
+        [Display(Name = "Discount Rate")]
         public decimal? DiscountRate { get; set; } //int/dec in 2 dec place,not req
                                       //still have display when said should just be in dollars (aka result of drate*amt)
 

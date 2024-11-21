@@ -13,7 +13,6 @@ namespace Files.Models
         private static int _nextConfirmationNumber = START_CONFIRMATION_NUMBER;
 
         [Key]
-        [Display(Name = "Reservation ID")]
         public Int32 ReservationID { get; set; }
 
         [Required(ErrorMessage = "Check In is required")]
