@@ -78,7 +78,7 @@ namespace Files.Controllers
 
             if (result.Succeeded) //everything is okay
             {
-                //NOTE: This code logs the user into the account that they just created
+                //This code logs the user into the account that they just created
                 //You may or may not want to log a user in directly after they register - check
                 //the business rules!
                 Microsoft.AspNetCore.Identity.SignInResult result2 = await _signInManager.PasswordSignInAsync(rvm.Email, rvm.Password, false, lockoutOnFailure: false);
