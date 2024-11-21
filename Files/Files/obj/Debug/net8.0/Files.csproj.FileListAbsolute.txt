@@ -6,11 +6,13 @@
 /Users/staronadele/Documents/GitHub/Group-14/Files/Files/obj/Debug/net8.0/Files.RazorAssemblyInfo.cache
 /Users/staronadele/Documents/GitHub/Group-14/Files/Files/obj/Debug/net8.0/Files.RazorAssemblyInfo.cs
 /Users/staronadele/Documents/GitHub/Group-14/Files/Files/obj/Debug/net8.0/Files.sourcelink.json
-/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/obj/Debug/net8.0/Files.GeneratedMSBuildEditorConfig.editorconfig
-/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/obj/Debug/net8.0/Files.AssemblyInfoInputs.cache
-/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/obj/Debug/net8.0/Files.AssemblyInfo.cs
-/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/obj/Debug/net8.0/Files.csproj.CoreCompileInputs.cache
-/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/obj/Debug/net8.0/Files.MvcApplicationPartsAssemblyInfo.cache
-/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/obj/Debug/net8.0/Files.RazorAssemblyInfo.cache
-/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/obj/Debug/net8.0/Files.RazorAssemblyInfo.cs
-/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/obj/Debug/net8.0/Files.sourcelink.json
+/Users/sophier/Documents/GitHub/Group-14/Files/Files/obj/Debug/net8.0/Files.GeneratedMSBuildEditorConfig.editorconfig
+/Users/sophier/Documents/GitHub/Group-14/Files/Files/obj/Debug/net8.0/Files.AssemblyInfoInputs.cache
+/Users/sophier/Documents/GitHub/Group-14/Files/Files/obj/Debug/net8.0/Files.AssemblyInfo.cs
+/Users/sophier/Documents/GitHub/Group-14/Files/Files/obj/Debug/net8.0/Files.csproj.CoreCompileInputs.cache
+/Users/sophier/Documents/GitHub/Group-14/Files/Files/obj/Debug/net8.0/Files.MvcApplicationPartsAssemblyInfo.cache
+/Users/sophier/Documents/GitHub/Group-14/Files/Files/obj/Debug/net8.0/Files.RazorAssemblyInfo.cache
+/Users/sophier/Documents/GitHub/Group-14/Files/Files/obj/Debug/net8.0/Files.RazorAssemblyInfo.cs
+/Users/sophier/Documents/GitHub/Group-14/Files/Files/obj/Debug/net8.0/Files.sourcelink.json
+/Users/staronadele/Documents/GitHub/Group-14/Files/Files/obj/Debug/net8.0/Files.csproj.AssemblyReference.cache
+/Users/sophier/Documents/GitHub/Group-14/Files/Files/obj/Debug/net8.0/Files.csproj.AssemblyReference.cache

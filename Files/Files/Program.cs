@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
 
-//TODO: Update these namespaces to match your project name 
+
 //Be sure to remove the []
 using Files.DAL;
 using Files.Models;
@@ -15,14 +15,13 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-//TODO: Add database on Azure so you have a connection string
-//TODO: Add a connection string here once you have created it on Azure
+
 String connectionString = "Server=tcp:fa24group14finalproject.database.windows.net,1433;Initial Catalog=FA24Group14FinalProject;Persist Security Info=False;User ID=MISAdmin;Password=Password123;MultipleActiveResultSets=True;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
 
-//NOTE: This tells your application how to get a connection to the database
+
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connectionString));
 
-//NOTE: You need this line for including Identity in your project
+
 builder.Services.AddDefaultIdentity<AppUser>()
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<AppDbContext>();
@@ -69,8 +68,7 @@ app.UseStaticFiles();
 //is made for a URL.
 app.UseRouting();
 
-//TODO: (HW4 & Beyond) Once you have added Identity into your project, you will 
-//need to uncomment these lines
+
 app.UseAuthentication();
 app.UseAuthorization();
 

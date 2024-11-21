@@ -7,10 +7,6 @@ using Files.Models;
 
 namespace Files.Models
 {
-    public enum PetsAllowed { yes, no }
-
-    public enum FreeParking { yes, no }
-
     public class Property
     {
 
@@ -26,8 +22,8 @@ namespace Files.Models
         //CategoryID fk + int?, non-req?
 
         //[Required(ErrorMessage = "Property Number is required")]
-        //[Display(Name = "Property Number")]
-        public int PropertyNumber { get; set; } //req
+        [Display(Name = "Property Number")]
+        public Int32 PropertyNumber { get; set; } //req
 
         [Required(ErrorMessage = "Street Address is required")]
         [Display(Name = "Street Address")]
@@ -57,17 +53,18 @@ namespace Files.Models
         [Display(Name = "Max Guest Number")]
         public Int32 GuestsAllowed { get; set; } //int
 
-        [Required(ErrorMessage = "Property Number is required")]
-        [Display(Name = "Property Number")]
-        public PetsAllowed PetsAllowed { get; set; } //enum (yes or no)
+        [Required(ErrorMessage = "Pets Allowed is required")]
+        [Display(Name = "Pets Allowed")]
+        public Boolean PetsAllowed { get; set; } 
 
         [Required(ErrorMessage = "Parking option is required")]
         [Display(Name = "Free Parking")]
-        public FreeParking FreeParking { get; set; } //enum (yes or no)
+        public Boolean FreeParking { get; set; } 
 
         [Required(ErrorMessage = "Weekday Price is required")]
         [Display(Name = "Weekday Price")]
-        public Type WeekdayPrice { get; set; } //int/dec in 2 dec place
+        [DisplayFormat(DataFormatString = "{0:C}")]
+        public decimal WeekdayPrice { get; set; } //int/dec in 2 dec place
 
         [Required(ErrorMessage = "Weekend Price is required")]
         [Display(Name = "Weekend Price")]
@@ -79,18 +76,23 @@ namespace Files.Models
         [DisplayFormat(DataFormatString = "{0:C}")]
         public decimal CleaningFee { get; set; } //int/dec in 2 dec place
 
-        [Required(ErrorMessage = "Minimum Stay for Discount is required")]
-        [Display(Name = "Minimum Days for Discount")]
+        //[DisplayFormat(DataFormatString = "{0:C}")]
+        [Display(Name = "Discount Rate")]
+        public decimal? DiscountRate { get; set; } //int/dec in 2 dec place,not req
+                                      //still have display when said should just be in dollars (aka result of drate*amt)
+
+        [RequiredIf("DiscountRate", "DiscountMinStay is required when a DiscountRate is specified.")]
+        [Display(Name = "Minimum Nights for Discount")]
         public Int32 DiscountMinStay { get; set; } //int not dec
 
-        //[DisplayFormat(DataFormatString = "{0:C}")]
-        public decimal? DiscountRate { get; set; } //int/dec in 2 dec place,not req
-        //still have display when said should just be in dollars (aka result of drate*amt)
-
-        [Display(Name = "Release Date")]
+        [Display(Name = "Unavailable Dates")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:MMMM d, yyyy}")]
         public DateTime UnavailableDates { get; set; } //multiple dates tho??
+
+        [Required(ErrorMessage = "Property Status is required")]
+        [Display(Name = "Active Property")]
+        public Boolean PropertyStatus { get; set; }
 
         // Setting the PropIDNumber
         public Property()
@@ -105,13 +107,45 @@ namespace Files.Models
         }
 
         // Navigation property to the (it can have many Reservations)
-        public List<Reservation> Reservations { get; set; }
+        public List<Reservation> Reservations { get; } = new List<Reservation>();
         //many reviews to one prop
-        public List<Review> Reviews { get; set; }
+        public List<Review> Reviews { get; } = new List<Review>();
         //one category
         public Category Categories { get; set; }
         //users
-        public User Users { get; set; }
+        public AppUser AppUsers { get; set; }
+    }
+
+    public class RequiredIfAttribute : ValidationAttribute
+    {
+        private readonly string _dependentProperty;
+        private readonly string _errorMessage;
+
+        public RequiredIfAttribute(string dependentProperty, string errorMessage = null)
+        {
+            _dependentProperty = dependentProperty;
+            _errorMessage = errorMessage;
+        }
+
+        protected override ValidationResult IsValid(object value, ValidationContext validationContext)
+        {
+            // Get the value of the dependent property (DiscountRate)
+            var dependentPropertyValue = validationContext.ObjectType
+                .GetProperty(_dependentProperty)
+                ?.GetValue(validationContext.ObjectInstance, null);
+
+            // Check if the dependent property has a value
+            if (dependentPropertyValue != null && !string.IsNullOrEmpty(dependentPropertyValue.ToString()))
+            {
+                // Validate the current property (DiscountMinStay)
+                if (value == null || string.IsNullOrEmpty(value.ToString()))
+                {
+                    return new ValidationResult(_errorMessage ?? $"{validationContext.DisplayName} is required.");
+                }
+            }
+
+            return ValidationResult.Success;
+        }
     }
 
 }

@@ -1,13 +1,13 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
 
-//TODO: Update these using statements to include your project name
-using fa23IdentityTemplate.Utilities;
-using fa23IdentityTemplate.DAL;
-using fa23IdentityTemplate.Models;
+//Update these using statements to include your project name
+using Files.Utilities;
+using Files.DAL;
+using Files.Models;
 
-//TODO: Upddate this namespace to match your project name
-namespace fa23IdentityTemplate.Seeding
+//Upddate this namespace to match your project name
+namespace Files.Seeding
 {
     public static class SeedUsers
     {
@@ -28,7 +28,12 @@ namespace fa23IdentityTemplate.Seeding
 
                     //TODO: Add additional fields that you created on the AppUser class
                     //FirstName is included as an example
-                    FirstName = "Admin"
+                    FirstName = "Admin",
+                    LastName = "Smith",
+                    DOB = new DateTime(2000, 1, 01),
+                    Address = "222 Palo Alto St",
+                    Status = HireStatus.Fired
+
 
                 },
                 Password = "Abc123!",

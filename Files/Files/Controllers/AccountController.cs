@@ -2,13 +2,13 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
-//TODO: Change these using statements to match your project
+
 using Files.DAL;
 using Files.Models;
 using Files.Utilities;
 using System;
 
-//TODO: Change this namespace to match your project
+//Change this namespace to match your project
 namespace Files.Controllers
 {
     [Authorize]
@@ -56,9 +56,13 @@ namespace Files.Controllers
                 Email = rvm.Email,
                 PhoneNumber = rvm.PhoneNumber,
 
-                //TODO: Add the rest of the custom user fields here
+                //Add the rest of the custom user fields here
                 //FirstName is included as an example
                 FirstName = rvm.FirstName,
+                LastName = rvm.LastName,
+                Address = rvm.Address,
+                DOB = rvm.DOB,
+                Status = rvm.Status,
 
             };
 
@@ -78,7 +82,7 @@ namespace Files.Controllers
 
             if (result.Succeeded) //everything is okay
             {
-                //NOTE: This code logs the user into the account that they just created
+                //This code logs the user into the account that they just created
                 //You may or may not want to log a user in directly after they register - check
                 //the business rules!
                 Microsoft.AspNetCore.Identity.SignInResult result2 = await _signInManager.PasswordSignInAsync(rvm.Email, rvm.Password, false, lockoutOnFailure: false);
