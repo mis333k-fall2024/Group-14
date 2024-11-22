@@ -16,3 +16,13 @@
 /Users/sophier/Documents/GitHub/Group-14/Files/Files/obj/Debug/net8.0/Files.sourcelink.json
 /Users/staronadele/Documents/GitHub/Group-14/Files/Files/obj/Debug/net8.0/Files.csproj.AssemblyReference.cache
 /Users/sophier/Documents/GitHub/Group-14/Files/Files/obj/Debug/net8.0/Files.csproj.AssemblyReference.cache
+/Users/marianaalvarez/Documents/GitHub/Group-14/Files/Files/obj/Debug/net8.0/Files.csproj.AssemblyReference.cache
+/Users/marianaalvarez/Documents/GitHub/Group-14/Files/Files/obj/Debug/net8.0/Files.GeneratedMSBuildEditorConfig.editorconfig
+/Users/marianaalvarez/Documents/GitHub/Group-14/Files/Files/obj/Debug/net8.0/Files.AssemblyInfoInputs.cache
+/Users/marianaalvarez/Documents/GitHub/Group-14/Files/Files/obj/Debug/net8.0/Files.AssemblyInfo.cs
+/Users/marianaalvarez/Documents/GitHub/Group-14/Files/Files/obj/Debug/net8.0/Files.csproj.CoreCompileInputs.cache
+/Users/marianaalvarez/Documents/GitHub/Group-14/Files/Files/obj/Debug/net8.0/Files.MvcApplicationPartsAssemblyInfo.cs
+/Users/marianaalvarez/Documents/GitHub/Group-14/Files/Files/obj/Debug/net8.0/Files.MvcApplicationPartsAssemblyInfo.cache
+/Users/marianaalvarez/Documents/GitHub/Group-14/Files/Files/obj/Debug/net8.0/Files.RazorAssemblyInfo.cache
+/Users/marianaalvarez/Documents/GitHub/Group-14/Files/Files/obj/Debug/net8.0/Files.RazorAssemblyInfo.cs
+/Users/marianaalvarez/Documents/GitHub/Group-14/Files/Files/obj/Debug/net8.0/Files.sourcelink.json

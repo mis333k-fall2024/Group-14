@@ -1,6 +1,4 @@
 ﻿<Properties StartupConfiguration="{4093AD08-3465-427B-81E2-2C099D378B96}|http">
-  <MonoDevelop.Ide.ItemProperties.Files PreferredExecutionTarget="/Applications/Google Chrome.app" />
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workbench ActiveDocument="Files/DAL/AppDbContext.cs">
     <Files>
       <File FileName="Files/Models/Reservation.cs" />
@@ -29,19 +27,17 @@
               <Node name="Dependencies" expanded="True">
                 <Node name="PackageDependencies" expanded="True" />
               </Node>
-              <Node name="Controllers" expanded="True" />
-              <Node name="DAL" expanded="True">
-                <Node name="AppDbContext.cs" selected="True" />
-              </Node>
-              <Node name="Models" expanded="True" />
+              <Node name="DAL" expanded="True" />
             </Node>
           </Node>
         </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.Files PreferredExecutionTarget="/Applications/Google Chrome.app" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
