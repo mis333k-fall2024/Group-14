@@ -1,4 +1,8 @@
 ﻿<Properties StartupConfiguration="{4093AD08-3465-427B-81E2-2C099D378B96}|http">
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.Files PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Files/DAL/AppDbContext.cs">
     <Files>
       <File FileName="Files/Models/Reservation.cs" />
@@ -12,7 +16,6 @@
       <File FileName="Files/Models/AppUser.cs" />
       <File FileName="Files/Controllers/AccountController.cs" />
       <File FileName="Files/Controllers/RoleAdminController.cs" />
-      <File FileName="Files/Controllers/SeedController.cs" />
       <File FileName="Files/Views/_ViewImports.cshtml" />
       <File FileName="Files/Program.cs" />
       <File FileName="Files/Views/Account/ChangePassword.cshtml" />
@@ -23,21 +26,16 @@
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="Files">
-            <Node name="Files">
-              <Node name="Dependencies" expanded="True">
-                <Node name="PackageDependencies" expanded="True" />
-              </Node>
+            <Node name="Files" expanded="True">
+              <Node name="Controllers" expanded="True" />
               <Node name="DAL" expanded="True" />
+              <Node name="Models" expanded="True" />
             </Node>
           </Node>
         </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.ItemProperties.Files PreferredExecutionTarget="/Applications/Google Chrome.app" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
