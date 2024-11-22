@@ -9,13 +9,12 @@
 
 using System;
 using System.Reflection;
-using Microsoft.AspNetCore.Identity.UI;
 
 [assembly: Microsoft.AspNetCore.Identity.UI.UIFrameworkAttribute("Bootstrap5")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("Files")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+315955c62024a9a1a3a926acec32f9667643bd65")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ab037533d071a799c61dbd61ca175ac2d4542179")]
 [assembly: System.Reflection.AssemblyProductAttribute("Files")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Files")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
