@@ -1,14 +1,11 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
-
-//TODO: Update this using statement to include your project name
-using fa23IdentityTemplate.Models;
-using fa23IdentityTemplate.DAL;
+using Files.Models;
+using Files.DAL;
 using System;
 
-//TODO: Upddate this namespace to match your project name
-namespace fa23IdentityTemplate.Controllers
+namespace Files.Controllers
 {
     public class SeedController : Controller
     {
