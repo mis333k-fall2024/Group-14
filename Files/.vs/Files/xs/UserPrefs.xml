@@ -1,10 +1,9 @@
 ﻿<Properties StartupConfiguration="{4093AD08-3465-427B-81E2-2C099D378B96}|http">
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.ItemProperties.Files PreferredExecutionTarget="/Applications/Google Chrome.app" />
-  <MultiItemStartupConfigurations />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.ItemProperties.Files PreferredExecutionTarget="/Applications/Google Chrome.app" />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Files/Controllers/SeedController.cs">
     <Files>
@@ -12,7 +11,7 @@
       <File FileName="Files/Models/Review.cs" />
       <File FileName="Files/Controllers/HomeController.cs" />
       <File FileName="Files/Views/Index.cshtml" />
-      <File FileName="Files/DAL/AppDbContext.cs" Line="8" Column="11" />
+      <File FileName="Files/DAL/AppDbContext.cs" />
       <File FileName="Files/Models/Category.cs" />
       <File FileName="Files/Models/Property.cs" />
       <File FileName="Files/Seeding/SeedRoles.cs" />
@@ -30,9 +29,8 @@
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="Files">
-            <Node name="Files">
+            <Node name="Files" expanded="True">
               <Node name="Controllers" expanded="True" />
-              <Node name="DAL" expanded="True" />
               <Node name="Models" expanded="True" />
             </Node>
           </Node>
@@ -40,4 +38,5 @@
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
+  <MultiItemStartupConfigurations />
 </Properties>
