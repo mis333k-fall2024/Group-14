@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/Users/staronadele/Documents/GitHub/Group-14/Files/Files/Files.csproj": {}
+    "/Users/sophier/Documents/GitHub/Group-14/Files/Files/Files.csproj": {}
   },
   "projects": {
-    "/Users/staronadele/Documents/GitHub/Group-14/Files/Files/Files.csproj": {
+    "/Users/sophier/Documents/GitHub/Group-14/Files/Files/Files.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/staronadele/Documents/GitHub/Group-14/Files/Files/Files.csproj",
+        "projectUniqueName": "/Users/sophier/Documents/GitHub/Group-14/Files/Files/Files.csproj",
         "projectName": "Files",
-        "projectPath": "/Users/staronadele/Documents/GitHub/Group-14/Files/Files/Files.csproj",
-        "packagesPath": "/Users/staronadele/.nuget/packages/",
-        "outputPath": "/Users/staronadele/Documents/GitHub/Group-14/Files/Files/obj/",
+        "projectPath": "/Users/sophier/Documents/GitHub/Group-14/Files/Files/Files.csproj",
+        "packagesPath": "/Users/sophier/.nuget/packages/",
+        "outputPath": "/Users/sophier/Documents/GitHub/Group-14/Files/Files/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/staronadele/.nuget/NuGet/NuGet.Config"
+          "/Users/sophier/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -32,11 +32,6 @@
           "warnAsError": [
             "NU1605"
           ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -54,6 +49,12 @@
             "Microsoft.AspNetCore.Identity.UI": {
               "target": "Package",
               "version": "[8.0.0, )"
+            },
+            "Microsoft.CodeAnalysis.Analyzers": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[3.3.4, )"
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
