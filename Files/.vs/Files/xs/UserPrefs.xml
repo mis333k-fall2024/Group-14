@@ -1,7 +1,6 @@
 ﻿<Properties StartupConfiguration="{4093AD08-3465-427B-81E2-2C099D378B96}|http">
-  <MonoDevelop.Ide.ItemProperties.Files PreferredExecutionTarget="/Applications/Google Chrome.app" />
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.Workbench ActiveDocument="../../../../../../usr/local/share/dotnet/sdk/8.0.401/Sdks/Microsoft.NET.Sdk/targets/Microsoft.PackageDependencyResolution.targets">
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Files/Seeding/SeedCategories.cs">
     <Files>
       <File FileName="Files/Models/Reservation.cs" />
       <File FileName="Files/Models/Review.cs" />
@@ -11,7 +10,7 @@
       <File FileName="Files/Models/Category.cs" />
       <File FileName="Files/Models/Property.cs" />
       <File FileName="Files/Seeding/SeedRoles.cs" />
-      <File FileName="Files/Models/AppUser.cs" />
+      <File FileName="Files/Models/AppUser.cs" Line="1" Column="1" />
       <File FileName="Files/Controllers/AccountController.cs" />
       <File FileName="Files/Controllers/RoleAdminController.cs" />
       <File FileName="Files/Views/_ViewImports.cshtml" />
@@ -21,14 +20,20 @@
       <File FileName="Files/Views/Account/Login.cshtml" />
       <File FileName="Files/Controllers/SeedController.cs" />
       <File FileName="../../../../../../usr/local/share/dotnet/sdk/8.0.401/Sdks/Microsoft.NET.Sdk/targets/Microsoft.PackageDependencyResolution.targets" Line="266" Column="5" />
+      <File FileName="Files/Seeding/SeedCustomers.cs" Line="1" Column="1" />
+      <File FileName="Files/Seeding/SeedAdmins.cs" Line="219" Column="47" />
+      <File FileName="Files/Seeding/SeedHosts.cs" Line="1" Column="1" />
+      <File FileName="Files/Seeding/SeedUsers.cs" Line="1" Column="1" />
+      <File FileName="Files/Seeding/SeedCategories.cs" Line="26" Column="40" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="Files">
-            <Node name="Files" expanded="True">
-              <Node name="Models" expanded="True">
-                <Node name="Reservation.cs" selected="True" />
+            <Node name="Files">
+              <Node name="Models" expanded="True" />
+              <Node name="Seeding" expanded="True">
+                <Node name="SeedCategories.cs" selected="True" />
               </Node>
             </Node>
           </Node>
@@ -37,8 +42,9 @@
     </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MultiItemStartupConfigurations />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.Files PreferredExecutionTarget="/Applications/Google Chrome.app" />
 </Properties>
