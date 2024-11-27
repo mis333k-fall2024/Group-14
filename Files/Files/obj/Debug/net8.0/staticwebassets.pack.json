@@ -1,6 +1,10 @@
 {
   "Files": [
     {
+      "Id": "/Users/sophier/Documents/GitHub/Group-14/Files/Files/wwwroot/Images/Logo.jpg",
+      "PackagePath": "staticwebassets/Images/Logo.jpg"
+    },
+    {
       "Id": "/Users/sophier/Documents/GitHub/Group-14/Files/Files/wwwroot/lib/font-awesome/css/all.css",
       "PackagePath": "staticwebassets/lib/font-awesome/css/all.css"
     },

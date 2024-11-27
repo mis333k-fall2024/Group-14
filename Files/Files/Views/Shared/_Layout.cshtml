@@ -1,14 +1,28 @@
 ﻿<!DOCTYPE html>
-
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewBag.Title</title>
     <link href="~/lib/twitter-bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <style>
+        /* Custom styling for the navbar */
+        .navbar-custom {
+            background-color: #BF5700;
+        }
+
+            .navbar-custom .navbar-brand,
+            .navbar-custom .nav-link {
+                color: white !important;
+            }
+
+                .navbar-custom .nav-link:hover {
+                    color: #FFD700; /* Optional: Add a hover effect for links */
+                }
+    </style>
 </head>
 <body>
     <!--This is the code for the navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
         <div class="container-fluid">
 
             <!--This is the code for the "hamburger menu" button -->
@@ -29,7 +43,6 @@
             </div>
         </div>
     </nav>
-
 
     <!--this is the main content section of the website -->
     <div class="container">

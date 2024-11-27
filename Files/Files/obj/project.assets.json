@@ -8183,19 +8183,19 @@
     ]
   },
   "packageFolders": {
-    "/Users/marianaalvarez/.nuget/packages/": {}
+    "/Users/sophier/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/marianaalvarez/Documents/GitHub/Group-14/Files/Files/Files.csproj",
+      "projectUniqueName": "/Users/sophier/Documents/GitHub/Group-14/Files/Files/Files.csproj",
       "projectName": "Files",
-      "projectPath": "/Users/marianaalvarez/Documents/GitHub/Group-14/Files/Files/Files.csproj",
-      "packagesPath": "/Users/marianaalvarez/.nuget/packages/",
-      "outputPath": "/Users/marianaalvarez/Documents/GitHub/Group-14/Files/Files/obj/",
+      "projectPath": "/Users/sophier/Documents/GitHub/Group-14/Files/Files/Files.csproj",
+      "packagesPath": "/Users/sophier/.nuget/packages/",
+      "outputPath": "/Users/sophier/Documents/GitHub/Group-14/Files/Files/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/marianaalvarez/.nuget/NuGet/NuGet.Config"
+        "/Users/sophier/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"

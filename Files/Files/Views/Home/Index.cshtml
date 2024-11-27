@@ -1,22 +1,27 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "Home";
 }
 
-<h1>Welcome to Longhorn Coding Academy!</h1>
+<div style="text-align: center; margin-top: 50px;">
+    <h1>Welcome to BevoBnB!</h1>
+    <img src="/images/Logo.JPG" alt="Website Logo" style="width:200px; height:auto; margin-top: 20px;" />
 
-<a asp-action="Index" asp-controller="Properties" class="btn btn-success">View Our Properties</a>
+    <div>
+        <a asp-action="Index" asp-controller="Properties" class="btn" style="margin-top: 30px; background-color: #BF5700; color: white; padding: 10px 20px; border: none; border-radius: 5px; text-decoration: none;">Search Our Properties</a>
+    </div>
 
-@if (User.Identity.IsAuthenticated)
-{
-    <a asp-action="Index" asp-controller="Reservations" class="btn btn-info">View Reservations</a>
-    if (User.IsInRole("Host"))
+    @if (User.Identity.IsAuthenticated)
     {
-        <a asp-action="Index" asp-controller="RoleAdmin" class="btn btn-warning">Manage Users</a>
+        <div style="margin-top: 20px;">
+            <a asp-action="Index" asp-controller="Reservations" class="btn btn-info">View Reservations</a>
+            @if (User.IsInRole("Host"))
+            {
+                <a asp-action="Index" asp-controller="RoleAdmin" class="btn btn-warning">Manage Users</a>
+            }
+            @if (User.IsInRole("Admin"))
+            {
+                <a asp-action="Index" asp-controller="RoleAdmin" class="btn btn-warning">Manage Users</a>
+            }
+        </div>
     }
-    if (User.IsInRole("Admin"))
-    {
-        <a asp-action="Index" asp-controller="RoleAdmin" class="btn btn-warning">Manage Users</a>
-    }
-
-}
+</div>
