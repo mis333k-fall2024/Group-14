@@ -1,4 +1,22 @@
-﻿<h1>Index page</h1>
-<div>
-    <a asp-controller="Seed" asp-action="Index">Seed Page</a>
-</div>
+﻿
+@{
+    ViewData["Title"] = "Home";
+}
+
+<h1>Welcome to Longhorn Coding Academy!</h1>
+
+<a asp-action="Index" asp-controller="Properties" class="btn btn-success">View Our Properties</a>
+
+@if (User.Identity.IsAuthenticated)
+{
+    <a asp-action="Index" asp-controller="Reservations" class="btn btn-info">View Reservations</a>
+    if (User.IsInRole("Host"))
+    {
+        <a asp-action="Index" asp-controller="RoleAdmin" class="btn btn-warning">Manage Users</a>
+    }
+    if (User.IsInRole("Admin"))
+    {
+        <a asp-action="Index" asp-controller="RoleAdmin" class="btn btn-warning">Manage Users</a>
+    }
+
+}

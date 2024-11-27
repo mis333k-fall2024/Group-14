@@ -4,11 +4,16 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Properties</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+@if (User.IsInRole("Host"))
+{<p>
+        <a asp-action="Create">Create New</a>
+    </p>}
+@if (User.IsInRole("Admin"))
+{<p>
+        <a asp-action="Create">Create New</a>
+    </p>}
 <table class="table">
     <thead>
         <tr>
@@ -67,65 +72,66 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.PropertyNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Street)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.City)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.State)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Zip)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Bedrooms)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Bathrooms)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.GuestsAllowed)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PetsAllowed)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FreeParking)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.WeekdayPrice)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.WeekendPrice)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CleaningFee)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DiscountRate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DiscountMinStay)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UnavailableDates)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PropertyStatus)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.PropertyID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.PropertyID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.PropertyID">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PropertyNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Street)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.City)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.State)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Zip)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Bedrooms)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Bathrooms)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GuestsAllowed)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PetsAllowed)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FreeParking)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.WeekdayPrice)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.WeekendPrice)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CleaningFee)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DiscountRate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DiscountMinStay)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UnavailableDates)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PropertyStatus)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.PropertyID">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.PropertyID">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.PropertyID">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
