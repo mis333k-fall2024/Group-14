@@ -8183,11 +8183,16 @@
     ]
   },
   "packageFolders": {
+<<<<<<< Updated upstream
     "/Users/marianaalvarez/.nuget/packages/": {}
+=======
+    "/Users/jordanburks/.nuget/packages/": {}
+>>>>>>> Stashed changes
   },
   "project": {
     "version": "1.0.0",
     "restore": {
+<<<<<<< Updated upstream
       "projectUniqueName": "/Users/marianaalvarez/Documents/GitHub/Group-14/Files/Files/Files.csproj",
       "projectName": "Files",
       "projectPath": "/Users/marianaalvarez/Documents/GitHub/Group-14/Files/Files/Files.csproj",
@@ -8196,6 +8201,16 @@
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/marianaalvarez/.nuget/NuGet/NuGet.Config"
+=======
+      "projectUniqueName": "/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/Files.csproj",
+      "projectName": "Files",
+      "projectPath": "/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/Files.csproj",
+      "packagesPath": "/Users/jordanburks/.nuget/packages/",
+      "outputPath": "/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/obj/",
+      "projectStyle": "PackageReference",
+      "configFilePaths": [
+        "/Users/jordanburks/.nuget/NuGet/NuGet.Config"
+>>>>>>> Stashed changes
       ],
       "originalTargetFrameworks": [
         "net8.0"

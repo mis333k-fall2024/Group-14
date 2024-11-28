@@ -1,5 +1,6 @@
 {
   "version": 2,
+<<<<<<< Updated upstream
   "dgSpecHash": "EUmscEs6ewtjKwFw1CVzU0CdHTjMfp4+1C2VPcquD2m8UilhmF9Wa/XaPLF5Wd199ooXyDmpPkSdOUhMTk4DyA==",
   "success": true,
   "projectFilePath": "/Users/marianaalvarez/Documents/GitHub/Group-14/Files/Files/Files.csproj",
@@ -173,5 +174,11 @@
     "/Users/marianaalvarez/.nuget/packages/system.threading.tasks.extensions/4.5.4/system.threading.tasks.extensions.4.5.4.nupkg.sha512",
     "/Users/marianaalvarez/.nuget/packages/system.windows.extensions/7.0.0/system.windows.extensions.7.0.0.nupkg.sha512"
   ],
+=======
+  "dgSpecHash": "2GWsEIISKgAm0EuPeOcnXwB9kvpHpPZ+1KXBb+40m7s41sR3YKlRwuXJEI31LQs98uQxhX9fycvUog+a4PkMmA==",
+  "success": true,
+  "projectFilePath": "/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/Files.csproj",
+  "expectedPackageFiles": [],
+>>>>>>> Stashed changes
   "logs": []
 }

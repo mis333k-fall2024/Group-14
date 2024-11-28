@@ -17,12 +17,17 @@ build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Files
 build_property.RootNamespace = Files
+<<<<<<< Updated upstream
 build_property.ProjectDir = /Users/marianaalvarez/Documents/GitHub/Group-14/Files/Files/
+=======
+build_property.ProjectDir = /Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/
+>>>>>>> Stashed changes
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 8.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+<<<<<<< Updated upstream
 build_property.MSBuildProjectDirectory = /Users/marianaalvarez/Documents/GitHub/Group-14/Files/Files
 build_property._RazorSourceGeneratorDebug = 
 
@@ -167,5 +172,23 @@ build_metadata.AdditionalFiles.TargetPath = Vmlld3MvX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/marianaalvarez/Documents/GitHub/Group-14/Files/Files/Views/_ViewStart.cshtml]
+=======
+build_property.MSBuildProjectDirectory = /Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files
+build_property._RazorSourceGeneratorDebug = 
+
+[/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/Views/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/Views/_ViewStart.cshtml]
+>>>>>>> Stashed changes
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
