@@ -36,10 +36,12 @@
     <Folder Include="Views\Home\" />
     <Folder Include="Views\RoleAdmin\" />
     <Folder Include="Views\Seed\" />
+    <Folder Include="wwwroot\Images\" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="wwwroot\" />
     <Content Remove="wwwroot\lib\" />
+    <Content Remove="wwwroot\Images\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.0" />

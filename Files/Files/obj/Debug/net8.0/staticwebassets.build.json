@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "5ZAUC2Bv90AckDRnkZcLbHRlE4cGCY7iQheGZLMZJ3M=",
+  "Hash": "02Muj8UrC9Iz2ALy5B5Xky+KNc23SpG3Hzesd+V+/W8=",
   "Source": "Files",
   "BasePath": "_content/Files",
   "Mode": "Default",
@@ -1155,6 +1155,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "/Users/sophier/.nuget/packages/microsoft.aspnetcore.identity.ui/8.0.11/staticwebassets/V5/lib/jquery/LICENSE.txt"
+    },
+    {
+      "Identity": "/Users/sophier/Documents/GitHub/Group-14/Files/Files/wwwroot/Images/Logo.jpg",
+      "SourceId": "Files",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/sophier/Documents/GitHub/Group-14/Files/Files/wwwroot/",
+      "BasePath": "_content/Files",
+      "RelativePath": "Images/Logo.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/Images/Logo.jpg"
     },
     {
       "Identity": "/Users/sophier/Documents/GitHub/Group-14/Files/Files/wwwroot/lib/font-awesome/css/all.css",
