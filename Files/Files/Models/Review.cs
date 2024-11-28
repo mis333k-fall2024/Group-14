@@ -6,7 +6,11 @@ using System.Xml.Linq;
 
 namespace Files.Models
 {
-    public enum StatusDispute { Accepted , Rejected}
+    public enum StatusDispute { Disputed,
+        [Display(Name = "Valid Dispute")] ValidDispute ,
+        [Display(Name = "Invalid Dispute")] InvalidDispute
+    }
+
     public class Review
     {
         [Key]

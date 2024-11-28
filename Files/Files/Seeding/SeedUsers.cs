@@ -53,6 +53,7 @@ namespace Files.Seeding
                     LastName = "Taylor",
                     DOB = new DateTime(1954, 8, 14),
                     Address = "467 Nueces St.",
+                    Status = HireStatus.Hired,
                 },
                 Password = "TRY563",
                 RoleName = "Admin"
@@ -70,6 +71,7 @@ namespace Files.Seeding
                     LastName = "Sheffield",
                     DOB = new DateTime(1986, 8, 27),
                     Address = "3886 Avenue A",
+                    Status = HireStatus.Hired,
                 },
                 Password = "longsnores",
                 RoleName = "Admin"
@@ -87,6 +89,7 @@ namespace Files.Seeding
                     LastName = "MacLeod",
                     DOB = new DateTime(1984, 12, 5),
                     Address = "2504 Far West Blvd.",
+                    Status = HireStatus.Hired,
                 },
                 Password = "kittys",
                 RoleName = "Admin"
@@ -104,6 +107,7 @@ namespace Files.Seeding
                     LastName = "Rhodes",
                     DOB = new DateTime(1972, 7, 2),
                     Address = "4587 Enfield Rd.",
+                    Status = HireStatus.Hired,
                 },
                 Password = "puppies",
                 RoleName = "Admin"
@@ -121,6 +125,7 @@ namespace Files.Seeding
                     LastName = "Stuart",
                     DOB = new DateTime(1984, 4, 17),
                     Address = "5576 Toro Ring",
+                    Status = HireStatus.Hired,
                 },
                 Password = "coolboi",
                 RoleName = "Admin"
@@ -138,6 +143,7 @@ namespace Files.Seeding
                     LastName = "Swanson",
                     DOB = new DateTime(1991, 7, 25),
                     Address = "245 River Rd",
+                    Status = HireStatus.Hired,
                 },
                 Password = "swanbong",
                 RoleName = "Admin"
@@ -155,6 +161,7 @@ namespace Files.Seeding
                     LastName = "White",
                     DOB = new DateTime(1986, 3, 17),
                     Address = "12 Valley View",
+                    Status = HireStatus.Hired,
                 },
                 Password = "456789",
                 RoleName = "Admin"
@@ -172,6 +179,7 @@ namespace Files.Seeding
                     LastName = "Montgomery",
                     DOB = new DateTime(1961, 5, 4),
                     Address = "210 Blanco Dr",
+                    Status = HireStatus.Hired,
                 },
                 Password = "python4",
                 RoleName = "Admin"
@@ -189,6 +197,7 @@ namespace Files.Seeding
                     LastName = "Walker",
                     DOB = new DateTime(2003, 4, 18),
                     Address = "9 Bison Circle",
+                    Status = HireStatus.Hired,
                 },
                 Password = "walkameter",
                 RoleName = "Admin"
@@ -206,6 +215,7 @@ namespace Files.Seeding
                     LastName = "Chang",
                     DOB = new DateTime(1958, 4, 26),
                     Address = "9003 Joshua St",
+                    Status = HireStatus.Hired,
                 },
                 Password = "pupgang",
                 RoleName = "Admin"
@@ -223,6 +233,7 @@ namespace Files.Seeding
                     LastName = "Dreibrodt",
                     DOB = new DateTime(2001, 1, 1),
                     Address = "4 Privet Dr",
+                    Status = HireStatus.Hired,
                 },
                 Password = "2cool4u",
                 RoleName = "Admin"
@@ -240,6 +251,7 @@ namespace Files.Seeding
                     LastName = "Rester",
                     DOB = new DateTime(2000, 1, 1),
                     Address = "2110 Speedway",
+                    Status = HireStatus.Hired,
                 },
                 Password = "KIzGreat",
                 RoleName = "Admin"
