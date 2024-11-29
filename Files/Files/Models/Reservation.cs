@@ -52,7 +52,7 @@ namespace Files.Models
 
         [Required(ErrorMessage = "Confirmation Number is required")]
         [Display(Name = "Confirmation Number")]
-        public Int32 ConfirmationNumber { get; private set; }
+        public Int32 ConfirmationNumber { get; set; }
 
         // Constructor to set the ConfirmationNumber
         public Reservation()
