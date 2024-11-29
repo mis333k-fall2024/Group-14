@@ -88,7 +88,7 @@ namespace Files.Models
         [Display(Name = "Unavailable Dates")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:MMMM d, yyyy}")]
-        public DateTime UnavailableDates { get; set; } //multiple dates tho??
+        public List<DateTime> UnavailableDates { get; set; } //multiple dates tho??
 
         [Required(ErrorMessage = "Property Status is required")]
         [Display(Name = "Active Property")]

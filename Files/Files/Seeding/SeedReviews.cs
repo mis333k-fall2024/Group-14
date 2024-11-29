@@ -23,6 +23,7 @@ namespace Files.Seeding
             {
                 Properties = db.Properties.FirstOrDefault(u => "${u.Street}, ${u.City}, ${u.State} ${u.ZIP}" == "588 Alan Rest, Port Stephanieville, MS 63590"),
                 AppUsers = db.Users.FirstOrDefault(r => r.Email == "father.Ingram@aool.com"),
+                DisputeStatus = StatusDispute.NoDispute,
                 HostComments = "",
                 Rating = 4,
                 TextReview = " ",
@@ -32,6 +33,7 @@ namespace Files.Seeding
             {
                 Properties = db.Properties.FirstOrDefault(u => "${u.Street}, ${u.City}, ${u.State} ${u.ZIP}" == "1168 Gary Fords Apt. 308, Port Trevor, RI 96954"),
                 AppUsers = db.Users.FirstOrDefault(r => r.Email == "orielly@foxnets.com"),
+                DisputeStatus = StatusDispute.NoDispute,
                 HostComments = "",
                 Rating = 3,
                 TextReview = "It was meh, ya know? It was really close to the coast, but the beaches were kinda trashed. The apartment was nice, but there wasn't an elevator.",
@@ -51,6 +53,7 @@ namespace Files.Seeding
             {
                 Properties = db.Properties.FirstOrDefault(u => "${u.Street}, ${u.City}, ${u.State} ${u.ZIP}" == "588 Alan Rest, Port Stephanieville, MS 63590"),
                 AppUsers = db.Users.FirstOrDefault(r => r.Email == "tuck33@puppy.com"),
+                DisputeStatus = StatusDispute.NoDispute,
                 HostComments = "",
                 Rating = 2,
                 TextReview = " ",
@@ -60,6 +63,7 @@ namespace Files.Seeding
             {
                 Properties = db.Properties.FirstOrDefault(u => "${u.Street}, ${u.City}, ${u.State} ${u.ZIP}" == "94102 Sims Port Suite 187, Florestown, NE 80082"),
                 AppUsers = db.Users.FirstOrDefault(r => r.Email == "father.Ingram@aool.com"),
+                DisputeStatus = StatusDispute.NoDispute,
                 HostComments = "",
                 Rating = 3,
                 TextReview = "Nebraska was... interesting",
@@ -89,6 +93,7 @@ namespace Files.Seeding
             {
                 Properties = db.Properties.FirstOrDefault(u => "${u.Street}, ${u.City}, ${u.State} ${u.ZIP}" == "693 Michael Estate, Lake Michael, NM 03009"),
                 AppUsers = db.Users.FirstOrDefault(r => r.Email == "orielly@foxnets.com"),
+                DisputeStatus = StatusDispute.NoDispute,
                 HostComments = "",
                 Rating = 5,
                 TextReview = " ",
@@ -98,6 +103,7 @@ namespace Files.Seeding
             {
                 Properties = db.Properties.FirstOrDefault(u => "${u.Street}, ${u.City}, ${u.State} ${u.ZIP}" == "457 Vargas Island Suite 853, Lake Patrickstad, WY 67652"),
                 AppUsers = db.Users.FirstOrDefault(r => r.Email == "orielly@foxnets.com"),
+                DisputeStatus = StatusDispute.NoDispute,
                 HostComments = "",
                 Rating = 2,
                 TextReview = " ",
@@ -117,6 +123,7 @@ namespace Files.Seeding
             {
                 Properties = db.Properties.FirstOrDefault(u => "${u.Street}, ${u.City}, ${u.State} ${u.ZIP}" == "71664 Kim Throughway, Chelsealand, AK 65056"),
                 AppUsers = db.Users.FirstOrDefault(r => r.Email == "tuck33@puppy.com"),
+                DisputeStatus = StatusDispute.NoDispute,
                 HostComments = "",
                 Rating = 4,
                 TextReview = " ",
@@ -126,6 +133,7 @@ namespace Files.Seeding
             {
                 Properties = db.Properties.FirstOrDefault(u => "${u.Street}, ${u.City}, ${u.State} ${u.ZIP}" == "693 Michael Estate, Lake Michael, NM 03009"),
                 AppUsers = db.Users.FirstOrDefault(r => r.Email == "ra@aoo.com"),
+                DisputeStatus = StatusDispute.NoDispute,
                 HostComments = "",
                 Rating = 5,
                 TextReview = "This place rocked!",
@@ -145,6 +153,7 @@ namespace Files.Seeding
             {
                 Properties = db.Properties.FirstOrDefault(u => "${u.Street}, ${u.City}, ${u.State} ${u.ZIP}" == "457 Vargas Island Suite 853, Lake Patrickstad, WY 67652"),
                 AppUsers = db.Users.FirstOrDefault(r => r.Email == "lamemartin.Martin@aool.com"),
+                DisputeStatus = StatusDispute.NoDispute,
                 HostComments = "",
                 Rating = 4,
                 TextReview = " ",
@@ -154,6 +163,7 @@ namespace Files.Seeding
             {
                 Properties = db.Properties.FirstOrDefault(u => "${u.Street}, ${u.City}, ${u.State} ${u.ZIP}" == "94102 Sims Port Suite 187, Florestown, NE 80082"),
                 AppUsers = db.Users.FirstOrDefault(r => r.Email == "fd@puppy.com"),
+                DisputeStatus = StatusDispute.NoDispute,
                 HostComments = "",
                 Rating = 1,
                 TextReview = "There were 1...5...22 roaches? I lost count.",
@@ -163,6 +173,7 @@ namespace Files.Seeding
             {
                 Properties = db.Properties.FirstOrDefault(u => "${u.Street}, ${u.City}, ${u.State} ${u.ZIP}" == "1168 Gary Fords Apt. 308, Port Trevor, RI 96954"),
                 AppUsers = db.Users.FirstOrDefault(r => r.Email == "sheff44@puppy.com"),
+                DisputeStatus = StatusDispute.NoDispute,
                 HostComments = "",
                 Rating = 1,
                 TextReview = " ",
@@ -172,6 +183,7 @@ namespace Files.Seeding
             {
                 Properties = db.Properties.FirstOrDefault(u => "${u.Street}, ${u.City}, ${u.State} ${u.ZIP}" == "1220 Heidi Rue Apt. 998, West Haleyburgh, CO 05222"),
                 AppUsers = db.Users.FirstOrDefault(r => r.Email == "fd@puppy.com"),
+                DisputeStatus = StatusDispute.NoDispute,
                 HostComments = "",
                 Rating = 4,
                 TextReview = "I LOVED the place! Had a nice view of the mountains",
@@ -181,6 +193,7 @@ namespace Files.Seeding
             {
                 Properties = db.Properties.FirstOrDefault(u => "${u.Street}, ${u.City}, ${u.State} ${u.ZIP}" == "1220 Heidi Rue Apt. 998, West Haleyburgh, CO 05222"),
                 AppUsers = db.Users.FirstOrDefault(r => r.Email == "tuck33@puppy.com"),
+                DisputeStatus = StatusDispute.NoDispute,
                 HostComments = "",
                 Rating = 5,
                 TextReview = " ",
@@ -190,6 +203,7 @@ namespace Files.Seeding
             {
                 Properties = db.Properties.FirstOrDefault(u => "${u.Street}, ${u.City}, ${u.State} ${u.ZIP}" == "588 Alan Rest, Port Stephanieville, MS 63590"),
                 AppUsers = db.Users.FirstOrDefault(r => r.Email == "orielly@foxnets.com"),
+                DisputeStatus = StatusDispute.NoDispute,
                 HostComments = "",
                 Rating = 5,
                 TextReview = "My stay was amazing! Saved my marriage",
@@ -209,6 +223,7 @@ namespace Files.Seeding
             {
                 Properties = db.Properties.FirstOrDefault(u => "${u.Street}, ${u.City}, ${u.State} ${u.ZIP}" == "03541 Ryan Islands Apt. 562, East Michaelfort, HI 90576"),
                 AppUsers = db.Users.FirstOrDefault(r => r.Email == "orielly@foxnets.com"),
+                DisputeStatus = StatusDispute.NoDispute,
                 HostComments = "",
                 Rating = 2,
                 TextReview = "My wife's attitude was the only thing rougher than the sand at the nearby beaches",
