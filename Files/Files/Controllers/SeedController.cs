@@ -1,13 +1,13 @@
-using Files.DAL;
-using Files.Models;
-using Files.Utilities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Files.DAL;
+using Files.Models;
+using Files.Seeding;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Files.Seeding
+namespace Files.Controllers
 {
     public class SeedController : Controller
     {
@@ -32,27 +32,14 @@ namespace Files.Seeding
             try
             {
                 // Call the method to seed the roles
-                await SeedRoles.AddAllRoles(_roleManager);
+                await Seeding.SeedRoles.AddAllRoles(_roleManager);
             }
             catch (Exception ex)
             {
-                // Add the error messages to a list of strings
-                List<string> errorList = new List<string>
-                {
-                    ex.Message,
-                    ex.InnerException?.Message
-                };
-
-                // Add additional inner exception messages if there are any
-                if (ex.InnerException?.InnerException != null)
-                {
-                    errorList.Add(ex.InnerException.InnerException.Message);
-                }
-
-                return View("Error", errorList);
+                return HandleError(ex);
             }
 
-            // This is the happy path - seeding worked!
+            // Successful seeding
             return View("Confirm");
         }
 
@@ -61,27 +48,14 @@ namespace Files.Seeding
             try
             {
                 // Call the method to seed the users
-                await SeedUsers.SeedAllUsers(_userManager, _context);
+                await Seeding.SeedUsers.SeedAllUsers(_userManager, _context);
             }
             catch (Exception ex)
             {
-                // Add the error messages to a list of strings
-                List<string> errorList = new List<string>
-                {
-                    ex.Message,
-                    ex.InnerException?.Message
-                };
-
-                // Add additional inner exception messages if there are any
-                if (ex.InnerException?.InnerException != null)
-                {
-                    errorList.Add(ex.InnerException.InnerException.Message);
-                }
-
-                return View("Error", errorList);
+                return HandleError(ex);
             }
 
-            // This is the happy path - seeding worked!
+            // Successful seeding
             return View("Confirm");
         }
 
@@ -89,28 +63,15 @@ namespace Files.Seeding
         {
             try
             {
-                // Call the method to seed categories
-                SeedCategories.SeedAllCategories(_context);
+           
+                Seeding.SeedCategories.SeedAllCategories(_context);
             }
             catch (Exception ex)
             {
-                // Add the error messages to a list of strings
-                List<string> errorList = new List<string>
-                {
-                    ex.Message,
-                    ex.InnerException?.Message
-                };
-
-                // Add additional inner exception messages if there are any
-                if (ex.InnerException?.InnerException != null)
-                {
-                    errorList.Add(ex.InnerException.InnerException.Message);
-                }
-
-                return View("Error", errorList);
+                return HandleError(ex);
             }
 
-            // This is the happy path - seeding worked!
+            // Successful seeding
             return View("Confirm");
         }
 
@@ -118,28 +79,15 @@ namespace Files.Seeding
         {
             try
             {
-                // Call the method to seed properties
-                SeedProperties.SeedAllProperties(_context);
+          
+                Seeding.SeedProperties.SeedAllProperties(_context);
             }
             catch (Exception ex)
             {
-                // Add the error messages to a list of strings
-                List<string> errorList = new List<string>
-                {
-                    ex.Message,
-                    ex.InnerException?.Message
-                };
-
-                // Add additional inner exception messages if there are any
-                if (ex.InnerException?.InnerException != null)
-                {
-                    errorList.Add(ex.InnerException.InnerException.Message);
-                }
-
-                return View("Error", errorList);
+                return HandleError(ex);
             }
 
-            // This is the happy path - seeding worked!
+            // Successful seeding
             return View("Confirm");
         }
 
@@ -148,27 +96,14 @@ namespace Files.Seeding
             try
             {
                 // Call the method to seed reservations
-                SeedReservations.SeedAllReservations(_context);
+                Seeding.SeedReservations.SeedAllReservations(_context);
             }
             catch (Exception ex)
             {
-                // Add the error messages to a list of strings
-                List<string> errorList = new List<string>
-                {
-                    ex.Message,
-                    ex.InnerException?.Message
-                };
-
-                // Add additional inner exception messages if there are any
-                if (ex.InnerException?.InnerException != null)
-                {
-                    errorList.Add(ex.InnerException.InnerException.Message);
-                }
-
-                return View("Error", errorList);
+                return HandleError(ex);
             }
 
-            // This is the happy path - seeding worked!
+            // Successful seeding
             return View("Confirm");
         }
 
@@ -177,28 +112,36 @@ namespace Files.Seeding
             try
             {
                 // Call the method to seed reviews
-                SeedReviews.SeedAllReviews(_context);
+                Seeding.SeedReviews.SeedAllReviews(_context);
             }
             catch (Exception ex)
             {
-                // Add the error messages to a list of strings
-                List<string> errorList = new List<string>
-                {
-                    ex.Message,
-                    ex.InnerException?.Message
-                };
+                return HandleError(ex);
+            }
 
-                // Add additional inner exception messages if there are any
-                if (ex.InnerException?.InnerException != null)
+            // Successful seeding
+            return View("Confirm");
+        }
+
+        // Helper method for error handling
+        private IActionResult HandleError(Exception ex)
+        {
+            var errorList = new List<string>
+            {
+                ex.Message
+            };
+
+            // Add inner exceptions if present
+            if (ex.InnerException != null)
+            {
+                errorList.Add(ex.InnerException.Message);
+                if (ex.InnerException.InnerException != null)
                 {
                     errorList.Add(ex.InnerException.InnerException.Message);
                 }
-
-                return View("Error", errorList);
             }
 
-            // This is the happy path - seeding worked!
-            return View("Confirm");
+            return View("Error", errorList);
         }
     }
 }
