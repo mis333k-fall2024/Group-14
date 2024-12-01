@@ -271,7 +271,10 @@ namespace Files.Seeding
 
                     //TODO: Add additional fields that you created on the AppUser class
                     //FirstName is included as an example
-                    FirstName = "Bevo"
+                    FirstName = "Bevo",
+                    LastName = "Longhorn",
+                    DOB = new DateTime(1994, 11, 29),
+                    Address = "512 Bevo Way",
 
                 },
                 Password = "Password123!",
