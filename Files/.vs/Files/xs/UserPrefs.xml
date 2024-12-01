@@ -10,7 +10,7 @@
       <File FileName="Files/DAL/AppDbContext.cs" />
       <File FileName="Files/Models/Category.cs" />
       <File FileName="Files/Models/Property.cs" />
-      <File FileName="Files/Seeding/SeedRoles.cs" Line="34" Column="6" />
+      <File FileName="Files/Seeding/SeedRoles.cs" />
       <File FileName="Files/Models/AppUser.cs" />
       <File FileName="Files/Controllers/AccountController.cs" />
       <File FileName="Files/Controllers/RoleAdminController.cs" />
@@ -19,21 +19,16 @@
       <File FileName="Files/Views/Account/ChangePassword.cshtml" />
       <File FileName="Files/Views/Account/Index.cshtml" />
       <File FileName="Files/Views/Account/Login.cshtml" />
-      <File FileName="Files/Controllers/SeedController.cs" Line="25" Column="37" />
-      <File FileName="../../../../../../usr/local/share/dotnet/sdk/8.0.401/Sdks/Microsoft.NET.Sdk/targets/Microsoft.PackageDependencyResolution.targets" Line="266" Column="5" />
-      <File FileName="Files/Seeding/SeedCategories.cs" Line="1" Column="1" />
+      <File FileName="Files/Controllers/SeedController.cs" Line="80" Column="16" />
+      <File FileName="../../../../../../usr/local/share/dotnet/sdk/8.0.401/Sdks/Microsoft.NET.Sdk/targets/Microsoft.PackageDependencyResolution.targets" />
+      <File FileName="Files/Seeding/SeedCategories.cs" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="Files" expanded="True">
-            <Node name="Files">
-              <Node name="Dependencies" expanded="True">
-                <Node name="PackageDependencies" expanded="True" />
-              </Node>
-              <Node name="Controllers">
-                <Node name="SeedController.cs" selected="True" />
-              </Node>
+            <Node name="Files" expanded="True">
+              <Node name="Controllers" expanded="True" />
               <Node name="Models" expanded="True" />
               <Node name="Seeding" expanded="True" />
               <Node name="Utilities" expanded="True" />
