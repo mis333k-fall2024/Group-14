@@ -59,12 +59,12 @@ namespace Files.Controllers
             return View("Confirm");
         }
 
-        public IActionResult SeedCategories()
+        public IActionResult SeedProperties()
         {
             try
             {
-           
-                Seeding.SeedCategories.SeedAllCategories(_context);
+
+                Seeding.SeedProperties.SeedAllProperties(_context);
             }
             catch (Exception ex)
             {
@@ -75,12 +75,12 @@ namespace Files.Controllers
             return View("Confirm");
         }
 
-        public IActionResult SeedProperties()
+        public IActionResult SeedCategories()
         {
             try
             {
-          
-                Seeding.SeedProperties.SeedAllProperties(_context);
+           
+                Seeding.SeedCategories.SeedAllCategories(_context);
             }
             catch (Exception ex)
             {
