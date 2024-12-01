@@ -119,7 +119,7 @@ namespace Files.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Login(LoginViewModel lvm, string returnUrl)
+        public async Task<ActionResult> Login(LoginViewModel lvm, string? returnUrl)
         {
             //if user forgot to include user name or password,
             //send them back to the login page to try again

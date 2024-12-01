@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+<!DOCTYPE html>
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -39,6 +40,23 @@
                     <!--TODO: Products is included here as an example, but you will need to edit this link and add more -->
                     <li class="nav-item"><a asp-controller="Properties" asp-action="Index" class="nav-link">Properties</a></li>
                     <li class="nav-item"><a asp-controller="Account" asp-action="Index" class="nav-link">Profile</a></li>
+                </ul>
+
+                <!-- Right-aligned navbar item using ms-auto -->
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    @inject SignInManager<AppUser> signInManager
+                    @if (signInManager.IsSignedIn(User))
+                    {
+                        // signed-in user - Log Out button and username
+                        <li class="nav-item">
+                            <form method="post" asp-action="LogOff"
+                                  asp-controller="Account" asp-area="">
+                                <input type="submit" value="Log Off"
+                                       class="btn btn-outline-light" />
+                                <span class="text-light">@User.Identity.Name</span>
+                            </form>
+                        </li>
+                    }
                 </ul>
             </div>
         </div>
