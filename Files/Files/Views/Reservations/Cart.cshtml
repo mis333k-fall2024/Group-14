@@ -1,0 +1,35 @@
+﻿@model Files.Models.ReservationList
+
+<h2>Your Reservations</h2>
+
+@if (Model.Reservations == null || !Model.Reservations.Any())
+{
+    <p>Sorry, your cart is empty!</p>
+    <a asp-controller="Properties" asp-action="Index" class="btn" style="background-color: #BF5700; color: white; border: none;">
+        Add a reservation!
+    </a>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Property</th>
+                <th>Price per Night</th>
+                <th>Total Nights</th>
+                <th>Total Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Reservations)
+            {
+                <tr>
+                    <td>@item.PropertyId</td>
+                    <td>@item.WeekdayPrice.ToString("C")</td>
+                    <td>@item.WeekendPrice</td>
+                    <td>@item.CalculateStayPrice().ToString("C")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
