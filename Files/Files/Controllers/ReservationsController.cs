@@ -1,15 +1,15 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Files.DAL;
-using Files.Models;
+using Files.DAL; // Your data access layer namespace
+using Files.Models; // Your models namespace
 
 namespace Files.Controllers
 {
+    [Authorize] // Ensure only logged-in users can access these actions
     public class ReservationsController : Controller
     {
         private readonly AppDbContext _context;
@@ -50,11 +50,9 @@ namespace Files.Controllers
         }
 
         // POST: Reservations/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ReservationID,CheckIn,CheckOut,NumOfGuests,WeekdayPrice,WeekendPrice,CleaningFee,DiscountRate,ReservationStatus,ConfirmationNumber")] Reservation reservation)
+        public async Task<IActionResult> Create([Bind("ReservationID,CheckIn,CheckOut,NumOfGuests,WeekdayPrice,WeekendPrice,CleaningFee,DiscountRate,ReservationStatus,ConfirmationNumber,PropertyId,UserId")] Reservation reservation)
         {
             if (ModelState.IsValid)
             {
@@ -65,93 +63,62 @@ namespace Files.Controllers
             return View(reservation);
         }
 
-        // GET: Reservations/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        // GET: Reservations/Checkout
+        public async Task<IActionResult> Checkout()
         {
-            if (id == null)
+            // Get the logged-in user's ID
+            var userId = User.Identity.Name;
+
+            // Retrieve all pending reservations for the user
+            var reservations = await _context.Reservations
+                .Where(r => r.UserId == userId && r.ReservationStatus == false) // Assuming false = "Pending"
+                .ToListAsync();
+
+            if (!reservations.Any())
             {
-                return NotFound();
+                TempData["Error"] = "Your cart is empty. Please add reservations before checking out.";
+                return RedirectToAction("Index", "Home");
             }
 
-            var reservation = await _context.Reservations.FindAsync(id);
-            if (reservation == null)
-            {
-                return NotFound();
-            }
-            return View(reservation);
+            // Pass the reservations to the Checkout view
+            return View(reservations);
         }
 
-        // POST: Reservations/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: Reservations/Confirm
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ReservationID,CheckIn,CheckOut,NumOfGuests,WeekdayPrice,WeekendPrice,CleaningFee,DiscountRate,ReservationStatus,ConfirmationNumber")] Reservation reservation)
+        public async Task<IActionResult> Confirm()
         {
-            if (id != reservation.ReservationID)
+            var userId = User.Identity.Name;
+
+            // Get all pending reservations for the user
+            var reservations = await _context.Reservations
+                .Where(r => r.UserId == userId && r.ReservationStatus == false)
+                .ToListAsync();
+
+            if (!reservations.Any())
             {
-                return NotFound();
+                TempData["Error"] = "Your cart is empty. Please add reservations before confirming.";
+                return RedirectToAction("Index", "Home");
             }
 
-            if (ModelState.IsValid)
+            // Mark all reservations as confirmed
+            foreach (var reservation in reservations)
             {
-                try
-                {
-                    _context.Update(reservation);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ReservationExists(reservation.ReservationID))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(reservation);
-        }
-
-        // GET: Reservations/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var reservation = await _context.Reservations
-                .FirstOrDefaultAsync(m => m.ReservationID == id);
-            if (reservation == null)
-            {
-                return NotFound();
-            }
-
-            return View(reservation);
-        }
-
-        // POST: Reservations/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var reservation = await _context.Reservations.FindAsync(id);
-            if (reservation != null)
-            {
-                _context.Reservations.Remove(reservation);
+                reservation.ReservationStatus = true;
             }
 
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+
+            // Redirect to a thank-you page or the home page
+            TempData["Message"] = "Your reservations have been confirmed!";
+            return RedirectToAction("ThankYou");
         }
 
-        private bool ReservationExists(int id)
+        // GET: Reservations/ThankYou
+        public IActionResult ThankYou()
         {
-            return _context.Reservations.Any(e => e.ReservationID == id);
+            return View();
         }
     }
 }

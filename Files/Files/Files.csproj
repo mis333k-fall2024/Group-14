@@ -20,6 +20,7 @@
     <None Remove="Views\Home\" />
     <None Remove="Views\RoleAdmin\" />
     <None Remove="Views\Seed\" />
+    <None Remove="Views\Checkout\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
@@ -37,6 +38,7 @@
     <Folder Include="Views\RoleAdmin\" />
     <Folder Include="Views\Seed\" />
     <Folder Include="wwwroot\Images\" />
+    <Folder Include="Views\Checkout\" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="wwwroot\" />

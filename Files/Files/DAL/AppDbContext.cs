@@ -28,5 +28,7 @@ namespace Files.DAL
         public DbSet<Category> Categories { get; set; }
         public DbSet<Reservation> Reservations { get; set; }
         public DbSet<Review> Reviews { get; set; }
+        public DbSet<Cart> Carts { get; set; }
+        public DbSet<Transaction> Transactions { get; set; }
     }
 }

@@ -1,50 +1,62 @@
 ﻿<Properties StartupConfiguration="{4093AD08-3465-427B-81E2-2C099D378B96}|http">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Files/Seeding/SeedReviews.cs">
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.Workbench ActiveDocument="Files/Controllers/ReservationsController.cs">
     <Files>
-      <File FileName="Files/Models/Reservation.cs" />
-      <File FileName="Files/Models/Review.cs" Line="1" Column="1" />
+      <File FileName="Files/Models/Reservation.cs" Line="1" Column="1" />
+      <File FileName="Files/Models/Review.cs" />
       <File FileName="Files/Controllers/HomeController.cs" />
       <File FileName="Files/Views/Index.cshtml" />
       <File FileName="Files/DAL/AppDbContext.cs" />
       <File FileName="Files/Models/Category.cs" />
-      <File FileName="Files/Models/Property.cs" Line="1" Column="1" />
+      <File FileName="Files/Models/Property.cs" />
       <File FileName="Files/Seeding/SeedRoles.cs" />
       <File FileName="Files/Models/AppUser.cs" />
-      <File FileName="Files/Controllers/AccountController.cs" />
+      <File FileName="Files/Controllers/AccountController.cs" Line="24" Column="37" />
       <File FileName="Files/Controllers/RoleAdminController.cs" />
       <File FileName="Files/Views/_ViewImports.cshtml" />
       <File FileName="Files/Program.cs" />
       <File FileName="Files/Views/Account/ChangePassword.cshtml" />
       <File FileName="Files/Views/Account/Index.cshtml" />
       <File FileName="Files/Views/Account/Login.cshtml" />
-      <File FileName="Files/Controllers/SeedController.cs" Line="77" Column="10" />
+      <File FileName="Files/Controllers/SeedController.cs" />
       <File FileName="../../../../../../usr/local/share/dotnet/sdk/8.0.401/Sdks/Microsoft.NET.Sdk/targets/Microsoft.PackageDependencyResolution.targets" />
-      <File FileName="Files/Seeding/SeedCategories.cs" Line="1" Column="1" />
-      <File FileName="Files/Seeding/SeedReservations.cs" Line="1" Column="1" />
-      <File FileName="Files/Seeding/SeedProperties.cs" Line="13" Column="2" />
-      <File FileName="Files/Seeding/SeedReviews.cs" Line="299" Column="2" />
+      <File FileName="Files/Views/Home/Index.cshtml" />
+      <File FileName="Files/Views/Shared/_Layout.cshtml" />
+      <File FileName="Files/Controllers/CategoriesController.cs" />
+      <File FileName="Files/Controllers/PropertiesController.cs" Line="1" Column="1" />
+      <File FileName="Files/Seeding/SeedProperties.cs" Line="8" Column="19" />
+      <File FileName="Files/Controllers/ReservationsController.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
-          <Node name="Files" expanded="True">
-            <Node name="Files">
-              <Node name="Models" expanded="True" />
-              <Node name="Seeding">
-                <Node name="SeedReviews.cs" selected="True" />
+          <Node name="Files">
+            <Node name="Files" expanded="True">
+              <Node name="Dependencies" expanded="True">
+                <Node name="PackageDependencies" expanded="True" />
               </Node>
+              <Node name="Controllers" expanded="True">
+                <Node name="ReservationsController.cs" selected="True" />
+              </Node>
+              <Node name="Migrations" expanded="True" />
+              <Node name="Models" expanded="True" />
+              <Node name="Seeding" expanded="True" />
               <Node name="Utilities" expanded="True" />
+              <Node name="Views" expanded="True">
+                <Node name="Home" expanded="True" />
+                <Node name="Shared" expanded="True" />
+              </Node>
+              <Node name="wwwroot" expanded="True" />
             </Node>
           </Node>
         </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.ItemProperties.Files PreferredExecutionTarget="/Applications/Google Chrome.app" />
-  <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
-  </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.Files PreferredExecutionTarget="/Applications/Google Chrome.app" />
 </Properties>
