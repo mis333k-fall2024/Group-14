@@ -6,6 +6,7 @@ using Files.Seeding;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace Files.Controllers
 {
@@ -59,27 +60,11 @@ namespace Files.Controllers
             return View("Confirm");
         }
 
-        public IActionResult SeedProperties()
-        {
-            try
-            {
-
-                Seeding.SeedProperties.SeedAllProperties(_context);
-            }
-            catch (Exception ex)
-            {
-                return HandleError(ex);
-            }
-
-            // Successful seeding
-            return View("Confirm");
-        }
-
         public IActionResult SeedCategories()
         {
             try
             {
-           
+
                 Seeding.SeedCategories.SeedAllCategories(_context);
             }
             catch (Exception ex)
@@ -90,6 +75,36 @@ namespace Files.Controllers
             // Successful seeding
             return View("Confirm");
         }
+
+        public IActionResult SeedProperties()
+        {
+            try
+            {
+                // Start a transaction for safety
+                using (var transaction = _context.Database.BeginTransaction())
+                {
+                    // Enable IDENTITY_INSERT for the Properties table
+                    _context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT Properties ON");
+
+                    // Call the method to seed properties
+                    Seeding.SeedProperties.SeedAllProperties(_context);
+
+                    // Disable IDENTITY_INSERT after seeding
+                    _context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT Properties OFF");
+
+                    // Commit the transaction
+                    transaction.Commit();
+                }
+            }
+            catch (Exception ex)
+            {
+                return HandleError(ex);
+            }
+
+            // Successful seeding
+            return View("Confirm");
+        }
+
 
         public IActionResult SeedReservations()
         {

@@ -1,3 +1,4 @@
+
 using Files.DAL;
 using Files.Models;
 using Files.Utilities;
@@ -21,9 +22,9 @@ namespace Files.Seeding
 
             AllReviews.Add(new Review
             {
-                Properties = db.Properties.FirstOrDefault(u => "${u.Street}, ${u.City}, ${u.State} ${u.ZIP}" == "588 Alan Rest, Port Stephanieville, MS 63590"),
+                Properties = db.Properties.FirstOrDefault(u => u.PropertyNumber == 3127),
                 AppUsers = db.Users.FirstOrDefault(r => r.Email == "father.Ingram@aool.com"),
-                DisputeStatus = StatusDispute.NoDispute,
+                DisputeStatus = StatusDispute.NoDispute, // Output enum
                 HostComments = "",
                 Rating = 4,
                 TextReview = " ",
@@ -31,9 +32,9 @@ namespace Files.Seeding
 
             AllReviews.Add(new Review
             {
-                Properties = db.Properties.FirstOrDefault(u => "${u.Street}, ${u.City}, ${u.State} ${u.ZIP}" == "1168 Gary Fords Apt. 308, Port Trevor, RI 96954"),
+                Properties = db.Properties.FirstOrDefault(u => u.PropertyNumber == 3085),
                 AppUsers = db.Users.FirstOrDefault(r => r.Email == "orielly@foxnets.com"),
-                DisputeStatus = StatusDispute.NoDispute,
+                DisputeStatus = StatusDispute.NoDispute, // Output enum
                 HostComments = "",
                 Rating = 3,
                 TextReview = "It was meh, ya know? It was really close to the coast, but the beaches were kinda trashed. The apartment was nice, but there wasn't an elevator.",
@@ -41,7 +42,7 @@ namespace Files.Seeding
 
             AllReviews.Add(new Review
             {
-                Properties = db.Properties.FirstOrDefault(u => "${u.Street}, ${u.City}, ${u.State} ${u.ZIP}" == "03541 Ryan Islands Apt. 562, East Michaelfort, HI 90576"),
+                Properties = db.Properties.FirstOrDefault(u => u.PropertyNumber == 3161),
                 AppUsers = db.Users.FirstOrDefault(r => r.Email == "father.Ingram@aool.com"),
                 DisputeStatus = StatusDispute.Disputed, // Output enum
                 HostComments = "The customer did not provide a valid reason for this rating.",
@@ -51,9 +52,9 @@ namespace Files.Seeding
 
             AllReviews.Add(new Review
             {
-                Properties = db.Properties.FirstOrDefault(u => "${u.Street}, ${u.City}, ${u.State} ${u.ZIP}" == "588 Alan Rest, Port Stephanieville, MS 63590"),
+                Properties = db.Properties.FirstOrDefault(u => u.PropertyNumber == 3127),
                 AppUsers = db.Users.FirstOrDefault(r => r.Email == "tuck33@puppy.com"),
-                DisputeStatus = StatusDispute.NoDispute,
+                DisputeStatus = StatusDispute.NoDispute, // Output enum
                 HostComments = "",
                 Rating = 2,
                 TextReview = " ",
@@ -61,9 +62,9 @@ namespace Files.Seeding
 
             AllReviews.Add(new Review
             {
-                Properties = db.Properties.FirstOrDefault(u => "${u.Street}, ${u.City}, ${u.State} ${u.ZIP}" == "94102 Sims Port Suite 187, Florestown, NE 80082"),
+                Properties = db.Properties.FirstOrDefault(u => u.PropertyNumber == 3107),
                 AppUsers = db.Users.FirstOrDefault(r => r.Email == "father.Ingram@aool.com"),
-                DisputeStatus = StatusDispute.NoDispute,
+                DisputeStatus = StatusDispute.NoDispute, // Output enum
                 HostComments = "",
                 Rating = 3,
                 TextReview = "Nebraska was... interesting",
@@ -71,7 +72,7 @@ namespace Files.Seeding
 
             AllReviews.Add(new Review
             {
-                Properties = db.Properties.FirstOrDefault(u => "${u.Street}, ${u.City}, ${u.State} ${u.ZIP}" == "94102 Sims Port Suite 187, Florestown, NE 80082"),
+                Properties = db.Properties.FirstOrDefault(u => u.PropertyNumber == 3107),
                 AppUsers = db.Users.FirstOrDefault(r => r.Email == "tfreeley@puppy.com"),
                 DisputeStatus = StatusDispute.Disputed, // Output enum
                 HostComments = "It is not my fault there was corn. It was not my corn!",
@@ -81,7 +82,7 @@ namespace Files.Seeding
 
             AllReviews.Add(new Review
             {
-                Properties = db.Properties.FirstOrDefault(u => "${u.Street}, ${u.City}, ${u.State} ${u.ZIP}" == "94102 Sims Port Suite 187, Florestown, NE 80082"),
+                Properties = db.Properties.FirstOrDefault(u => u.PropertyNumber == 3107),
                 AppUsers = db.Users.FirstOrDefault(r => r.Email == "ra@aoo.com"),
                 DisputeStatus = StatusDispute.ValidDispute, // Output enum
                 HostComments = "BevoBnB is the best",
@@ -91,9 +92,9 @@ namespace Files.Seeding
 
             AllReviews.Add(new Review
             {
-                Properties = db.Properties.FirstOrDefault(u => "${u.Street}, ${u.City}, ${u.State} ${u.ZIP}" == "693 Michael Estate, Lake Michael, NM 03009"),
+                Properties = db.Properties.FirstOrDefault(u => u.PropertyNumber == 3065),
                 AppUsers = db.Users.FirstOrDefault(r => r.Email == "orielly@foxnets.com"),
-                DisputeStatus = StatusDispute.NoDispute,
+                DisputeStatus = StatusDispute.NoDispute, // Output enum
                 HostComments = "",
                 Rating = 5,
                 TextReview = " ",
@@ -101,9 +102,9 @@ namespace Files.Seeding
 
             AllReviews.Add(new Review
             {
-                Properties = db.Properties.FirstOrDefault(u => "${u.Street}, ${u.City}, ${u.State} ${u.ZIP}" == "457 Vargas Island Suite 853, Lake Patrickstad, WY 67652"),
+                Properties = db.Properties.FirstOrDefault(u => u.PropertyNumber == 3133),
                 AppUsers = db.Users.FirstOrDefault(r => r.Email == "orielly@foxnets.com"),
-                DisputeStatus = StatusDispute.NoDispute,
+                DisputeStatus = StatusDispute.NoDispute, // Output enum
                 HostComments = "",
                 Rating = 2,
                 TextReview = " ",
@@ -111,7 +112,7 @@ namespace Files.Seeding
 
             AllReviews.Add(new Review
             {
-                Properties = db.Properties.FirstOrDefault(u => "${u.Street}, ${u.City}, ${u.State} ${u.ZIP}" == "693 Michael Estate, Lake Michael, NM 03009"),
+                Properties = db.Properties.FirstOrDefault(u => u.PropertyNumber == 3065),
                 AppUsers = db.Users.FirstOrDefault(r => r.Email == "tfreeley@puppy.com"),
                 DisputeStatus = StatusDispute.InvalidDispute, // Output enum
                 HostComments = "The website was coded by students so the owner should not be penalized!",
@@ -121,9 +122,9 @@ namespace Files.Seeding
 
             AllReviews.Add(new Review
             {
-                Properties = db.Properties.FirstOrDefault(u => "${u.Street}, ${u.City}, ${u.State} ${u.ZIP}" == "71664 Kim Throughway, Chelsealand, AK 65056"),
+                Properties = db.Properties.FirstOrDefault(u => u.PropertyNumber == 3067),
                 AppUsers = db.Users.FirstOrDefault(r => r.Email == "tuck33@puppy.com"),
-                DisputeStatus = StatusDispute.NoDispute,
+                DisputeStatus = StatusDispute.NoDispute, // Output enum
                 HostComments = "",
                 Rating = 4,
                 TextReview = " ",
@@ -131,9 +132,9 @@ namespace Files.Seeding
 
             AllReviews.Add(new Review
             {
-                Properties = db.Properties.FirstOrDefault(u => "${u.Street}, ${u.City}, ${u.State} ${u.ZIP}" == "693 Michael Estate, Lake Michael, NM 03009"),
+                Properties = db.Properties.FirstOrDefault(u => u.PropertyNumber == 3065),
                 AppUsers = db.Users.FirstOrDefault(r => r.Email == "ra@aoo.com"),
-                DisputeStatus = StatusDispute.NoDispute,
+                DisputeStatus = StatusDispute.NoDispute, // Output enum
                 HostComments = "",
                 Rating = 5,
                 TextReview = "This place rocked!",
@@ -141,7 +142,7 @@ namespace Files.Seeding
 
             AllReviews.Add(new Review
             {
-                Properties = db.Properties.FirstOrDefault(u => "${u.Street}, ${u.City}, ${u.State} ${u.ZIP}" == "693 Michael Estate, Lake Michael, NM 03009"),
+                Properties = db.Properties.FirstOrDefault(u => u.PropertyNumber == 3065),
                 AppUsers = db.Users.FirstOrDefault(r => r.Email == "fd@puppy.com"),
                 DisputeStatus = StatusDispute.ValidDispute, // Output enum
                 HostComments = "I do not understand this.",
@@ -151,9 +152,9 @@ namespace Files.Seeding
 
             AllReviews.Add(new Review
             {
-                Properties = db.Properties.FirstOrDefault(u => "${u.Street}, ${u.City}, ${u.State} ${u.ZIP}" == "457 Vargas Island Suite 853, Lake Patrickstad, WY 67652"),
+                Properties = db.Properties.FirstOrDefault(u => u.PropertyNumber == 3133),
                 AppUsers = db.Users.FirstOrDefault(r => r.Email == "lamemartin.Martin@aool.com"),
-                DisputeStatus = StatusDispute.NoDispute,
+                DisputeStatus = StatusDispute.NoDispute, // Output enum
                 HostComments = "",
                 Rating = 4,
                 TextReview = " ",
@@ -161,9 +162,9 @@ namespace Files.Seeding
 
             AllReviews.Add(new Review
             {
-                Properties = db.Properties.FirstOrDefault(u => "${u.Street}, ${u.City}, ${u.State} ${u.ZIP}" == "94102 Sims Port Suite 187, Florestown, NE 80082"),
+                Properties = db.Properties.FirstOrDefault(u => u.PropertyNumber == 3107),
                 AppUsers = db.Users.FirstOrDefault(r => r.Email == "fd@puppy.com"),
-                DisputeStatus = StatusDispute.NoDispute,
+                DisputeStatus = StatusDispute.NoDispute, // Output enum
                 HostComments = "",
                 Rating = 1,
                 TextReview = "There were 1...5...22 roaches? I lost count.",
@@ -171,9 +172,9 @@ namespace Files.Seeding
 
             AllReviews.Add(new Review
             {
-                Properties = db.Properties.FirstOrDefault(u => "${u.Street}, ${u.City}, ${u.State} ${u.ZIP}" == "1168 Gary Fords Apt. 308, Port Trevor, RI 96954"),
+                Properties = db.Properties.FirstOrDefault(u => u.PropertyNumber == 3085),
                 AppUsers = db.Users.FirstOrDefault(r => r.Email == "sheff44@puppy.com"),
-                DisputeStatus = StatusDispute.NoDispute,
+                DisputeStatus = StatusDispute.NoDispute, // Output enum
                 HostComments = "",
                 Rating = 1,
                 TextReview = " ",
@@ -181,9 +182,9 @@ namespace Files.Seeding
 
             AllReviews.Add(new Review
             {
-                Properties = db.Properties.FirstOrDefault(u => "${u.Street}, ${u.City}, ${u.State} ${u.ZIP}" == "1220 Heidi Rue Apt. 998, West Haleyburgh, CO 05222"),
+                Properties = db.Properties.FirstOrDefault(u => u.PropertyNumber == 3087),
                 AppUsers = db.Users.FirstOrDefault(r => r.Email == "fd@puppy.com"),
-                DisputeStatus = StatusDispute.NoDispute,
+                DisputeStatus = StatusDispute.NoDispute, // Output enum
                 HostComments = "",
                 Rating = 4,
                 TextReview = "I LOVED the place! Had a nice view of the mountains",
@@ -191,9 +192,9 @@ namespace Files.Seeding
 
             AllReviews.Add(new Review
             {
-                Properties = db.Properties.FirstOrDefault(u => "${u.Street}, ${u.City}, ${u.State} ${u.ZIP}" == "1220 Heidi Rue Apt. 998, West Haleyburgh, CO 05222"),
+                Properties = db.Properties.FirstOrDefault(u => u.PropertyNumber == 3087),
                 AppUsers = db.Users.FirstOrDefault(r => r.Email == "tuck33@puppy.com"),
-                DisputeStatus = StatusDispute.NoDispute,
+                DisputeStatus = StatusDispute.NoDispute, // Output enum
                 HostComments = "",
                 Rating = 5,
                 TextReview = " ",
@@ -201,9 +202,9 @@ namespace Files.Seeding
 
             AllReviews.Add(new Review
             {
-                Properties = db.Properties.FirstOrDefault(u => "${u.Street}, ${u.City}, ${u.State} ${u.ZIP}" == "588 Alan Rest, Port Stephanieville, MS 63590"),
+                Properties = db.Properties.FirstOrDefault(u => u.PropertyNumber == 3127),
                 AppUsers = db.Users.FirstOrDefault(r => r.Email == "orielly@foxnets.com"),
-                DisputeStatus = StatusDispute.NoDispute,
+                DisputeStatus = StatusDispute.NoDispute, // Output enum
                 HostComments = "",
                 Rating = 5,
                 TextReview = "My stay was amazing! Saved my marriage",
@@ -211,7 +212,7 @@ namespace Files.Seeding
 
             AllReviews.Add(new Review
             {
-                Properties = db.Properties.FirstOrDefault(u => "${u.Street}, ${u.City}, ${u.State} ${u.ZIP}" == "457 Vargas Island Suite 853, Lake Patrickstad, WY 67652"),
+                Properties = db.Properties.FirstOrDefault(u => u.PropertyNumber == 3133),
                 AppUsers = db.Users.FirstOrDefault(r => r.Email == "sheff44@puppy.com"),
                 DisputeStatus = StatusDispute.InvalidDispute, // Output enum
                 HostComments = "Why??",
@@ -221,9 +222,9 @@ namespace Files.Seeding
 
             AllReviews.Add(new Review
             {
-                Properties = db.Properties.FirstOrDefault(u => "${u.Street}, ${u.City}, ${u.State} ${u.ZIP}" == "03541 Ryan Islands Apt. 562, East Michaelfort, HI 90576"),
+                Properties = db.Properties.FirstOrDefault(u => u.PropertyNumber == 3161),
                 AppUsers = db.Users.FirstOrDefault(r => r.Email == "orielly@foxnets.com"),
-                DisputeStatus = StatusDispute.NoDispute,
+                DisputeStatus = StatusDispute.NoDispute, // Output enum
                 HostComments = "",
                 Rating = 2,
                 TextReview = "My wife's attitude was the only thing rougher than the sand at the nearby beaches",
@@ -237,55 +238,61 @@ namespace Files.Seeding
             // Add the reviews to the database in a Try/Catch block to handle potential errors
             try
             {
-                // Loop through each review
-                foreach (Review seedReview in AllReviews)
                 {
-                    // Update debugging variables to track progress
-                    intReviewID = seedReview.ReviewID;
-                    strReviewCustomer = seedReview.AppUsers.FirstName + " " + seedReview.AppUsers.LastName;
-                    strReviewProperty = seedReview.Properties.Street + ", " + seedReview.Properties.City + ", " +
-                                        seedReview.Properties.State + " " + seedReview.Properties.Zip;
-
-                    // Check if the review already exists in the database
-                    Review dbReview = db.Reviews.FirstOrDefault(c =>
-                        (c.Properties.Street == seedReview.Properties.Street &&
-                         c.Properties.City == seedReview.Properties.City &&
-                         c.Properties.State == seedReview.Properties.State &&
-                         c.Properties.Zip == seedReview.Properties.Zip) &&
-                        (c.AppUsers.Email == seedReview.AppUsers.Email));
-
-                    // If the review doesn't exist, add it to the database
-                    if (dbReview == null)
+                    // Loop through each review
+                    foreach (Review seedReview in AllReviews)
                     {
-                        db.Reviews.Add(seedReview);
-                        db.SaveChanges();
-                    }
-                    else // If the review exists, update the fields
-                    {
-                        dbReview.DisputeStatus = seedReview.DisputeStatus;
-                        dbReview.HostComments = seedReview.HostComments;
-                        dbReview.Rating = seedReview.Rating;
-                        dbReview.TextReview = seedReview.TextReview;
+                        {
+                            // Update debugging variables to track progress
+                            intReviewID = seedReview.ReviewID;
+                            strReviewCustomer = seedReview.AppUsers.FirstName + " " + seedReview.AppUsers.LastName;
+                            strReviewProperty = seedReview.Properties.PropertyNumber.ToString(); // Updated to PropertyNumber
 
-                        db.SaveChanges();
+                            // Check if the review already exists in the database
+                            Review dbReview = db.Reviews.FirstOrDefault(c =>
+                                (c.Properties.PropertyNumber == seedReview.Properties.PropertyNumber) &&
+                                (c.AppUsers.Email == seedReview.AppUsers.Email));
+
+                            // If the review doesn't exist, add it to the database
+                            if (dbReview == null)
+                            {
+                                {
+                                    db.Reviews.Add(seedReview);
+                                    db.SaveChanges();
+                                }
+                            }
+                            else // If the review exists, update the fields
+                            {
+                                {
+                                    dbReview.DisputeStatus = seedReview.DisputeStatus;
+                                    dbReview.HostComments = seedReview.HostComments;
+                                    dbReview.Rating = seedReview.Rating;
+                                    dbReview.TextReview = seedReview.TextReview;
+
+                                    db.SaveChanges();
+                                }
+                            }
+                        }
                     }
                 }
             }
             catch (Exception ex) // Handle errors during the database operation
             {
-                // Build a custom error message for debugging
-                StringBuilder msg = new StringBuilder();
+                {
+                    // Build a custom error message for debugging
+                    StringBuilder msg = new StringBuilder();
 
-                msg.Append("There was an error adding the review for customer ");
-                msg.Append(strReviewCustomer);
-                msg.Append(" and property ");
-                msg.Append(strReviewProperty);
-                msg.Append(" (ReviewID = ");
-                msg.Append(intReviewID);
-                msg.Append(")");
+                    msg.Append("There was an error adding the review for customer ");
+                    msg.Append(strReviewCustomer); // Customer name
+                    msg.Append(" and property number ");
+                    msg.Append(strReviewProperty); // Updated to show PropertyNumber
+                    msg.Append(" (ReviewID = ");
+                    msg.Append(intReviewID);
+                    msg.Append(")");
 
-                // Throw a new exception with the custom error message
-                throw new Exception(msg.ToString(), ex);
+                    // Throw a new exception with the custom error message
+                    throw new Exception(msg.ToString(), ex);
+                }
             }
         }
     }
