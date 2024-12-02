@@ -17,9 +17,7 @@
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.PropertyNumber)
-            </th>
+
             <th>
                 @Html.DisplayNameFor(model => model.Street)
             </th>
@@ -53,21 +51,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.WeekendPrice)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CleaningFee)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DiscountRate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DiscountMinStay)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UnavailableDates)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PropertyStatus)
-            </th>
+
             <th></th>
         </tr>
     </thead>
@@ -75,9 +59,7 @@
         @foreach (var item in Model)
         {
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PropertyNumber)
-                </td>
+
                 <td>
                     @Html.DisplayFor(modelItem => item.Street)
                 </td>
@@ -111,25 +93,10 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.WeekendPrice)
                 </td>
+
                 <td>
-                    @Html.DisplayFor(modelItem => item.CleaningFee)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DiscountRate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DiscountMinStay)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.UnavailableDates)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PropertyStatus)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.PropertyID">Edit</a> |
                     <a asp-action="Details" asp-route-id="@item.PropertyID">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.PropertyID">Delete</a>
+
                 </td>
             </tr>
         }
