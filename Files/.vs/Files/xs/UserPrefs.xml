@@ -2,7 +2,7 @@
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.Workbench ActiveDocument="Files/Views/Cart/Index.cshtml">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Files/Views/Properties/Index.cshtml">
     <Files>
       <File FileName="Files/Models/Reservation.cs" />
       <File FileName="Files/Models/Review.cs" />
@@ -23,9 +23,9 @@
       <File FileName="Files/Controllers/SeedController.cs" />
       <File FileName="../../../../../../usr/local/share/dotnet/sdk/8.0.401/Sdks/Microsoft.NET.Sdk/targets/Microsoft.PackageDependencyResolution.targets" />
       <File FileName="Files/Views/Home/Index.cshtml" />
-      <File FileName="Files/Views/Shared/_Layout.cshtml" Line="43" Column="95" />
+      <File FileName="Files/Views/Shared/_Layout.cshtml" />
       <File FileName="Files/Controllers/CategoriesController.cs" />
-      <File FileName="Files/Controllers/PropertiesController.cs" Line="99" Column="18" />
+      <File FileName="Files/Controllers/PropertiesController.cs" />
       <File FileName="Files/Seeding/SeedProperties.cs" />
       <File FileName="Files/Controllers/ReservationsController.cs" />
       <File FileName="Files/Models/Transaction.cs" />
@@ -33,25 +33,52 @@
       <File FileName="Files/Views/Shared/_LoginPartial.cshtml" />
       <File FileName="Files/Views/Properties/Create.cshtml" />
       <File FileName="Files/Views/Properties/Delete.cshtml" />
-      <File FileName="Files/Views/Properties/Index.cshtml" Line="20" Column="1" />
-      <File FileName="Files/Views/Properties/Details.cshtml" Line="119" Column="31" />
+      <File FileName="Files/Views/Properties/Index.cshtml" Line="101" Column="1" />
+      <File FileName="Files/Views/Properties/Details.cshtml" />
       <File FileName="Files/Seeding/SeedCategories.cs" />
       <File FileName="Files/Seeding/SeedReservations.cs" />
       <File FileName="Files/Utilities/AddUser.cs" />
-      <File FileName="Files/Models/Cart.cs" Line="14" Column="1" />
-      <File FileName="Files/Views/Cart/Index.cshtml" Line="42" Column="1" />
+      <File FileName="Files/Views/Properties/Edit.cshtml" />
+      <File FileName="Files/Views/Reviews/Index.cshtml" />
+      <File FileName="Files/Views/Checkout/CheckoutView.cshtml" />
+      <File FileName="Files/Views/Reviews/Create.cshtml" />
+      <File FileName="Files/Views/Reservations/Index.cshtml" />
+      <File FileName="Files/Views/Reviews/Delete.cshtml" />
+      <File FileName="Files/Views/Reviews/Details.cshtml" />
+      <File FileName="Files/Views/Reviews/Edit.cshtml" />
+      <File FileName="Files/Views/Reservations/Create.cshtml" />
+      <File FileName="Files/Views/Reservations/Delete.cshtml" />
+      <File FileName="Files/Views/Reservations/Details.cshtml" />
+      <File FileName="Files/Views/Reservations/Edit.cshtml" />
+      <File FileName="Files/Views/Reservations/Cart.cshtml" />
+      <File FileName="Files/Models/ReservationList.cs" />
+      <File FileName="Files/Utilities/SessionExtensions.cs" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
-          <Node name="Files">
-            <Node name="Files">
+          <Node name="Files" expanded="True">
+            <Node name="Files" expanded="True">
+              <Node name="Dependencies" expanded="True">
+                <Node name="PackageDependencies" expanded="True" />
+              </Node>
               <Node name="Controllers" expanded="True" />
-              <Node name="Models" expanded="True" />
-              <Node name="Properties" expanded="True" />
+              <Node name="DAL" expanded="True" />
+              <Node name="Models" expanded="True">
+                <Node name="ViewModels" expanded="True" />
+              </Node>
+              <Node name="Utilities" expanded="True" />
               <Node name="Views" expanded="True">
-                <Node name="Properties" expanded="True" />
+                <Node name="Checkout" expanded="True" />
+                <Node name="Properties" expanded="True">
+                  <Node name="Index.cshtml" selected="True" />
+                </Node>
+                <Node name="Reservations" expanded="True" />
+                <Node name="Reviews" expanded="True" />
                 <Node name="Shared" expanded="True" />
+              </Node>
+              <Node name="wwwroot" expanded="True">
+                <Node name="Images" expanded="True" />
               </Node>
             </Node>
           </Node>
