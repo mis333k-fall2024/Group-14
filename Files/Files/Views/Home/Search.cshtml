@@ -15,7 +15,7 @@
         <input name="State" id="State" class="form-control" value="@Model.State" /><br />
 
         <label for="Category">Category:</label>
-        @Html.DropDownList("SelectedCategoryID", ViewBag.AllCategories as SelectList, "All Categories", new { @class = "form-control" })<br />
+        @Html.DropDownList("SelectedCategoryID", ViewBag.AllCategories as SelectList, new { @class = "form-control" })<br />
 
         <label for="MinGuests">Min Guests:</label>
         <input name="MinGuests" id="MinGuests" class="form-control" type="number" value="@Model.MinGuests" /><br />

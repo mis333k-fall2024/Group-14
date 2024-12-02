@@ -35,9 +35,9 @@ namespace Files.Controllers
             var svm = new SearchViewModel
             {
                 MinGuests = 0,
-                MaxGuests = int.MaxValue,
+                MaxGuests = 15,
                 MinPrice = 0.0m,
-                MaxPrice = decimal.MaxValue,
+                MaxPrice = 300.0m,
                 SelectedCategoryID = 0, // Default: All categories
                 MinRating = 1.0m,
                 MaxRating = 5.0m

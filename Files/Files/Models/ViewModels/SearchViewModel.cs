@@ -26,7 +26,7 @@ namespace Files.Models
 
         [Display(Name = "Maximum Guests")]
         [Range(0, Int32.MaxValue, ErrorMessage = "Maximum Guests must be a positive number.")]
-        public int? MaxGuests { get; set; }
+        public int? MaxGuests { get; set; } = 15;
 
         // Price Range
         [Display(Name = "Minimum Price (Weekday)")]
@@ -35,7 +35,7 @@ namespace Files.Models
 
         [Display(Name = "Maximum Price (Weekday)")]
         [Range(0.0, double.MaxValue, ErrorMessage = "Price must be a positive number.")]
-        public decimal? MaxPrice { get; set; }
+        public decimal? MaxPrice { get; set; } = 300;
 
         // Category dropdown
         [Display(Name = "Category")]

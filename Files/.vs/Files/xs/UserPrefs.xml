@@ -1,29 +1,33 @@
 ﻿<Properties StartupConfiguration="{4093AD08-3465-427B-81E2-2C099D378B96}|http">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Files/Program.cs">
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Files/Models/ViewModels/SearchViewModel.cs">
     <Files>
       <File FileName="Files/Models/Reservation.cs" />
       <File FileName="Files/Models/Review.cs" />
-      <File FileName="Files/Controllers/HomeController.cs" />
+      <File FileName="Files/Controllers/HomeController.cs" Line="40" Column="31" />
       <File FileName="Files/Views/Index.cshtml" />
       <File FileName="Files/DAL/AppDbContext.cs" />
       <File FileName="Files/Models/Category.cs" />
       <File FileName="Files/Models/Property.cs" />
       <File FileName="Files/Seeding/SeedRoles.cs" />
-      <File FileName="Files/Models/AppUser.cs" />
+      <File FileName="Files/Models/AppUser.cs" Line="1" Column="1" />
       <File FileName="Files/Controllers/AccountController.cs" />
       <File FileName="Files/Controllers/RoleAdminController.cs" />
       <File FileName="Files/Views/_ViewImports.cshtml" />
-      <File FileName="Files/Program.cs" Line="7" Column="28" />
+      <File FileName="Files/Program.cs" Line="12" Column="50" />
       <File FileName="Files/Views/Account/ChangePassword.cshtml" />
       <File FileName="Files/Views/Account/Index.cshtml" />
       <File FileName="Files/Views/Account/Login.cshtml" />
-      <File FileName="Files/Controllers/SeedController.cs" />
+      <File FileName="Files/Controllers/SeedController.cs" Line="1" Column="1" />
       <File FileName="../../../../../../usr/local/share/dotnet/sdk/8.0.401/Sdks/Microsoft.NET.Sdk/targets/Microsoft.PackageDependencyResolution.targets" />
-      <File FileName="Files/Views/Home/Index.cshtml" />
+      <File FileName="Files/Views/Home/Index.cshtml" Line="1" Column="1" />
       <File FileName="Files/Views/Shared/_Layout.cshtml" />
       <File FileName="Files/Controllers/CategoriesController.cs" />
       <File FileName="Files/Controllers/PropertiesController.cs" />
-      <File FileName="Files/Seeding/SeedProperties.cs" />
+      <File FileName="Files/Seeding/SeedProperties.cs" Line="1" Column="1" />
       <File FileName="Files/Controllers/ReservationsController.cs" />
       <File FileName="Files/Models/Transaction.cs" />
       <File FileName="Files/Views/Checkout/ThankYouView.cshtml" />
@@ -33,7 +37,7 @@
       <File FileName="Files/Views/Properties/Index.cshtml" />
       <File FileName="Files/Views/Properties/Details.cshtml" />
       <File FileName="Files/Seeding/SeedCategories.cs" />
-      <File FileName="Files/Seeding/SeedReservations.cs" />
+      <File FileName="Files/Seeding/SeedReservations.cs" Line="1" Column="1" />
       <File FileName="Files/Utilities/AddUser.cs" />
       <File FileName="Files/Views/Properties/Edit.cshtml" />
       <File FileName="Files/Views/Reviews/Index.cshtml" />
@@ -50,34 +54,30 @@
       <File FileName="Files/Views/Reservations/Cart.cshtml" />
       <File FileName="Files/Models/ReservationList.cs" />
       <File FileName="Files/Utilities/SessionExtensions.cs" />
+      <File FileName="Files/Models/ViewModels/SearchViewModel.cs" Line="40" Column="29" />
+      <File FileName="Files/Views/Home/Search.cshtml" Line="18" Column="86" />
+      <File FileName="Files/Views/Home/Results.cshtml" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
-          <Node name="Files" expanded="True">
-            <Node name="Files" expanded="True">
-              <Node name="Models" expanded="True" />
-              <Node name="Views" expanded="True">
-                <Node name="Properties" expanded="True" />
-                <Node name="Reservations" expanded="True" />
-                <Node name="Reviews" expanded="True" />
+          <Node name="Files">
+            <Node name="Files">
+              <Node name="Models">
+                <Node name="ViewModels">
+                  <Node name="SearchViewModel.cs" selected="True" />
+                </Node>
+              </Node>
+              <Node name="Views">
                 <Node name="Shared" expanded="True" />
               </Node>
-              <Node name="wwwroot" expanded="True">
-                <Node name="Images" expanded="True" />
-              </Node>
-              <Node name="Program.cs" selected="True" />
             </Node>
           </Node>
         </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.ItemProperties.Files PreferredExecutionTarget="/Applications/Google Chrome.app" />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
-  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.ItemProperties.Files PreferredExecutionTarget="/Applications/Google Chrome.app" />
 </Properties>
