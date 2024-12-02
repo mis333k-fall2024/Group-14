@@ -4,8 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
 
-
-//Be sure to remove the []
+// Be sure to remove the []
 using Files.DAL;
 using Files.Models;
 
@@ -15,12 +14,12 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+// Add session services
+builder.Services.AddSession();
 
 String connectionString = "Server=tcp:fa24group14finalproject.database.windows.net,1433;Initial Catalog=FA24Group14FinalProject;Persist Security Info=False;User ID=MISAdmin;Password=Password123;MultipleActiveResultSets=True;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
 
-
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connectionString));
-
 
 builder.Services.AddDefaultIdentity<AppUser>()
     .AddRoles<IdentityRole>()
@@ -38,7 +37,7 @@ builder.Services.Configure<IdentityOptions>(options =>
 
     // User settings.
     options.User.AllowedUserNameCharacters =
-    "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
+        "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
     options.User.RequireUniqueEmail = true;
 });
 
@@ -52,7 +51,6 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.AccessDeniedPath = "/Account/AccessDenied";
     options.SlidingExpiration = true;
 });
-
 
 //build the app
 var app = builder.Build();
@@ -68,10 +66,11 @@ app.UseStaticFiles();
 //is made for a URL.
 app.UseRouting();
 
+// Enable session middleware
+app.UseSession();
 
 app.UseAuthentication();
 app.UseAuthorization();
-
 
 //This allows the data annotations for currency to work on Macs
 app.Use(async (context, next) =>
@@ -82,8 +81,7 @@ app.Use(async (context, next) =>
     await next.Invoke();
 });
 
-
-//This method maps the controllers and their actions to a patter for
+//This method maps the controllers and their actions to a pattern for
 //requests that's known as the default route. This route identifies
 //the Home controller as the default controller and the Index() action
 //method as the default action. The default route also identifies a 

@@ -6,10 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Files.DAL; // Your data access layer namespace
 using Files.Models; // Your models namespace
+using Files.Utilities;
 
 namespace Files.Controllers
 {
-    [Authorize] // Ensure only logged-in users can access these actions
+    [Authorize] // Ensure only logged-in users can access these actions unless specified
     public class ReservationsController : Controller
     {
         private readonly AppDbContext _context;
@@ -61,6 +62,17 @@ namespace Files.Controllers
                 return RedirectToAction(nameof(Index));
             }
             return View(reservation);
+        }
+
+        // GET: Reservations/Cart
+        [AllowAnonymous] // Allow unauthenticated users to access the cart
+        public IActionResult Cart()
+        {
+            // Retrieve the cart from the session or initialize a new one
+            var reservations = HttpContext.Session.GetObjectFromJson<ReservationList>("Reservations") ?? new ReservationList();
+
+            // Pass the cart (reservations) to the view
+            return View(reservations);
         }
 
         // GET: Reservations/Checkout
