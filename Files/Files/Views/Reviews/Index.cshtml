@@ -4,11 +4,13 @@
     ViewData["Title"] = "Property Reviews";
 }
 
-<h1>Index</h1>
+<h1>Property Reviews</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" asp-controller="Reviews" style="color: #CC5500;">Create New</a>
 </p>
+
+
 <table class="table">
     <thead>
         <tr>
@@ -28,26 +30,26 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Rating)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TextReview)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.HostComments)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DisputeStatus)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ReviewID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ReviewID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ReviewID">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Rating)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TextReview)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HostComments)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DisputeStatus)
+                </td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.ReviewID" style="color: #CC5500;">Details</a>
+                </td>
+
+            </tr>
+        }
     </tbody>
 </table>
