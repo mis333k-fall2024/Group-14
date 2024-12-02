@@ -5,6 +5,9 @@
 @if (Model.Reservations == null || !Model.Reservations.Any())
 {
     <p>Sorry, your cart is empty!</p>
+    <a asp-controller="Properties" asp-action="Index" class="btn" style="background-color: #BF5700; color: white; border: none;">
+        Add a reservation!
+    </a>
 }
 else
 {
@@ -30,4 +33,3 @@ else
         </tbody>
     </table>
 }
-
