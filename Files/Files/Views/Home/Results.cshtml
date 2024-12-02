@@ -1,0 +1,43 @@
+﻿@model IEnumerable<Files.Models.PropertyViewModel>
+
+@{
+    ViewData["Title"] = "Search Results";
+}
+
+<h1>Search Results</h1>
+
+<p>
+    Displaying @ViewBag.SelectedProperties out of @ViewBag.AllProperties Properties
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.City)</th>
+            <th>@Html.DisplayNameFor(model => model.State)</th>
+            <th>@Html.DisplayNameFor(model => model.Category)</th>
+            <th>@Html.DisplayNameFor(model => model.WeekdayPrice)</th>
+            <th>@Html.DisplayNameFor(model => model.Bedrooms)</th>
+            <th>@Html.DisplayNameFor(model => model.Bathrooms)</th>
+            <th>@Html.DisplayNameFor(model => model.GuestRating)</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.City)</td>
+                <td>@Html.DisplayFor(modelItem => item.State)</td>
+                <td>@Html.DisplayFor(modelItem => item.Category)</td>
+                <td>@Html.DisplayFor(modelItem => item.WeekdayPrice)</td>
+                <td>@Html.DisplayFor(modelItem => item.Bedrooms)</td>
+                <td>@Html.DisplayFor(modelItem => item.Bathrooms)</td>
+                <td>@Html.DisplayFor(modelItem => item.GuestRating)</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.PropertyID" class="btn btn-info">Details</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

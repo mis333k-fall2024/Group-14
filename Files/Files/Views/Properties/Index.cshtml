@@ -14,6 +14,10 @@
 {<p>
         <a asp-action="Create">Create New</a>
     </p>}
+
+<!-- Add the "Search" button -->
+<a asp-action="Search" asp-controller="Home" class="btn btn-primary">Search Properties</a>
+
 <table class="table">
     <thead>
         <tr>
@@ -95,7 +99,7 @@
                 </td>
 
                 <td>
-                    <a asp-action="Details" asp-route-id="@item.PropertyID">Details</a> 
+                    <a asp-action="Details" asp-route-id="@item.PropertyID">Details</a>
 
                 </td>
             </tr>
