@@ -34,9 +34,7 @@
                 <td>@Html.DisplayFor(modelItem => item.Bedrooms)</td>
                 <td>@Html.DisplayFor(modelItem => item.Bathrooms)</td>
                 <td>@Html.DisplayFor(modelItem => item.GuestRating)</td>
-                <td>
-                    <a asp-action="Details" asp-route-id="@item.PropertyID" class="btn btn-info">Details</a>
-                </td>
+                <td><a asp-action="Details" asp-controller="Properties" asp-route-id="@item.PropertyID" class="btn" style=" background-color: #BF5700; color: white; padding: 10px 20px; border: none; border-radius: 5px; text-decoration: none;">Details</a></td>
             </tr>
         }
     </tbody>
