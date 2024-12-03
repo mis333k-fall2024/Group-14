@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Files.DAL;
 using Files.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -178,6 +181,52 @@ namespace Files.Controllers
 
             // Return as a SelectList
             return new SelectList(categories.OrderBy(c => c.CategoryName), "CategoryID", "CategoryName");
+        }
+
+        [Authorize(Roles = "Host")]
+        public IActionResult HostReports(DateTime? startDate, DateTime? endDate)
+        {
+            // Get the logged-in user's ID
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            // Pull properties and reservations into memory
+            var properties = _context.Properties
+                .Where(p => p.AppUsers.Id == userId)
+                .Include(p => p.Reservations) // Ensure Reservations are loaded
+                .ToList(); // Bring data into memory
+
+            // Process the data in memory
+            var reports = properties.Select(p => new HostReport
+            {
+                Street = p.Street,
+                PropertyNumber = p.PropertyNumber,
+                TotalStayRevenue = p.Reservations
+                    .Where(r => (!startDate.HasValue || r.CheckIn >= startDate) &&
+                                (!endDate.HasValue || r.CheckOut <= endDate))
+                    .Sum(r => r.CalculateStayPrice() * 0.9m), // Apply method in memory
+                TotalCleaningFees = p.Reservations
+                    .Where(r => (!startDate.HasValue || r.CheckIn >= startDate) &&
+                                (!endDate.HasValue || r.CheckOut <= endDate))
+                    .Sum(r => r.CleaningFee),
+                TotalCombinedRevenue = p.Reservations
+                    .Where(r => (!startDate.HasValue || r.CheckIn >= startDate) &&
+                                (!endDate.HasValue || r.CheckOut <= endDate))
+                    .Sum(r => (r.CalculateStayPrice() * 0.9m) + r.CleaningFee),
+                TotalReservations = p.Reservations
+                    .Where(r => (!startDate.HasValue || r.CheckIn >= startDate) &&
+                                (!endDate.HasValue || r.CheckOut <= endDate))
+                    .Count()
+            }).ToList();
+
+            // Prepare the view model
+            var model = new HostReportViewModel
+            {
+                StartDate = startDate ?? DateTime.Now.AddMonths(-1),
+                EndDate = endDate ?? DateTime.Now,
+                Reports = reports
+            };
+
+            return View(model);
         }
     }
 }

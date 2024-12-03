@@ -1,0 +1,44 @@
+﻿@model Files.Models.HostReportViewModel
+
+<h1>Host Reports</h1>
+
+<form method="get" asp-action="HostReports">
+    <div class="form-group">
+        <label for="StartDate">Start Date:</label>
+        <input type="date" name="StartDate" id="StartDate" class="form-control" value="@Model.StartDate.ToString("yyyy-MM-dd")" />
+    </div>
+    <div class="form-group">
+        <label for="EndDate">End Date:</label>
+        <input type="date" name="EndDate" id="EndDate" class="form-control" value="@Model.EndDate.ToString("yyyy-MM-dd")" />
+    </div>
+    <button type="submit" class="btn btn-primary">Generate Report</button>
+</form>
+
+@if (Model.Reports != null && Model.Reports.Any())
+{
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Street Address</th>
+            <th>Property Number</th>
+            <th>Total Stay Revenue</th>
+            <th>Total Cleaning Fees</th>
+            <th>Total Revenue</th>
+            <th>Total Reservations</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var report in Model.Reports)
+        {
+            <tr>
+                <td>@report.Street</td>
+                <td>@report.PropertyNumber</td>
+                <td>@report.TotalStayRevenue.ToString("C")</td>
+                <td>@report.TotalCleaningFees.ToString("C")</td>
+                <td>@report.TotalCombinedRevenue.ToString("C")</td>
+                <td>@report.TotalReservations</td>
+            </tr>
+        }
+    </tbody>
+</table>
+}

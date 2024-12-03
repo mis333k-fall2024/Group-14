@@ -14,9 +14,9 @@
     {
         <div style="margin-top: 20px;">
             <a asp-action="Index" asp-controller="Reservations" class="btn btn-info">View Reservations</a>
-            @if (User.IsInRole("Host"))
+            @if ( User.IsInRole("Host"))
             {
-                <a asp-action="Index" asp-controller="RoleAdmin" class="btn btn-warning">Manage Users</a>
+                <a asp-action="HostReports" asp-controller="Home" class="btn btn-primary">Host Reports</a>
             }
             @if (User.IsInRole("Admin"))
             {

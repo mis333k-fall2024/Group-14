@@ -1,14 +1,16 @@
 ﻿<Properties StartupConfiguration="{4093AD08-3465-427B-81E2-2C099D378B96}|http">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MultiItemStartupConfigurations />
   <MonoDevelop.Ide.ItemProperties.Files PreferredExecutionTarget="/Applications/Google Chrome.app" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Files/Views/Home/Results.cshtml">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Files/Models/Reservation.cs">
     <Files>
-      <File FileName="Files/Models/Reservation.cs" />
+      <File FileName="Files/Models/Reservation.cs" Line="18" Column="37" />
       <File FileName="Files/Models/Review.cs" />
-      <File FileName="Files/Controllers/HomeController.cs" />
+      <File FileName="Files/Controllers/HomeController.cs" Line="196" Column="34" />
       <File FileName="Files/Views/Index.cshtml" />
       <File FileName="Files/DAL/AppDbContext.cs" />
       <File FileName="Files/Models/Category.cs" />
-      <File FileName="Files/Models/Property.cs" />
+      <File FileName="Files/Models/Property.cs" Line="1" Column="1" />
       <File FileName="Files/Seeding/SeedRoles.cs" />
       <File FileName="Files/Models/AppUser.cs" />
       <File FileName="Files/Controllers/AccountController.cs" />
@@ -20,7 +22,7 @@
       <File FileName="Files/Views/Account/Login.cshtml" />
       <File FileName="Files/Controllers/SeedController.cs" />
       <File FileName="../../../../../../usr/local/share/dotnet/sdk/8.0.401/Sdks/Microsoft.NET.Sdk/targets/Microsoft.PackageDependencyResolution.targets" />
-      <File FileName="Files/Views/Home/Index.cshtml" Line="19" Column="106" />
+      <File FileName="Files/Views/Home/Index.cshtml" Line="22" Column="14" />
       <File FileName="Files/Views/Shared/_Layout.cshtml" />
       <File FileName="Files/Controllers/CategoriesController.cs" />
       <File FileName="Files/Controllers/PropertiesController.cs" />
@@ -31,8 +33,8 @@
       <File FileName="Files/Views/Shared/_LoginPartial.cshtml" />
       <File FileName="Files/Views/Properties/Create.cshtml" />
       <File FileName="Files/Views/Properties/Delete.cshtml" />
-      <File FileName="Files/Views/Properties/Index.cshtml" Line="1" Column="1" />
-      <File FileName="Files/Views/Properties/Details.cshtml" Line="123" Column="1" />
+      <File FileName="Files/Views/Properties/Index.cshtml" />
+      <File FileName="Files/Views/Properties/Details.cshtml" />
       <File FileName="Files/Seeding/SeedCategories.cs" />
       <File FileName="Files/Seeding/SeedReservations.cs" />
       <File FileName="Files/Utilities/AddUser.cs" />
@@ -51,9 +53,11 @@
       <File FileName="Files/Views/Reservations/Cart.cshtml" />
       <File FileName="Files/Models/ReservationList.cs" />
       <File FileName="Files/Utilities/SessionExtensions.cs" />
-      <File FileName="Files/Models/ViewModels/SearchViewModel.cs" Line="40" Column="29" />
+      <File FileName="Files/Models/ViewModels/SearchViewModel.cs" />
       <File FileName="Files/Views/Home/Search.cshtml" />
       <File FileName="Files/Views/Home/Results.cshtml" Line="37" Column="124" />
+      <File FileName="Files/Views/Home/HostReports.cshtml" Line="43" Column="9" />
+      <File FileName="Files/Models/ViewModels/HostReportViewModel.cs" Line="19" Column="58" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -62,11 +66,10 @@
             <Node name="Files">
               <Node name="Models" expanded="True">
                 <Node name="ViewModels" expanded="True" />
+                <Node name="Reservation.cs" selected="True" />
               </Node>
-              <Node name="Views">
-                <Node name="Home">
-                  <Node name="Results.cshtml" selected="True" />
-                </Node>
+              <Node name="Views" expanded="True">
+                <Node name="Home" expanded="True" />
                 <Node name="Properties" expanded="True" />
               </Node>
             </Node>
@@ -78,7 +81,5 @@
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>
