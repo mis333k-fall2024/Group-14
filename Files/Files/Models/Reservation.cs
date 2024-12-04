@@ -5,14 +5,14 @@ namespace Files.Models
 {
     public class Reservation
     {
-        public const decimal TaxRate = 0.07m;
+        public const Decimal TaxRate = 0.07m;
 
         private const int START_CONFIRMATION_NUMBER = 21901;
 
         private static int _nextConfirmationNumber = START_CONFIRMATION_NUMBER;
 
         [Key]
-        public int ReservationID { get; set; }
+        public Int32 ReservationID { get; set; }
 
         [Required(ErrorMessage = "Check In is required")]
         [Display(Name = "Check In")]
@@ -24,47 +24,41 @@ namespace Files.Models
 
         [Required(ErrorMessage = "Number of Guests is required")]
         [Display(Name = "Number of Guests")]
-        public int NumOfGuests { get; set; }
+        public Int32 NumOfGuests { get; set; }
 
         [Required(ErrorMessage = "Weekday Price is required")]
         [Display(Name = "Weekday Price")]
         [DisplayFormat(DataFormatString = "{0:c}")]
-        public decimal WeekdayPrice { get; set; }
+        public Decimal WeekdayPrice { get; set; }
 
         [Required(ErrorMessage = "Weekend Price is required")]
         [Display(Name = "Weekend Price")]
         [DisplayFormat(DataFormatString = "{0:c}")]
-        public decimal WeekendPrice { get; set; }
+        public Decimal WeekendPrice { get; set; }
 
         [Required(ErrorMessage = "Cleaning Fee is required")]
         [Display(Name = "Cleaning Fee")]
         [DisplayFormat(DataFormatString = "{0:c}")]
-        public decimal CleaningFee { get; set; }
+        public Decimal CleaningFee { get; set; }
 
         [Display(Name = "Discount Amount")]
         [DisplayFormat(DataFormatString = "{0:c}")]
-        public decimal DiscountAmount { get; set; } // Automatically calculated based on DiscountRate and length of stay
+        public Decimal DiscountAmount { get; set; } // Automatically calculated based on DiscountRate and length of stay
 
         [Required(ErrorMessage = "Discount Rate is required")]
         [Display(Name = "Discount Rate")]
-        public decimal DiscountRate { get; set; }
+        public Decimal DiscountRate { get; set; }
 
         [Required(ErrorMessage = "Reservation Status is required")]
-        [Display(Name = "Reservation Status")]
-        public bool ReservationStatus { get; set; }
+        [Display(Name = "Active Reservation")]
+        public Boolean ReservationStatus { get; set; }
 
         [Required(ErrorMessage = "Confirmation Number is required")]
         [Display(Name = "Confirmation Number")]
-        public int ConfirmationNumber { get; set; }
-
-        [Required(ErrorMessage = "Property is required")]
-        public int PropertyId { get; set; } // Foreign key for Property
+        public Int32 ConfirmationNumber { get; set; }
 
         [Display(Name = "Property Name")]
         public Property Properties { get; set; }
-
-        [Required(ErrorMessage = "User is required")]
-        public string UserId { get; set; } // Foreign key for User
 
         [Display(Name = "User")]
         public AppUser AppUsers { get; set; }
