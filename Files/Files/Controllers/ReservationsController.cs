@@ -83,7 +83,7 @@ namespace Files.Controllers
 
             // Retrieve all pending reservations for the user
             var reservations = await _context.Reservations
-                .Where(r => r.AppUsers == userId && r.ReservationStatus == false) // Assuming false = "Pending"
+                .Where(r => r.AppUsers.UserName == userId && r.ReservationStatus == false) // Assuming false = "Pending"
                 .ToListAsync();
 
             if (!reservations.Any())
@@ -105,7 +105,7 @@ namespace Files.Controllers
 
             // Get all pending reservations for the user
             var reservations = await _context.Reservations
-                .Where(r => r.AppUsers == userId && r.ReservationStatus == false)
+                .Where(r => r.AppUsers.UserName == userId && r.ReservationStatus == false)
                 .ToListAsync();
 
             if (!reservations.Any())
