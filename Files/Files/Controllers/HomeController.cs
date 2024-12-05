@@ -260,20 +260,20 @@ namespace Files.Controllers
                 Street = p.Street,
                 PropertyNumber = p.PropertyNumber,
                 TotalStayRevenue = p.Reservations
-                    .Where(r => (!startDate.HasValue || r.CheckIn >= startDate) &&
-                                (!endDate.HasValue || r.CheckOut <= endDate))
+                    .Where(r => (!startDate.HasValue || !endDate.HasValue ||
+                                 r.CheckIn <= endDate && r.CheckOut >= startDate))
                     .Sum(r => r.CalculateStayPrice() * 0.9m), // Apply method in memory
                 TotalCleaningFees = p.Reservations
-                    .Where(r => (!startDate.HasValue || r.CheckIn >= startDate) &&
-                                (!endDate.HasValue || r.CheckOut <= endDate))
+                    .Where(r => (!startDate.HasValue || !endDate.HasValue ||
+                                 r.CheckIn <= endDate && r.CheckOut >= startDate))
                     .Sum(r => r.CleaningFee),
                 TotalCombinedRevenue = p.Reservations
-                    .Where(r => (!startDate.HasValue || r.CheckIn >= startDate) &&
-                                (!endDate.HasValue || r.CheckOut <= endDate))
+                    .Where(r => (!startDate.HasValue || !endDate.HasValue ||
+                                 r.CheckIn <= endDate && r.CheckOut >= startDate))
                     .Sum(r => (r.CalculateStayPrice() * 0.9m) + r.CleaningFee),
                 TotalReservations = p.Reservations
-                    .Where(r => (!startDate.HasValue || r.CheckIn >= startDate) &&
-                                (!endDate.HasValue || r.CheckOut <= endDate))
+                    .Where(r => (!startDate.HasValue || !endDate.HasValue ||
+                                 r.CheckIn <= endDate && r.CheckOut >= startDate))
                     .Count()
             }).ToList();
 
