@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace Files.Models
 {
@@ -10,12 +11,7 @@ namespace Files.Models
         {
             get
             {
-                decimal total = 0;
-                foreach (var reservation in Reservations)
-                {
-                    total += reservation.CalculateStayPrice();
-                }
-                return total;
+                return Reservations.Sum(r => r.CalculateStayPrice());
             }
         }
     }

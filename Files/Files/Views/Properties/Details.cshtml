@@ -1,5 +1,6 @@
 @model Files.Models.Property
 
+
 @{
     ViewData["Title"] = "Details";
 }
@@ -115,8 +116,11 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Index" class="btn" style="background-color: #BF5700; color: white; border: none; text-decoration: none; padding: 8px 16px; border-radius: 4px;">Back to List</a> 
-    <a class="btn" asp-controller="Reservations" asp-action="Cart" style="background-color: #BF5700; color: white; border: none; text-decoration: none; padding: 8px 16px; border-radius: 4px;">Add To Cart</a> 
-    <a class="btn" asp-controller="Reviews" asp-action="Index" asp-route-propertyId="@Model.PropertyID" style="background-color: #BF5700; color: white; border: none; text-decoration: none; padding: 8px 16px; border-radius: 4px;">Reviews</a>
-</div>
+    <a asp-action="Index" class="btn" style="background-color: #BF5700; color: white; border: none; text-decoration: none; padding: 8px 16px; border-radius: 4px;">Back to List</a>
+    <a asp-action="Index" asp-controller="Reviews" asp-route-propertyId="@Model.PropertyID" class="btn" style="background-color: #BF5700; color: white; border: none; text-decoration: none; padding: 8px 16px; border-radius: 4px;">Reviews</a>
+    <form asp-action="AddToCart" asp-controller="Reservations" method="post">
+        <input type="hidden" name="propertyId" value="@Model.PropertyID" />
+        <button type="submit" class="btn btn-primary">Add to Cart</button>
+    </form>
 
+</div>

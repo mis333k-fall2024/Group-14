@@ -5,9 +5,7 @@
 @if (Model.Reservations == null || !Model.Reservations.Any())
 {
     <p>Sorry, your cart is empty!</p>
-    <a asp-controller="Properties" asp-action="Index" class="btn" style="background-color: #BF5700; color: white; border: none;">
-        Add a reservation!
-    </a>
+    <a asp-controller="Properties" asp-action="Index" class="btn" style="background-color: #BF5700; color: white;">Add a reservation!</a>
 }
 else
 {
@@ -15,8 +13,9 @@ else
         <thead>
             <tr>
                 <th>Property</th>
-                <th>Price per Night</th>
-                <th>Total Nights</th>
+                <th>Check-In</th>
+                <th>Check-Out</th>
+                <th>Guests</th>
                 <th>Total Price</th>
             </tr>
         </thead>
@@ -24,12 +23,18 @@ else
             @foreach (var item in Model.Reservations)
             {
                 <tr>
-                    <td>@item.Properties</td>
-                    <td>@item.WeekdayPrice.ToString("C")</td>
-                    <td>@item.WeekendPrice</td>
+                    <td>@item.Properties.Street, @item.Properties.City</td>
+                    <td>@item.CheckIn.ToShortDateString()</td>
+                    <td>@item.CheckOut.ToShortDateString()</td>
+                    <td>@item.NumOfGuests</td>
                     <td>@item.CalculateStayPrice().ToString("C")</td>
                 </tr>
             }
         </tbody>
     </table>
+
+    <p><strong>Total Price:</strong> @Model.TotalPrice.ToString("C")</p>
+    <form asp-action="Confirm" asp-controller="Reservations" method="post">
+        <button type="submit" class="btn btn-primary" style="background-color: #BF5700; color: white;">Confirm Reservations</button>
+    </form>
 }
