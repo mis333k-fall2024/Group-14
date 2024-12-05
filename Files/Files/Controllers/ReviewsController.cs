@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Files.DAL;
 using Files.Models;
@@ -21,9 +20,22 @@ namespace Files.Controllers
         }
 
         // GET: Reviews
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int propertyId)
         {
-            return View(await _context.Reviews.ToListAsync());
+            // Retrieve reviews for the specific property
+            var reviews = await _context.Reviews
+                .Include(r => r.Properties) // Include navigation property
+                .Where(r => r.Properties.PropertyID == propertyId)
+                .ToListAsync();
+
+            // Retrieve the property details for display purposes
+            var property = await _context.Properties.FirstOrDefaultAsync(p => p.PropertyID == propertyId);
+            ViewData["PropertyName"] = property != null
+                ? $"{property.Street}, {property.City}"
+                : "Unknown Property";
+            ViewData["Properties"] = property;
+
+            return View(reviews);
         }
 
         // GET: Reviews/Details/5
@@ -35,7 +47,9 @@ namespace Files.Controllers
             }
 
             var review = await _context.Reviews
+                .Include(r => r.Properties) // Include navigation property
                 .FirstOrDefaultAsync(m => m.ReviewID == id);
+
             if (review == null)
             {
                 return NotFound();
@@ -45,24 +59,41 @@ namespace Files.Controllers
         }
 
         // GET: Reviews/Create
-        [Authorize] // Ensures only authenticated users can access this action
-        public IActionResult Create()
+        [Authorize]
+        public IActionResult Create(int propertyId)
         {
+            // Pass the property object to the view
+            ViewData["Properties"] = _context.Properties.FirstOrDefault(p => p.PropertyID == propertyId);
             return View();
         }
 
         // POST: Reviews/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize] // Ensures only authenticated users can submit the form
-        public async Task<IActionResult> Create([Bind("ReviewID,Rating,TextReview,HostComments,DisputeStatus")] Review review)
+        [Authorize]
+        public async Task<IActionResult> Create([Bind("ReviewID,Rating,TextReview,HostComments,DisputeStatus")] Review review, int propertyId)
         {
             if (ModelState.IsValid)
             {
+                // Retrieve the property and associate it with the review
+                var property = await _context.Properties.FirstOrDefaultAsync(p => p.PropertyID == propertyId);
+
+                if (property == null)
+                {
+                    return NotFound();
+                }
+
+                review.Properties = property;
+
+                // Save the review to the database
                 _context.Add(review);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+
+                // Redirect to the property's review index page
+                return RedirectToAction("Index", new { propertyId = property.PropertyID });
             }
+
+            ViewData["Properties"] = _context.Properties.FirstOrDefault(p => p.PropertyID == propertyId);
             return View(review);
         }
 
@@ -74,11 +105,17 @@ namespace Files.Controllers
                 return NotFound();
             }
 
-            var review = await _context.Reviews.FindAsync(id);
+            var review = await _context.Reviews
+                .Include(r => r.Properties) // Include navigation property
+                .FirstOrDefaultAsync(r => r.ReviewID == id);
+
             if (review == null)
             {
                 return NotFound();
             }
+
+            // Pass the associated property to the view
+            ViewData["Properties"] = review.Properties;
             return View(review);
         }
 
@@ -96,6 +133,16 @@ namespace Files.Controllers
             {
                 try
                 {
+                    // Associate the review with its property
+                    var property = await _context.Properties.FirstOrDefaultAsync(p => p.PropertyID == review.Properties.PropertyID);
+
+                    if (property == null)
+                    {
+                        return NotFound();
+                    }
+
+                    review.Properties = property;
+
                     _context.Update(review);
                     await _context.SaveChangesAsync();
                 }
@@ -110,8 +157,12 @@ namespace Files.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+
+                // Redirect to the property's review index page
+                return RedirectToAction("Index", new { propertyId = review.Properties.PropertyID });
             }
+
+            ViewData["Properties"] = review.Properties;
             return View(review);
         }
 
@@ -124,12 +175,15 @@ namespace Files.Controllers
             }
 
             var review = await _context.Reviews
-                .FirstOrDefaultAsync(m => m.ReviewID == id);
+                .Include(r => r.Properties) // Include navigation property
+                .FirstOrDefaultAsync(r => r.ReviewID == id);
+
             if (review == null)
             {
                 return NotFound();
             }
 
+            ViewData["Properties"] = review.Properties;
             return View(review);
         }
 
@@ -138,13 +192,19 @@ namespace Files.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var review = await _context.Reviews.FindAsync(id);
+            var review = await _context.Reviews
+                .Include(r => r.Properties) // Include navigation property
+                .FirstOrDefaultAsync(r => r.ReviewID == id);
+
             if (review != null)
             {
                 _context.Reviews.Remove(review);
+                await _context.SaveChangesAsync();
+
+                // Redirect to the property's review index page
+                return RedirectToAction("Index", new { propertyId = review.Properties.PropertyID });
             }
 
-            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 

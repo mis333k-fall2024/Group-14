@@ -4,28 +4,19 @@
     ViewData["Title"] = "Property Reviews";
 }
 
-<h1>Property Reviews</h1>
+<h1>Reviews for @ViewData["PropertyName"]</h1>
 
 <p>
-    <a asp-action="Create" asp-controller="Reviews" style="color: #CC5500;">Create New</a>
+    <a asp-action="Create" asp-route-propertyId="@ViewData["PropertyId"]" class="btn btn-primary" style="background-color: #CC5500;">Write a Review</a>
 </p>
-
 
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Rating)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TextReview)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.HostComments)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DisputeStatus)
-            </th>
+            <th>Rating</th>
+            <th>Review</th>
+            <th>Host Comments</th>
+            <th>Dispute Status</th>
             <th></th>
         </tr>
     </thead>
@@ -33,23 +24,21 @@
         @foreach (var item in Model)
         {
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Rating)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TextReview)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.HostComments)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DisputeStatus)
-                </td>
+                <td>@item.Rating</td>
+                <td>@item.TextReview</td>
+                <td>@item.HostComments</td>
+                <td>@item.DisputeStatus</td>
                 <td>
                     <a asp-action="Details" asp-route-id="@item.ReviewID" style="color: #CC5500;">Details</a>
                 </td>
-
             </tr>
         }
     </tbody>
 </table>
+
+<div>
+    <a asp-action="Index" asp-controller="Properties" style="color: #BF5700; text-decoration: none;">Back to Properties</a>
+</div>
+<div>
+    <a asp-action="Details" asp-controller="Properties" asp-route-id="@(ViewData["PropertyId"])" style="color: #BF5700; text-decoration: none;">Back to Property Details</a>
+</div>

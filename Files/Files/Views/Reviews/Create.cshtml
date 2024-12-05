@@ -1,37 +1,38 @@
 @model Files.Models.Review
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Create Review";
 }
 
-<h1>Create</h1>
+<h1>Create Review for @((ViewData["Properties"] as Files.Models.Property)?.Street ?? "Unknown Property")</h1>
 
-<h4>Review</h4>
-<hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
+            <!-- Ensure the form submits the property details -->
+            <input type="hidden" name="Properties.PropertyID" value="@(ViewData["Properties"] as Files.Models.Property)?.PropertyID" />
+
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
             <div class="form-group">
                 <label asp-for="Rating" class="control-label"></label>
                 <input asp-for="Rating" class="form-control" />
                 <span asp-validation-for="Rating" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="TextReview" class="control-label"></label>
-                <input asp-for="TextReview" class="form-control" />
+                <textarea asp-for="TextReview" class="form-control"></textarea>
                 <span asp-validation-for="TextReview" class="text-danger"></span>
             </div>
 
             <div class="form-group">
-                <div>
-                    <input type="submit" value="Create" class="btn btn-primary" style="background-color: #CC5500; border-color: #CC5500; color: white;" />
-                </div>
+                <button type="submit" class="btn btn-primary" style="background-color: #CC5500; border-color: #CC5500; color: white;">Create</button>
+            </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index" style="color: #CC5500; text-decoration: none;">Back to List</a>
+    <a asp-action="Index" asp-route-propertyId="@(ViewData["Properties"] as Files.Models.Property)?.PropertyID" style="color: #CC5500; text-decoration: none;">Back to Reviews</a>
 </div>
-
