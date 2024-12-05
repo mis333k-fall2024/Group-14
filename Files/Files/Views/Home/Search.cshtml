@@ -7,57 +7,113 @@
 <h1>Search Properties</h1>
 
 <form asp-action="DisplaySearchResults" asp-controller="Home" method="get">
-    <p class="form-group">
+    <div class="mb-3">
         <label for="City">City:</label>
-        <input name="City" id="City" class="form-control" value="@Model.City" /><br />
+        <input name="City" id="City" class="form-control" value="@Model.City" />
+        <span asp-validation-for="City" class="text-danger"></span>
+    </div>
 
+    <div class="mb-3">
         <label for="State">State:</label>
-        <input name="State" id="State" class="form-control" value="@Model.State" /><br />
+        <input name="State" id="State" class="form-control" value="@Model.State" />
+        <span asp-validation-for="State" class="text-danger"></span>
+    </div>
 
+    <div class="mb-3">
         <label for="Category">Category:</label>
-        @Html.DropDownList("SelectedCategoryID", ViewBag.AllCategories as SelectList, new { @class = "form-control" })<br />
+        @Html.DropDownList("SelectedCategoryID", ViewBag.AllCategories as SelectList, new { @class = "form-control" })
+    </div>
 
-        <label for="MinGuests">Min Guests:</label>
-        <input name="MinGuests" id="MinGuests" class="form-control" type="number" value="@Model.MinGuests" /><br />
+    <div class="mb-3">
+        <label>Guests:</label>
+        <div class="form-check form-check-inline">
+            <input type="radio" name="GuestComparison" value="GreaterThan" class="form-check-input" @(Model.GuestComparison == ComparisonType.GreaterThan ? "checked" : "") />
+            <label class="form-check-label">Greater Than</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input type="radio" name="GuestComparison" value="LessThan" class="form-check-input" @(Model.GuestComparison == ComparisonType.LessThan ? "checked" : "") />
+            <label class="form-check-label">Less Than</label>
+        </div>
+        <input name="GuestValue" id="GuestValue" class="form-control mt-2" type="number" min="0" value="@Model.GuestValue" />
+        <span asp-validation-for="GuestValue" class="text-danger"></span>
+    </div>
 
-        <label for="MaxGuests">Max Guests:</label>
-        <input name="MaxGuests" id="MaxGuests" class="form-control" type="number" value="@Model.MaxGuests" /><br />
+    <div class="mb-3">
+        <label>Price:</label>
+        <div class="form-check form-check-inline">
+            <input type="radio" name="PriceComparison" value="GreaterThan" class="form-check-input" @(Model.PriceComparison == ComparisonType.GreaterThan ? "checked" : "") />
+            <label class="form-check-label">Greater Than</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input type="radio" name="PriceComparison" value="LessThan" class="form-check-input" @(Model.PriceComparison == ComparisonType.LessThan ? "checked" : "") />
+            <label class="form-check-label">Less Than</label>
+        </div>
+        <input name="PriceValue" id="PriceValue" class="form-control mt-2" type="number" min="0" step="0.01" value="@Model.PriceValue" />
+        <span asp-validation-for="PriceValue" class="text-danger"></span>
+    </div>
 
-        <label for="MinPrice">Min Price:</label>
-        <input name="MinPrice" id="MinPrice" class="form-control" type="number" step="0.01" value="@Model.MinPrice" /><br />
+    <div class="mb-3">
+        <label>Bedrooms:</label>
+        <div class="form-check form-check-inline">
+            <input type="radio" name="BedroomComparison" value="GreaterThan" class="form-check-input" @(Model.BedroomComparison == ComparisonType.GreaterThan ? "checked" : "") />
+            <label class="form-check-label">Greater Than</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input type="radio" name="BedroomComparison" value="LessThan" class="form-check-input" @(Model.BedroomComparison == ComparisonType.LessThan ? "checked" : "") />
+            <label class="form-check-label">Less Than</label>
+        </div>
+        <input name="BedroomValue" id="BedroomValue" class="form-control mt-2" type="number" min="0" value="@Model.BedroomValue" />
+        <span asp-validation-for="BedroomValue" class="text-danger"></span>
+    </div>
 
-        <label for="MaxPrice">Max Price:</label>
-        <input name="MaxPrice" id="MaxPrice" class="form-control" type="number" step="0.01" value="@Model.MaxPrice" /><br />
+    <div class="mb-3">
+        <label>Bathrooms:</label>
+        <div class="form-check form-check-inline">
+            <input type="radio" name="BathroomComparison" value="GreaterThan" class="form-check-input" @(Model.BathroomComparison == ComparisonType.GreaterThan ? "checked" : "") />
+            <label class="form-check-label">Greater Than</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input type="radio" name="BathroomComparison" value="LessThan" class="form-check-input" @(Model.BathroomComparison == ComparisonType.LessThan ? "checked" : "") />
+            <label class="form-check-label">Less Than</label>
+        </div>
+        <input name="BathroomValue" id="BathroomValue" class="form-control mt-2" type="number" min="0" value="@Model.BathroomValue" />
+        <span asp-validation-for="BathroomValue" class="text-danger"></span>
+    </div>
 
-        <label for="MinRating">Min Rating:</label>
-        <input name="MinRating" id="MinRating" class="form-control" type="number" step="0.1" value="@Model.MinRating" /><br />
-
-        <label for="MaxRating">Max Rating:</label>
-        <input name="MaxRating" id="MaxRating" class="form-control" type="number" step="0.1" value="@Model.MaxRating" /><br />
-
-        <label for="Bedrooms">Min Bedrooms:</label>
-        <input name="MinBedrooms" id="MinBedrooms" class="form-control" type="number" value="@Model.MinBedrooms" /><br />
-
-        <label for="Bathrooms">Min Bathrooms:</label>
-        <input name="MinBathrooms" id="MinBathrooms" class="form-control" type="number" value="@Model.MinBathrooms" /><br />
-
+    <div class="mb-3">
         <label for="CheckInDate">Check-In Date:</label>
-        <input name="CheckInDate" id="CheckInDate" class="form-control" type="date" value="@Model.CheckInDate?.ToString("yyyy-MM-dd")" /><br />
+        <input name="CheckInDate" id="CheckInDate" class="form-control" type="date" value="@Model.CheckInDate?.ToString("yyyy-MM-dd")" />
+    </div>
 
+    <div class="mb-3">
         <label for="CheckOutDate">Check-Out Date:</label>
-        <input name="CheckOutDate" id="CheckOutDate" class="form-control" type="date" value="@Model.CheckOutDate?.ToString("yyyy-MM-dd")" /><br />
+        <input name="CheckOutDate" id="CheckOutDate" class="form-control" type="date" value="@Model.CheckOutDate?.ToString("yyyy-MM-dd")" />
+    </div>
 
-        <label>
-            <input name="PetsAllowed" type="checkbox" value="true" @(Model.PetsAllowed == true ? "checked" : "") />
-            Pets Allowed
-        </label><br />
+    <div class="mb-3">
+        <label for="RatingComparison">Rating:</label>
+        <div class="form-check form-check-inline">
+            <input type="radio" id="GreaterThan" name="RatingComparison" value="GreaterThan" class="form-check-input" @(Model.RatingComparison == ComparisonType.GreaterThan ? "checked" : "") />
+            <label class="form-check-label" for="GreaterThan">Greater Than</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input type="radio" id="LessThan" name="RatingComparison" value="LessThan" class="form-check-input" @(Model.RatingComparison == ComparisonType.LessThan ? "checked" : "") />
+            <label class="form-check-label" for="LessThan">Less Than</label>
+        </div>
+        <input name="RatingValue" id="RatingValue" class="form-control mt-2" type="number" step="0.1" min="1" max="5" value="@Model.RatingValue" />
+        <span asp-validation-for="RatingValue" class="text-danger"></span>
+    </div>
 
-        <label>
-            <input name="FreeParking" type="checkbox" value="true" @(Model.FreeParking == true ? "checked" : "") />
-            Free Parking
-        </label><br />
+    <div class="mb-3 form-check">
+        <input name="PetsAllowed" type="checkbox" value="true" class="form-check-input" @(Model.PetsAllowed == true ? "checked" : "") />
+        <label class="form-check-label">Pets Allowed</label>
+    </div>
 
-        <button type="submit" class="btn btn-primary">Search</button>
-        <a asp-action="Search" class="btn btn-danger">Reset</a>
-    </p>
+    <div class="mb-3 form-check">
+        <input name="FreeParking" type="checkbox" value="true" class="form-check-input" @(Model.FreeParking == true ? "checked" : "") />
+        <label class="form-check-label">Free Parking</label>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Search</button>
+    <a asp-action="Search" class="btn btn-danger">Reset</a>
 </form>

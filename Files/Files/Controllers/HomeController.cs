@@ -37,13 +37,10 @@ namespace Files.Controllers
             // Initialize search view model with defaults
             var svm = new SearchViewModel
             {
-                MinGuests = 0,
-                MaxGuests = 15,
-                MinPrice = 0.0m,
-                MaxPrice = 300.0m,
+                GuestValue = null,  // Default to null (no value)
+                PriceValue = null,   // Default to null (no value)
                 SelectedCategoryID = 0, // Default: All categories
-                MinRating = 1.0m,
-                MaxRating = 5.0m
+                RatingValue = null   // Default to null (no value)
             };
 
             return View(svm);
@@ -52,6 +49,27 @@ namespace Files.Controllers
         // GET: Properties/Results
         public IActionResult DisplaySearchResults(SearchViewModel svm)
         {
+            // Check if the model is valid before proceeding
+            if (!ModelState.IsValid)
+            {
+                // Re-populate dropdowns or other view data
+                ViewBag.AllCategories = GetAllCategoriesSelectList();
+
+                // Return to the search view with the validation errors
+                return View("Search", svm);
+            }
+
+            // Validate Check-In and Check-Out Dates
+            if ((svm.CheckInDate.HasValue && !svm.CheckOutDate.HasValue) ||
+                (!svm.CheckInDate.HasValue && svm.CheckOutDate.HasValue))
+            {
+                // Add a custom validation error
+                ModelState.AddModelError("", "Both Check-In and Check-Out dates must be provided or left blank.");
+                ViewBag.AllCategories = GetAllCategoriesSelectList();
+                return View("Search", svm);
+            }
+
+
             // Start with the full list of properties
             IQueryable<Property> query = _context.Properties
                 .Include(p => p.Categories)
@@ -80,48 +98,76 @@ namespace Files.Controllers
                 query = query.Where(p => p.State.Contains(svm.State));
             }
 
-            // Filter by guests
-            if (svm.MinGuests.HasValue)
+            // Guests comparison
+            if (svm.GuestValue.HasValue)
             {
-                query = query.Where(p => p.GuestsAllowed >= svm.MinGuests.Value);
+                if (svm.GuestComparison == ComparisonType.GreaterThan)
+                {
+                    query = query.Where(p => p.GuestsAllowed >= svm.GuestValue.Value);
+                }
+                else if (svm.GuestComparison == ComparisonType.LessThan)
+                {
+                    query = query.Where(p => p.GuestsAllowed <= svm.GuestValue.Value);
+                }
+                else
+                {
+                    // Default to Equal To if no radio button is selected
+                    query = query.Where(p => p.GuestsAllowed == svm.GuestValue.Value);
+                }
             }
 
-            if (svm.MaxGuests.HasValue)
+            // Price comparison
+            if (svm.PriceValue.HasValue)
             {
-                query = query.Where(p => p.GuestsAllowed <= svm.MaxGuests.Value);
+                if (svm.PriceComparison == ComparisonType.GreaterThan)
+                {
+                    query = query.Where(p => p.WeekdayPrice >= svm.PriceValue.Value || p.WeekendPrice >= svm.PriceValue.Value);
+                }
+                else if (svm.PriceComparison == ComparisonType.LessThan)
+                {
+                    query = query.Where(p => p.WeekdayPrice <= svm.PriceValue.Value || p.WeekendPrice <= svm.PriceValue.Value);
+                }
+                else
+                {
+                    // Default to Equal To if no radio button is selected
+                    query = query.Where(p => p.WeekdayPrice == svm.PriceValue.Value || p.WeekendPrice == svm.PriceValue.Value);
+                }
             }
 
-            // Filter by price
-            if (svm.MinPrice.HasValue)
+            // Bedrooms comparison
+            if (svm.BedroomValue.HasValue)
             {
-                query = query.Where(p => p.WeekdayPrice >= svm.MinPrice.Value);
+                if (svm.BedroomComparison == ComparisonType.GreaterThan)
+                {
+                    query = query.Where(p => p.Bedrooms >= svm.BedroomValue.Value);
+                }
+                else if (svm.BedroomComparison == ComparisonType.LessThan)
+                {
+                    query = query.Where(p => p.Bedrooms <= svm.BedroomValue.Value);
+                }
+                else
+                {
+                    // Default to Equal To if no radio button is selected
+                    query = query.Where(p => p.Bedrooms == svm.BedroomValue.Value);
+                }
             }
 
-            if (svm.MaxPrice.HasValue)
+            // Bathrooms comparison
+            if (svm.BathroomValue.HasValue)
             {
-                query = query.Where(p => p.WeekdayPrice <= svm.MaxPrice.Value);
-            }
-
-            // Filter by bedrooms
-            if (svm.MinBedrooms.HasValue)
-            {
-                query = query.Where(p => p.Bedrooms >= svm.MinBedrooms.Value);
-            }
-
-            if (svm.MaxBedrooms.HasValue)
-            {
-                query = query.Where(p => p.Bedrooms <= svm.MaxBedrooms.Value);
-            }
-
-            // Filter by bathrooms
-            if (svm.MinBathrooms.HasValue)
-            {
-                query = query.Where(p => p.Bathrooms >= svm.MinBathrooms.Value);
-            }
-
-            if (svm.MaxBathrooms.HasValue)
-            {
-                query = query.Where(p => p.Bathrooms <= svm.MaxBathrooms.Value);
+                if (svm.BathroomComparison == ComparisonType.GreaterThan)
+                {
+                    query = query.Where(p => p.Bathrooms >= svm.BathroomValue.Value);
+                }
+                else if (svm.BathroomComparison == ComparisonType.LessThan)
+                {
+                    query = query.Where(p => p.Bathrooms <= svm.BathroomValue.Value);
+                }
+                else
+                {
+                    // Default to Equal To if no radio button is selected
+                    query = query.Where(p => p.Bathrooms == svm.BathroomValue.Value);
+                }
             }
 
             // Filter by pets allowed
@@ -136,27 +182,28 @@ namespace Files.Controllers
                 query = query.Where(p => p.FreeParking == svm.FreeParking.Value);
             }
 
-            // Filter by guest rating range
-            if (svm.MinRating.HasValue)
+            //guestrating
+            if (svm.RatingValue.HasValue)
             {
-                query = query.Where(p => p.Reviews.Any() ? (decimal)p.Reviews.Average(r => r.Rating) >= svm.MinRating.Value : false);
-            }
-
-            if (svm.MaxRating.HasValue)
-            {
-                query = query.Where(p => p.Reviews.Any() ? (decimal)p.Reviews.Average(r => r.Rating) <= svm.MaxRating.Value : false);
+                if (svm.RatingComparison == ComparisonType.GreaterThan)
+                {
+                    query = query.Where(p => p.Reviews.Any() ? (decimal)p.Reviews.Average(r => r.Rating) >= svm.RatingValue.Value : false);
+                }
+                else if (svm.RatingComparison == ComparisonType.LessThan)
+                {
+                    query = query.Where(p => p.Reviews.Any() ? (decimal)p.Reviews.Average(r => r.Rating) <= svm.RatingValue.Value : false);
+                }
+                else
+                {
+                    // Default behavior: Equal to comparison if no radio button is selected
+                    query = query.Where(p => p.Reviews.Any() ? (decimal)p.Reviews.Average(r => r.Rating) == svm.RatingValue.Value : false);
+                }
             }
 
             // Filter by category
             if (svm.SelectedCategoryID != 0)
             {
                 query = query.Where(p => p.Categories.CategoryID == svm.SelectedCategoryID);
-            }
-
-            // Check-in and Check-out date filters
-            if (svm.CheckInDate.HasValue && svm.CheckOutDate.HasValue)
-            {
-                query = query.Where(p => !p.UnavailableDates.Any(d => d >= svm.CheckInDate && d <= svm.CheckOutDate));
             }
 
             // Execute the query and materialize the results
@@ -170,8 +217,9 @@ namespace Files.Controllers
                 Bathrooms = p.Bathrooms,
                 GuestsAllowed = p.GuestsAllowed,
                 WeekdayPrice = p.WeekdayPrice,
+                WeekendPrice = p.WeekendPrice,
                 Category = p.Categories.CategoryName,
-                GuestRating = p.Reviews.Any() ? p.Reviews.Average(r => r.Rating) : 0 // Calculate average rating
+                GuestRating = p.Reviews.Any() ? (decimal?)p.Reviews.Average(r => r.Rating) : null // Return null if no reviews
             }).ToList();
 
             // Populate ViewBag with counts

@@ -3,73 +3,67 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Files.Models
 {
-    public enum SelectedVote
+    public enum ComparisonType
     {
         [Display(Name = "Greater Than")] GreaterThan,
         [Display(Name = "Less Than")] LessThan,
     }
 
-    public class SearchViewModel
+    public class SearchViewModel : IValidatableObject
     {
         // City search
         [Display(Name = "City")]
+        [RegularExpression("^[a-zA-Z\\s]+$", ErrorMessage = "City must only contain letters.")]
         public string? City { get; set; }
 
         // State search
         [Display(Name = "State")]
+        [RegularExpression("^[a-zA-Z\\s]+$", ErrorMessage = "State must only contain letters.")]
         public string? State { get; set; }
 
-        // Number of Guests
-        [Display(Name = "Minimum Guests")]
-        [Range(0, Int32.MaxValue, ErrorMessage = "Minimum Guests must be a positive number.")]
-        public int? MinGuests { get; set; }
+        // Guests
+        [Display(Name = "Guest Comparison")]
+        public ComparisonType? GuestComparison { get; set; }
 
-        [Display(Name = "Maximum Guests")]
-        [Range(0, Int32.MaxValue, ErrorMessage = "Maximum Guests must be a positive number.")]
-        public int? MaxGuests { get; set; } = 15;
+        [Display(Name = "Guests")]
+        [Range(0, Int32.MaxValue, ErrorMessage = "Guests must be a positive number.")]
+        public int? GuestValue { get; set; }
 
-        // Price Range
-        [Display(Name = "Minimum Price (Weekday)")]
+        // Price
+        [Display(Name = "Price Comparison")]
+        public ComparisonType? PriceComparison { get; set; }
+
+        [Display(Name = "Price")]
         [Range(0.0, double.MaxValue, ErrorMessage = "Price must be a positive number.")]
-        public decimal? MinPrice { get; set; }
-
-        [Display(Name = "Maximum Price (Weekday)")]
-        [Range(0.0, double.MaxValue, ErrorMessage = "Price must be a positive number.")]
-        public decimal? MaxPrice { get; set; } = 300;
+        public decimal? PriceValue { get; set; }
 
         // Category dropdown
         [Display(Name = "Category")]
         public int SelectedCategoryID { get; set; }
 
-        // Number of Bedrooms
-        [Display(Name = "Minimum Bedrooms")]
-        [Range(0, Int32.MaxValue, ErrorMessage = "Minimum Bedrooms must be a positive number.")]
-        public int? MinBedrooms { get; set; }
+        // Bedrooms
+        [Display(Name = "Bedroom Comparison")]
+        public ComparisonType? BedroomComparison { get; set; }
 
-        [Display(Name = "Maximum Bedrooms")]
-        [Range(0, Int32.MaxValue, ErrorMessage = "Maximum Bedrooms must be a positive number.")]
-        public int? MaxBedrooms { get; set; }
+        [Display(Name = "Bedrooms")]
+        [Range(0, Int32.MaxValue, ErrorMessage = "Bedrooms must be a positive number.")]
+        public int? BedroomValue { get; set; }
 
-        // Number of Bathrooms
-        [Display(Name = "Minimum Bathrooms")]
-        [Range(0, Int32.MaxValue, ErrorMessage = "Minimum Bathrooms must be a positive number.")]
-        public int? MinBathrooms { get; set; }
+        // Bathrooms
+        [Display(Name = "Bathroom Comparison")]
+        public ComparisonType? BathroomComparison { get; set; }
 
-        [Display(Name = "Maximum Bathrooms")]
-        [Range(0, Int32.MaxValue, ErrorMessage = "Maximum Bathrooms must be a positive number.")]
-        public int? MaxBathrooms { get; set; }
+        [Display(Name = "Bathrooms")]
+        [Range(0, Int32.MaxValue, ErrorMessage = "Bathrooms must be a positive number.")]
+        public int? BathroomValue { get; set; }
 
         // Guest Ratings
-        [Display(Name = "Minimum Rating")]
+        [Display(Name = "Rating")]
         [Range(1.0, 5.0, ErrorMessage = "Rating must be between 1.0 and 5.0.")]
-        public decimal? MinRating { get; set; }
-
-        [Display(Name = "Maximum Rating")]
-        [Range(1.0, 5.0, ErrorMessage = "Rating must be between 1.0 and 5.0.")]
-        public decimal? MaxRating { get; set; }
+        public decimal? RatingValue { get; set; }
 
         [Display(Name = "Rating Comparison")]
-        public SelectedVote? RatingComparison { get; set; }
+        public ComparisonType? RatingComparison { get; set; }
 
         // Pets Allowed
         [Display(Name = "Pets Allowed")]
@@ -79,7 +73,6 @@ namespace Files.Models
         [Display(Name = "Free Parking")]
         public bool? FreeParking { get; set; }
 
-        // Check-In and Check-Out Dates
         [DataType(DataType.Date)]
         [Display(Name = "Check-In Date")]
         public DateTime? CheckInDate { get; set; }
@@ -87,7 +80,21 @@ namespace Files.Models
         [DataType(DataType.Date)]
         [Display(Name = "Check-Out Date")]
         public DateTime? CheckOutDate { get; set; }
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            if (CheckInDate.HasValue && !CheckOutDate.HasValue)
+            {
+                yield return new ValidationResult("If Check-In Date is provided, Check-Out Date must also be provided.", new[] { nameof(CheckOutDate) });
+            }
+
+            if (!CheckInDate.HasValue && CheckOutDate.HasValue)
+            {
+                yield return new ValidationResult("If Check-Out Date is provided, Check-In Date must also be provided.", new[] { nameof(CheckInDate) });
+            }
+        }
     }
+
 }
 
 
