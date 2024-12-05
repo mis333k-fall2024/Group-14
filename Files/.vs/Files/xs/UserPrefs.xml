@@ -6,18 +6,18 @@
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MultiItemStartupConfigurations />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Files/Models/Reservation.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Files/Controllers/HomeController.cs">
     <Files>
-      <File FileName="Files/Models/Reservation.cs" Line="60" Column="42" />
-      <File FileName="Files/Models/Review.cs" />
-      <File FileName="Files/Controllers/HomeController.cs" />
+      <File FileName="Files/Models/Reservation.cs" />
+      <File FileName="Files/Models/Review.cs" Line="30" Column="28" />
+      <File FileName="Files/Controllers/HomeController.cs" Line="70" Column="1" />
       <File FileName="Files/Views/Index.cshtml" />
       <File FileName="Files/DAL/AppDbContext.cs" />
       <File FileName="Files/Models/Category.cs" />
       <File FileName="Files/Models/Property.cs" Line="18" Column="12" />
       <File FileName="Files/Seeding/SeedRoles.cs" />
       <File FileName="Files/Models/AppUser.cs" Line="1" Column="1" />
-      <File FileName="Files/Controllers/AccountController.cs" />
+      <File FileName="Files/Controllers/AccountController.cs" Line="1" Column="1" />
       <File FileName="Files/Controllers/RoleAdminController.cs" />
       <File FileName="Files/Views/_ViewImports.cshtml" />
       <File FileName="Files/Program.cs" />
@@ -30,8 +30,8 @@
       <File FileName="Files/Views/Shared/_Layout.cshtml" />
       <File FileName="Files/Controllers/CategoriesController.cs" />
       <File FileName="Files/Controllers/PropertiesController.cs" />
-      <File FileName="Files/Seeding/SeedProperties.cs" />
-      <File FileName="Files/Controllers/ReservationsController.cs" Line="86" Column="49" />
+      <File FileName="Files/Seeding/SeedProperties.cs" Line="1" Column="1" />
+      <File FileName="Files/Controllers/ReservationsController.cs" Line="81" Column="43" />
       <File FileName="Files/Models/Transaction.cs" />
       <File FileName="Files/Views/Checkout/ThankYouView.cshtml" />
       <File FileName="Files/Views/Shared/_LoginPartial.cshtml" />
@@ -54,28 +54,26 @@
       <File FileName="Files/Views/Reservations/Delete.cshtml" />
       <File FileName="Files/Views/Reservations/Details.cshtml" />
       <File FileName="Files/Views/Reservations/Edit.cshtml" />
-      <File FileName="Files/Views/Reservations/Cart.cshtml" Line="27" Column="31" />
-      <File FileName="Files/Models/ReservationList.cs" Line="1" Column="1" />
+      <File FileName="Files/Views/Reservations/Cart.cshtml" />
+      <File FileName="Files/Models/ReservationList.cs" />
       <File FileName="Files/Utilities/SessionExtensions.cs" />
       <File FileName="Files/Models/ViewModels/SearchViewModel.cs" Line="1" Column="1" />
-      <File FileName="Files/Views/Home/Search.cshtml" />
+      <File FileName="Files/Views/Home/Search.cshtml" Line="49" Column="1" />
       <File FileName="Files/Views/Home/Results.cshtml" />
       <File FileName="Files/Views/Home/HostReports.cshtml" />
-      <File FileName="Files/Models/ViewModels/HostReportViewModel.cs" Line="19" Column="58" />
+      <File FileName="Files/Models/ViewModels/HostReportViewModel.cs" />
+      <File FileName="Files/Seeding/SeedReviews.cs" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
-          <Node name="Files">
+          <Node name="Files" expanded="True">
             <Node name="Files">
-              <Node name="Models" expanded="True">
-                <Node name="ViewModels" expanded="True" />
-                <Node name="Reservation.cs" selected="True" />
+              <Node name="Controllers">
+                <Node name="HomeController.cs" selected="True" />
               </Node>
-              <Node name="Views">
-                <Node name="Home" expanded="True" />
-                <Node name="Properties" expanded="True" />
-              </Node>
+              <Node name="Models" expanded="True" />
+              <Node name="Seeding" expanded="True" />
             </Node>
           </Node>
         </State>

@@ -57,6 +57,17 @@ namespace Files.Controllers
                 .Include(p => p.Categories)
                 .Include(p => p.Reviews); // Include Reviews for GuestRating calculations
 
+
+            // Check-In and Check-Out Date filter
+            if (svm.CheckInDate.HasValue && svm.CheckOutDate.HasValue)
+            {
+                DateTime checkInDate = svm.CheckInDate.Value;
+                DateTime checkOutDate = svm.CheckOutDate.Value;
+
+                // Filter properties that do not have unavailable dates overlapping with the stay period
+                query = query.Where(p => !p.UnavailableDates.Any(d => d >= checkInDate && d <= checkOutDate));
+            }
+
             // City search
             if (!string.IsNullOrEmpty(svm.City))
             {

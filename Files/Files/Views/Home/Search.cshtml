@@ -41,6 +41,12 @@
         <label for="Bathrooms">Min Bathrooms:</label>
         <input name="MinBathrooms" id="MinBathrooms" class="form-control" type="number" value="@Model.MinBathrooms" /><br />
 
+        <label for="CheckInDate">Check-In Date:</label>
+        <input name="CheckInDate" id="CheckInDate" class="form-control" type="date" value="@Model.CheckInDate?.ToString("yyyy-MM-dd")" /><br />
+
+        <label for="CheckOutDate">Check-Out Date:</label>
+        <input name="CheckOutDate" id="CheckOutDate" class="form-control" type="date" value="@Model.CheckOutDate?.ToString("yyyy-MM-dd")" /><br />
+
         <label>
             <input name="PetsAllowed" type="checkbox" value="true" @(Model.PetsAllowed == true ? "checked" : "") />
             Pets Allowed
