@@ -28,7 +28,18 @@
         </form>
     </div>
 </div>
-
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="alert alert-danger">
+        <p>There were errors with your submission:</p>
+        <ul>
+            @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+            {
+                <li>@error.ErrorMessage</li>
+            }
+        </ul>
+    </div>
+}
 <div>
     <a asp-action="Index" asp-route-propertyId="@ViewBag.PropertyId">Back to Reviews</a>
 </div>
