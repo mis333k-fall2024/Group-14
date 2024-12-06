@@ -22,18 +22,24 @@ namespace Files.Controllers
         // GET: Reviews
         public async Task<IActionResult> Index(int propertyId)
         {
+            // Retrieve the property details for display purposes
+            var property = await _context.Properties
+                .FirstOrDefaultAsync(p => p.PropertyID == propertyId);
+
+            if (property == null)
+            {
+                // Return a NotFound view or an error message if the property is not found
+                return NotFound("Property not found");
+            }
+
             // Retrieve reviews for the specific property
             var reviews = await _context.Reviews
-                .Include(r => r.Properties) // Include navigation property
-                .Where(r => r.Properties.PropertyID == propertyId)
+                .Where(r => r.Properties.PropertyID == propertyId) // Use PropertyID directly
                 .ToListAsync();
 
-            // Retrieve the property details for display purposes
-            var property = await _context.Properties.FirstOrDefaultAsync(p => p.PropertyID == propertyId);
-            ViewData["PropertyName"] = property != null
-                ? $"{property.Street}, {property.City}"
-                : "Unknown Property";
-            ViewData["Properties"] = property;
+            // Pass the necessary data to the view using ViewModel or ViewData
+            ViewData["PropertyId"] = property.PropertyID;
+            ViewData["PropertyName"] = $"{property.Street}, {property.City}";
 
             return View(reviews);
         }
@@ -62,8 +68,17 @@ namespace Files.Controllers
         [Authorize]
         public IActionResult Create(int propertyId)
         {
+            var property = _context.Properties.FirstOrDefault(p => p.PropertyID == propertyId);
+            if (property == null)
+            {
+                return NotFound();
+            }
+
             // Pass the property object to the view
-            ViewData["Properties"] = _context.Properties.FirstOrDefault(p => p.PropertyID == propertyId);
+            ViewData["Properties"] = property;
+            ViewData["PropertyId"] = property.PropertyID; // Pass PropertyID explicitly
+            ViewData["PropertyName"] = $"{property.Street}, {property.City}"; // Adjust details as needed
+
             return View();
         }
 
@@ -73,29 +88,29 @@ namespace Files.Controllers
         [Authorize]
         public async Task<IActionResult> Create([Bind("ReviewID,Rating,TextReview,HostComments,DisputeStatus")] Review review, int propertyId)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                // Retrieve the property and associate it with the review
-                var property = await _context.Properties.FirstOrDefaultAsync(p => p.PropertyID == propertyId);
-
-                if (property == null)
-                {
-                    return NotFound();
-                }
-
-                review.Properties = property;
-
-                // Save the review to the database
-                _context.Add(review);
-                await _context.SaveChangesAsync();
-
-                // Redirect to the property's review index page
-                return RedirectToAction("Index", new { propertyId = property.PropertyID });
+                // If validation fails, re-display the form with validation errors
+                ViewData["PropertyId"] = propertyId;
+                ViewData["PropertyName"] = "Your Property Name Here"; // Replace or retrieve dynamically
+                return View(review);
             }
 
-            ViewData["Properties"] = _context.Properties.FirstOrDefault(p => p.PropertyID == propertyId);
-            return View(review);
+            // Retrieve the property and associate it with the review
+            var property = await _context.Properties.FirstOrDefaultAsync(p => p.PropertyID == propertyId);
+            if (property == null)
+            {
+                return NotFound();
+            }
+
+            review.Properties = property; // Associate the review with the property
+            _context.Reviews.Add(review);
+            await _context.SaveChangesAsync();
+
+            // Redirect to the Index action for the list of reviews to avoid re-submission
+            return RedirectToAction("Index", new { propertyId = propertyId });
         }
+
 
         // GET: Reviews/Edit/5
         public async Task<IActionResult> Edit(int? id)
