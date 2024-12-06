@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Files.DAL;
 using Files.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Files.Controllers
 {
@@ -22,7 +23,12 @@ namespace Files.Controllers
         // GET: Properties
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Properties.ToListAsync());
+            var approvedProperties = await _context.Properties
+            .Where(p => p.PropertyStatus)
+            // Using propstat from Property 
+            .ToListAsync();
+                        return View(approvedProperties);
+
         }
 
         // GET: Properties/Details/5
@@ -52,20 +58,32 @@ namespace Files.Controllers
         // POST: Properties/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+        [HttpPost, ActionName("Create")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("PropertyID,PropertyNumber,Street,City,State,Zip,Bedrooms,Bathrooms,GuestsAllowed,PetsAllowed,FreeParking,WeekdayPrice,WeekendPrice,CleaningFee,DiscountRate,DiscountMinStay,UnavailableDates,PropertyStatus")] Property @property)
         {
             if (ModelState.IsValid)
             {
+                property.PropertyStatus = false; //makes pending approval
+                //add the new prop
                 _context.Add(@property);
                 await _context.SaveChangesAsync();
+                //sucesss message
+                TempData["SuccessMessage"] = "Property successfully created and is pending approval.";
+                ViewBag.ApprovalStatus = "Your property is now pending approval.";
+                //return to index
                 return RedirectToAction(nameof(Index));
+            }
+            //trying to have error pg
+            foreach (var error in ModelState.Values.SelectMany(v => v.Errors))
+            {
+                Console.WriteLine(error.ErrorMessage);  // Log or display these errors
             }
             return View(@property);
         }
 
-        // GET: Properties/Edit/5
+        // GET: Properties/Edit/
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -78,6 +96,7 @@ namespace Files.Controllers
             {
                 return NotFound();
             }
+            ViewBag.ApprovalStatus = property.PropertyStatus ? "Approved" : "Pending approval";
             return View(@property);
         }
 
@@ -86,38 +105,36 @@ namespace Files.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("PropertyID,PropertyNumber,Street,City,State,Zip,Bedrooms,Bathrooms,GuestsAllowed,PetsAllowed,FreeParking,WeekdayPrice,WeekendPrice,CleaningFee,DiscountRate,DiscountMinStay,UnavailableDates,PropertyStatus")] Property @property)
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> Edit(int id, bool PropertyStatus)
         {
-            if (id != @property.PropertyID)
+            var property = await _context.Properties.FindAsync(id);
+            if (property == null)
             {
                 return NotFound();
             }
+            // Update the approval status of the property 
+            property.PropertyStatus = PropertyStatus;
+            _context.Update(property);
+            await _context.SaveChangesAsync();
+            // Set the approval status message based on whether it was approved or rejected
+            ViewBag.ApprovalStatus = PropertyStatus ? "Approved" : "Rejected";
+            return RedirectToAction(nameof(PendingApproval)); }
 
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(@property);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!PropertyExists(@property.PropertyID))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(@property);
+        // GET: Properties/PendingApproval (For admins to see properties awaiting approval)
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> PendingApproval()
+        {
+            // Get all properties that are pending approval (Propertystatus/approved = false)
+            var pendingProperties = await _context.Properties
+                .Where(p => !p.PropertyStatus) // Only show properties not approved yet
+                .ToListAsync();
+            return View(pendingProperties);
         }
 
-        // GET: Properties/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+
+            // GET: Properties/Delete/5
+            public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {

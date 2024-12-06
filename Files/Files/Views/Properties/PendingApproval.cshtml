@@ -1,0 +1,38 @@
+﻿@model IEnumerable<Files.Models.Property>
+
+<h2>Pending Approval</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Property Number</th>
+            <th>Street</th>
+            <th>City</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var property in Model)
+        {
+            <tr>
+                <td>@property.PropertyNumber</td>
+                <td>@property.Street</td>
+                <td>@property.City</td>
+                <td>@property.PropertyStatus</td>
+                <td>Pending approval</td>
+                <td>
+                    <a href="@Url.Action("Edit", new { id = property.PropertyID })" class="btn btn-info">Approve/Reject</a>
+
+                    <div class="form-group form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" asp-for="@property.PropertyStatus" />
+                        @Html.DisplayNameFor(model => model.PropertyStatus)
+                        </label>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
