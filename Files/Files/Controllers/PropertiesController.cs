@@ -7,7 +7,9 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Files.DAL;
 using Files.Models;
+using Files.Views;
 using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace Files.Controllers
 {
@@ -49,22 +51,44 @@ namespace Files.Controllers
             return View(@property);
         }
 
+  
+
         // GET: Properties/Create
         public IActionResult Create()
         {
             return View();
         }
-
-        // POST: Properties/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost, ActionName("Create")]
+        
+            // POST: Properties/Create
+            // To protect from overposting attacks, enable the specific properties you want to bind to.
+            // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+            [HttpPost, ActionName("Create")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PropertyID,PropertyNumber,Street,City,State,Zip,Bedrooms,Bathrooms,GuestsAllowed,PetsAllowed,FreeParking,WeekdayPrice,WeekendPrice,CleaningFee,DiscountRate,DiscountMinStay,UnavailableDates,PropertyStatus")] Property @property)
+        public async Task<IActionResult> Create([Bind("PropertyID,PropertyNumber,Street,City,State,Zip,Bedrooms,Bathrooms,GuestsAllowed,PetsAllowed,FreeParking,WeekdayPrice,WeekendPrice,CleaningFee,DiscountRate,DiscountMinStay,UnavailableDates,PropertyStatus,CategoryID")] Property @property)
         {
+            // Retrieve the logged-in user
+            string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (string.IsNullOrEmpty(userId))
+            {
+                return Unauthorized("User not logged in.");
+            }
+
+            // Fetch the user object from the database
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == userId);
+            if (user == null)
+            {
+                return NotFound("User not found.");
+            }
+
+            // Assign the user navigation property
+            property.AppUsers = user;
+
             if (ModelState.IsValid)
             {
+                //mapping viewmodel to model
+
                 property.PropertyStatus = false; //makes pending approval
+
                 //add the new prop
                 _context.Add(@property);
                 await _context.SaveChangesAsync();
@@ -73,7 +97,9 @@ namespace Files.Controllers
                 ViewBag.ApprovalStatus = "Your property is now pending approval.";
                 //return to index
                 return RedirectToAction(nameof(Index));
+
             }
+
             //trying to have error pg
             foreach (var error in ModelState.Values.SelectMany(v => v.Errors))
             {

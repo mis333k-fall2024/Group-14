@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Files.Models
 {
@@ -18,9 +19,13 @@ namespace Files.Models
         [Display(Name = "Weekend Price")]
         [DisplayFormat(DataFormatString = "{0:C}")]
         public decimal WeekendPrice { get; set; }
+        // Category dropdown
+        [Display(Name = "Category")]
+        //public int SelectedCategoryID { get; set; }
         public string Category { get; set; }
         [Display(Name = "Guest Rating")]
         public decimal? GuestRating { get; set; }
+        //public IEnumerable<SelectListItem> Categories { get; set; }
     }
 }
 
