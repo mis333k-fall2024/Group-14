@@ -17,199 +17,215 @@ build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Files
 build_property.RootNamespace = Files
-build_property.ProjectDir = /Users/marianaalvarez/Documents/GitHub/Group-14/Files/Files/
+build_property.ProjectDir = /Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 8.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = /Users/marianaalvarez/Documents/GitHub/Group-14/Files/Files
+build_property.MSBuildProjectDirectory = /Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files
 build_property._RazorSourceGeneratorDebug = 
 
-[/Users/marianaalvarez/Documents/GitHub/Group-14/Files/Files/Views/Account/ChangePassword.cshtml]
+[/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/Views/Account/ChangePassword.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWNjb3VudC9DaGFuZ2VQYXNzd29yZC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/marianaalvarez/Documents/GitHub/Group-14/Files/Files/Views/Account/EditProfile.cshtml]
+[/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/Views/Account/EditProfile.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWNjb3VudC9FZGl0UHJvZmlsZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/marianaalvarez/Documents/GitHub/Group-14/Files/Files/Views/Account/Index.cshtml]
+[/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/Views/Account/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWNjb3VudC9JbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/marianaalvarez/Documents/GitHub/Group-14/Files/Files/Views/Account/Login.cshtml]
+[/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/Views/Account/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWNjb3VudC9Mb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/marianaalvarez/Documents/GitHub/Group-14/Files/Files/Views/Account/ModifyProfile.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWNjb3VudC9Nb2RpZnlQcm9maWxlLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[/Users/marianaalvarez/Documents/GitHub/Group-14/Files/Files/Views/Account/Register.cshtml]
+[/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/Views/Account/Register.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWNjb3VudC9SZWdpc3Rlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/marianaalvarez/Documents/GitHub/Group-14/Files/Files/Views/Categories/Create.cshtml]
+[/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/Views/Account/ReservationHistory.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWNjb3VudC9SZXNlcnZhdGlvbkhpc3RvcnkuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/Views/Categories/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ2F0ZWdvcmllcy9DcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/marianaalvarez/Documents/GitHub/Group-14/Files/Files/Views/Categories/Delete.cshtml]
+[/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/Views/Categories/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ2F0ZWdvcmllcy9EZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/marianaalvarez/Documents/GitHub/Group-14/Files/Files/Views/Categories/Details.cshtml]
+[/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/Views/Categories/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ2F0ZWdvcmllcy9EZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/marianaalvarez/Documents/GitHub/Group-14/Files/Files/Views/Categories/Edit.cshtml]
+[/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/Views/Categories/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ2F0ZWdvcmllcy9FZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/marianaalvarez/Documents/GitHub/Group-14/Files/Files/Views/Categories/Index.cshtml]
+[/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/Views/Categories/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ2F0ZWdvcmllcy9JbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/marianaalvarez/Documents/GitHub/Group-14/Files/Files/Views/Checkout/CheckoutView.cshtml]
+[/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/Views/Checkout/CheckoutView.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ2hlY2tvdXQvQ2hlY2tvdXRWaWV3LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/marianaalvarez/Documents/GitHub/Group-14/Files/Files/Views/Checkout/ThankYouView.cshtml]
+[/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/Views/Checkout/ThankYouView.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ2hlY2tvdXQvVGhhbmtZb3VWaWV3LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/marianaalvarez/Documents/GitHub/Group-14/Files/Files/Views/Home/HostReports.cshtml]
+[/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/Views/Home/HostReports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9Ib3N0UmVwb3J0cy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/marianaalvarez/Documents/GitHub/Group-14/Files/Files/Views/Home/Index.cshtml]
+[/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9JbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/marianaalvarez/Documents/GitHub/Group-14/Files/Files/Views/Home/Results.cshtml]
+[/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/Views/Home/Results.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9SZXN1bHRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/marianaalvarez/Documents/GitHub/Group-14/Files/Files/Views/Home/Search.cshtml]
+[/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/Views/Home/Search.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9TZWFyY2guY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/marianaalvarez/Documents/GitHub/Group-14/Files/Files/Views/Index.cshtml]
+[/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/Views/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/marianaalvarez/Documents/GitHub/Group-14/Files/Files/Views/Properties/Create.cshtml]
+[/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/Views/ModifyProfile/AdminModifyProfile.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTW9kaWZ5UHJvZmlsZS9BZG1pbk1vZGlmeVByb2ZpbGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/Views/ModifyProfile/UserModifyProfile.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTW9kaWZ5UHJvZmlsZS9Vc2VyTW9kaWZ5UHJvZmlsZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/Views/Properties/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUHJvcGVydGllcy9DcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/marianaalvarez/Documents/GitHub/Group-14/Files/Files/Views/Properties/Delete.cshtml]
+[/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/Views/Properties/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUHJvcGVydGllcy9EZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/marianaalvarez/Documents/GitHub/Group-14/Files/Files/Views/Properties/Details.cshtml]
+[/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/Views/Properties/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUHJvcGVydGllcy9EZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/marianaalvarez/Documents/GitHub/Group-14/Files/Files/Views/Properties/Edit.cshtml]
+[/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/Views/Properties/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUHJvcGVydGllcy9FZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/marianaalvarez/Documents/GitHub/Group-14/Files/Files/Views/Properties/Index.cshtml]
+[/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/Views/Properties/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUHJvcGVydGllcy9JbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/marianaalvarez/Documents/GitHub/Group-14/Files/Files/Views/Reservations/Cart.cshtml]
+[/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/Views/Reservations/Cart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUmVzZXJ2YXRpb25zL0NhcnQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/marianaalvarez/Documents/GitHub/Group-14/Files/Files/Views/Reservations/Create.cshtml]
+[/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/Views/Reservations/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUmVzZXJ2YXRpb25zL0NyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/marianaalvarez/Documents/GitHub/Group-14/Files/Files/Views/Reservations/Delete.cshtml]
+[/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/Views/Reservations/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUmVzZXJ2YXRpb25zL0RlbGV0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/marianaalvarez/Documents/GitHub/Group-14/Files/Files/Views/Reservations/Details.cshtml]
+[/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/Views/Reservations/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUmVzZXJ2YXRpb25zL0RldGFpbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/marianaalvarez/Documents/GitHub/Group-14/Files/Files/Views/Reservations/Edit.cshtml]
+[/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/Views/Reservations/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUmVzZXJ2YXRpb25zL0VkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/marianaalvarez/Documents/GitHub/Group-14/Files/Files/Views/Reservations/Index.cshtml]
+[/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/Views/Reservations/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUmVzZXJ2YXRpb25zL0luZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/marianaalvarez/Documents/GitHub/Group-14/Files/Files/Views/Reviews/Create.cshtml]
+[/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/Views/Reservations/MakeReservation.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUmVzZXJ2YXRpb25zL01ha2VSZXNlcnZhdGlvbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/Views/Reviews/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUmV2aWV3cy9DcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/marianaalvarez/Documents/GitHub/Group-14/Files/Files/Views/Reviews/Delete.cshtml]
+[/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/Views/Reviews/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUmV2aWV3cy9EZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/marianaalvarez/Documents/GitHub/Group-14/Files/Files/Views/Reviews/Details.cshtml]
+[/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/Views/Reviews/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUmV2aWV3cy9EZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/marianaalvarez/Documents/GitHub/Group-14/Files/Files/Views/Reviews/Edit.cshtml]
+[/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/Views/Reviews/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUmV2aWV3cy9FZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/marianaalvarez/Documents/GitHub/Group-14/Files/Files/Views/Reviews/Index.cshtml]
+[/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/Views/Reviews/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUmV2aWV3cy9JbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/marianaalvarez/Documents/GitHub/Group-14/Files/Files/Views/RoleAdmin/Create.cshtml]
+[/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/Views/Reviews/ResolveDispute.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUmV2aWV3cy9SZXNvbHZlRGlzcHV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/Views/RoleAdmin/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUm9sZUFkbWluL0NyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/marianaalvarez/Documents/GitHub/Group-14/Files/Files/Views/RoleAdmin/Edit.cshtml]
+[/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/Views/RoleAdmin/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUm9sZUFkbWluL0VkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/marianaalvarez/Documents/GitHub/Group-14/Files/Files/Views/RoleAdmin/FireAdmin.cshtml]
+[/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/Views/RoleAdmin/FireAdmin.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUm9sZUFkbWluL0ZpcmVBZG1pbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/marianaalvarez/Documents/GitHub/Group-14/Files/Files/Views/RoleAdmin/HireAdmin.cshtml]
+[/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/Views/RoleAdmin/HireAdmin.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUm9sZUFkbWluL0hpcmVBZG1pbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/marianaalvarez/Documents/GitHub/Group-14/Files/Files/Views/RoleAdmin/Index.cshtml]
+[/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/Views/RoleAdmin/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUm9sZUFkbWluL0luZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/marianaalvarez/Documents/GitHub/Group-14/Files/Files/Views/RoleAdmin/RehireAdmin.cshtml]
+[/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/Views/RoleAdmin/RehireAdmin.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUm9sZUFkbWluL1JlaGlyZUFkbWluLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/marianaalvarez/Documents/GitHub/Group-14/Files/Files/Views/Seed/Confirm.cshtml]
+[/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/Views/Seed/Confirm.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2VlZC9Db25maXJtLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/marianaalvarez/Documents/GitHub/Group-14/Files/Files/Views/Seed/Index.cshtml]
+[/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/Views/Seed/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2VlZC9JbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/marianaalvarez/Documents/GitHub/Group-14/Files/Files/Views/Shared/Error.cshtml]
+[/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL0Vycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/marianaalvarez/Documents/GitHub/Group-14/Files/Files/Views/Shared/_Layout.cshtml]
+[/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/marianaalvarez/Documents/GitHub/Group-14/Files/Files/Views/Shared/_LoginPartial.cshtml]
+[/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/Views/Shared/_LoginPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19Mb2dpblBhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/marianaalvarez/Documents/GitHub/Group-14/Files/Files/Views/_ViewImports.cshtml]
+[/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/marianaalvarez/Documents/GitHub/Group-14/Files/Files/Views/_ViewStart.cshtml]
+[/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
