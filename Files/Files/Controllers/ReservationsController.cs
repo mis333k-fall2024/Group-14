@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -86,7 +87,9 @@ namespace Files.Controllers
                 WeekendPrice = property.WeekendPrice,
                 CleaningFee = property.CleaningFee,
                 DiscountRate = property.DiscountRate ?? 0m,
-                Properties = property
+                Properties = property,
+                City = property.City,
+                State = property.State,
             };
 
             reservationList.Reservations.Add(reservation);
@@ -123,7 +126,7 @@ namespace Files.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Confirm()
         {
-            var userId = User.Identity.Name;
+            var userId = User.FindFirstValue(System.Security.Claims.ClaimTypes.NameIdentifier);
 
             var reservationList = HttpContext.Session.GetObjectFromJson<ReservationList>("Reservations");
 
@@ -143,17 +146,36 @@ namespace Files.Controllers
                 UserId = userId
             };
 
-            // Add reservations to the transaction
-            foreach (var reservation in reservationList.Reservations)
+            try
             {
-                reservation.ReservationStatus = true;
-                transaction.Reservations.Add(reservation); // Link reservations to the transaction
-                _context.Reservations.Add(reservation);    // Add each reservation to the database
+                // Enable IDENTITY_INSERT for the Properties table
+                _context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT Properties ON");
+
+                // Add reservations to the transaction
+                foreach (var reservation in reservationList.Reservations)
+                {
+                    var property = await _context.Properties.FirstOrDefaultAsync(p => p.PropertyID == reservation.Properties.PropertyID);
+
+                    if (property == null)
+                    {
+                        return NotFound($"Property with ID {reservation.Properties.PropertyID} not found.");
+                    }
+
+                    reservation.ReservationStatus = true;
+                    reservation.Properties = property;
+                    transaction.Reservations.Add(reservation); // Link reservations to the transaction
+                    _context.Reservations.Add(reservation);    // Add each reservation to the database
+                }
+
+                _context.Transactions.Add(transaction);
+
+                await _context.SaveChangesAsync();
             }
-
-            _context.Transactions.Add(transaction);
-
-            await _context.SaveChangesAsync();
+            finally
+            {
+                // Disable IDENTITY_INSERT for the Properties table
+                _context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT Properties OFF");
+            }
 
             HttpContext.Session.Remove("Reservations");
 
