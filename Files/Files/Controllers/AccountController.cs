@@ -49,6 +49,24 @@ namespace Files.Controllers
                 return View(rvm);
             }
 
+            // Custom Validation: Check if the user is at least 18 years old
+            var today = DateTime.Today;
+            var age = today.Year - rvm.DOB.Year;
+            if (rvm.DOB.Date > today.AddYears(-age)) age--; // Adjust if birthday hasn't occurred yet this year
+            if (age < 18)
+            {
+                ModelState.AddModelError("DOB", "You must be at least 18 years old to register.");
+                return View(rvm);
+            }
+
+            // Custom Validation: Check if the email is already in use
+            var existingUser = await _userManager.FindByEmailAsync(rvm.Email);
+            if (existingUser != null)
+            {
+                ModelState.AddModelError("Email", "This email address is already in use.");
+                return View(rvm);
+            }
+
             //this code maps the RegisterViewModel to the AppUser domain model
             AppUser newUser = new AppUser
             {
@@ -222,6 +240,80 @@ namespace Files.Controllers
                 return View(cpvm);
             }
         }
+
+        // GET: /Account/EditProfile
+        [HttpGet]
+        public async Task<ActionResult> EditProfile()
+        {
+            // Find the logged-in user
+            AppUser userLoggedIn = await _userManager.FindByNameAsync(User.Identity.Name);
+
+            // Create a view model with the user's current data
+            EditProfileViewModel epvm = new EditProfileViewModel
+            {
+                Address = userLoggedIn.Address,
+                PhoneNumber = userLoggedIn.PhoneNumber,
+                DOB = userLoggedIn.DOB
+            };
+
+            // Send the view model to the view
+            return View(epvm);
+        }
+
+        // POST: /Account/EditProfile
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> EditProfile(EditProfileViewModel epvm)
+        {
+            // Validate the model state
+            if (!ModelState.IsValid)
+            {
+                return View(epvm);
+            }
+
+            // Custom Validation: Check if the user is at least 18 years old
+            var today = DateTime.Today;
+            var age = today.Year - epvm.DOB.Year;
+            if (epvm.DOB.Date > today.AddYears(-age)) age--; // Adjust if the birthday hasn't occurred this year
+            if (age < 18)
+            {
+                ModelState.AddModelError("DOB", "You must be at least 18 years old.");
+                return View(epvm);
+            }
+
+            // Find the logged-in user
+            AppUser userLoggedIn = await _userManager.FindByNameAsync(User.Identity.Name);
+
+            // Update the user's profile information
+            userLoggedIn.Address = epvm.Address;
+            userLoggedIn.PhoneNumber = epvm.PhoneNumber;
+            userLoggedIn.DOB = epvm.DOB;
+
+            // Update the user in the database
+            var result = await _userManager.UpdateAsync(userLoggedIn);
+
+            // Check if the update succeeded
+            if (result.Succeeded)
+            {
+                // Optionally re-sign the user to update claims if necessary
+                await _signInManager.RefreshSignInAsync(userLoggedIn);
+
+                // Redirect to the home page or a profile success page
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                // Add errors to the model state
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
+
+                // Return the user to the Edit Profile page with errors
+                return View(epvm);
+            }
+        }
+
 
         // POST: /Account/LogOff
         [HttpPost]

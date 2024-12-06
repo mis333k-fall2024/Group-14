@@ -17,6 +17,7 @@
             <th>@Html.DisplayNameFor(model => model.State)</th>
             <th>@Html.DisplayNameFor(model => model.Category)</th>
             <th>@Html.DisplayNameFor(model => model.WeekdayPrice)</th>
+            <th>@Html.DisplayNameFor(model => model.WeekendPrice)</th>
             <th>@Html.DisplayNameFor(model => model.Bedrooms)</th>
             <th>@Html.DisplayNameFor(model => model.Bathrooms)</th>
             <th>@Html.DisplayNameFor(model => model.GuestRating)</th>
@@ -31,10 +32,22 @@
                 <td>@Html.DisplayFor(modelItem => item.State)</td>
                 <td>@Html.DisplayFor(modelItem => item.Category)</td>
                 <td>@Html.DisplayFor(modelItem => item.WeekdayPrice)</td>
+                <td>@Html.DisplayFor(modelItem => item.WeekendPrice)</td>
                 <td>@Html.DisplayFor(modelItem => item.Bedrooms)</td>
                 <td>@Html.DisplayFor(modelItem => item.Bathrooms)</td>
-                <td>@Html.DisplayFor(modelItem => item.GuestRating)</td>
-                <td><a asp-action="Details" asp-controller="Properties" asp-route-id="@item.PropertyID" class="btn" style=" background-color: #BF5700; color: white; padding: 10px 20px; border: none; border-radius: 5px; text-decoration: none;">Details</a></td>
+                <td>
+                    @if (item.GuestRating.HasValue)
+                    {
+                        @item.GuestRating.Value.ToString("F1")
+                    }
+                    else
+                    {
+                        <span>No Ratings</span>
+                    }
+                </td>
+                <td>
+                    <a asp-action="Details" asp-controller="Properties" asp-route-id="@item.PropertyID" class="btn" style=" background-color: #BF5700; color: white; padding: 10px 20px; border: none; border-radius: 5px; text-decoration: none;">Details</a>
+                </td>
             </tr>
         }
     </tbody>

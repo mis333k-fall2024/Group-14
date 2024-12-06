@@ -1,16 +1,17 @@
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Files.DAL; // Your data access layer namespace
-using Files.Models; // Your models namespace
+using Files.DAL;
+using Files.Models;
 using Files.Utilities;
 
 namespace Files.Controllers
 {
-    [Authorize] // Ensure only logged-in users can access these actions unless specified
+    [Authorize]
     public class ReservationsController : Controller
     {
         private readonly AppDbContext _context;
@@ -44,56 +45,80 @@ namespace Files.Controllers
             return View(reservation);
         }
 
-        // GET: Reservations/Create
-        public IActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Reservations/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ReservationID,CheckIn,CheckOut,NumOfGuests,WeekdayPrice,WeekendPrice,CleaningFee,DiscountRate,ReservationStatus,ConfirmationNumber,PropertyId,UserId")] Reservation reservation)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(reservation);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(reservation);
-        }
-
         // GET: Reservations/Cart
-        [AllowAnonymous] // Allow unauthenticated users to access the cart
+        [AllowAnonymous]
         public IActionResult Cart()
         {
-            // Retrieve the cart from the session or initialize a new one
             var reservations = HttpContext.Session.GetObjectFromJson<ReservationList>("Reservations") ?? new ReservationList();
-
-            // Pass the cart (reservations) to the view
             return View(reservations);
         }
 
-        // GET: Reservations/Checkout
-        public async Task<IActionResult> Checkout()
+        // POST: Reservations/AddToCart
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult AddToCart(int propertyId, DateTime checkIn, DateTime checkOut, int numOfGuests)
         {
-            // Get the logged-in user's ID
-            var userId = User.Identity.Name;
-
-            // Retrieve all pending reservations for the user
-            var reservations = await _context.Reservations
-                .Where(r => r.AppUsers.UserName == userId && r.ReservationStatus == false) // Assuming false = "Pending"
-                .ToListAsync();
-
-            if (!reservations.Any())
+            if (checkIn < DateTime.Today)
             {
-                TempData["Error"] = "Your cart is empty. Please add reservations before checking out.";
-                return RedirectToAction("Index", "Home");
+                TempData["Error"] = "Check-in date cannot be in the past.";
+                return RedirectToAction("Cart");
             }
 
-            // Pass the reservations to the Checkout view
-            return View(reservations);
+            if (checkOut <= checkIn)
+            {
+                TempData["Error"] = "Check-out date must be after the check-in date.";
+                return RedirectToAction("Cart");
+            }
+
+            var reservationList = HttpContext.Session.GetObjectFromJson<ReservationList>("Reservations") ?? new ReservationList();
+
+            var property = _context.Properties.FirstOrDefault(p => p.PropertyID == propertyId);
+            if (property == null)
+            {
+                return NotFound("Property not found.");
+            }
+
+            var reservation = new Reservation
+            {
+                CheckIn = checkIn,
+                CheckOut = checkOut,
+                NumOfGuests = numOfGuests,
+                WeekdayPrice = property.WeekdayPrice,
+                WeekendPrice = property.WeekendPrice,
+                CleaningFee = property.CleaningFee,
+                DiscountRate = property.DiscountRate ?? 0m,
+                Properties = property,
+                City = property.City,
+                State = property.State,
+            };
+
+            reservationList.Reservations.Add(reservation);
+            HttpContext.Session.SetObjectAsJson("Reservations", reservationList);
+
+            return RedirectToAction("Cart");
+        }
+
+        // GET: Reservations/Transaction
+        public IActionResult Transaction()
+        {
+            var reservationList = HttpContext.Session.GetObjectFromJson<ReservationList>("Reservations");
+
+            if (reservationList == null || !reservationList.Reservations.Any())
+            {
+                TempData["Error"] = "Your cart is empty. Please add reservations before checking out.";
+                return RedirectToAction("Cart");
+            }
+
+            var transaction = new Transaction
+            {
+                Reservations = reservationList.Reservations,
+                Subtotal = reservationList.TotalPrice,
+                Tax = reservationList.TotalPrice * 0.1m, // 10% tax
+                GrandTotal = reservationList.TotalPrice + (reservationList.TotalPrice * 0.1m),
+                TransactionDate = DateTime.Now
+            };
+
+            return View(transaction);
         }
 
         // POST: Reservations/Confirm
@@ -101,36 +126,67 @@ namespace Files.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Confirm()
         {
-            var userId = User.Identity.Name;
+            var userId = User.FindFirstValue(System.Security.Claims.ClaimTypes.NameIdentifier);
 
-            // Get all pending reservations for the user
-            var reservations = await _context.Reservations
-                .Where(r => r.AppUsers.UserName == userId && r.ReservationStatus == false)
-                .ToListAsync();
+            var reservationList = HttpContext.Session.GetObjectFromJson<ReservationList>("Reservations");
 
-            if (!reservations.Any())
+            if (reservationList == null || !reservationList.Reservations.Any())
             {
-                TempData["Error"] = "Your cart is empty. Please add reservations before confirming.";
-                return RedirectToAction("Index", "Home");
+                TempData["Error"] = "Your cart is empty.";
+                return RedirectToAction("Cart");
             }
 
-            // Mark all reservations as confirmed
-            foreach (var reservation in reservations)
+            var transaction = new Transaction
             {
-                reservation.ReservationStatus = true;
+                ConfirmationNumber = Guid.NewGuid().ToString(),
+                TransactionDate = DateTime.Now,
+                Subtotal = reservationList.TotalPrice,
+                Tax = reservationList.TotalPrice * 0.1m,
+                GrandTotal = reservationList.TotalPrice + (reservationList.TotalPrice * 0.1m),
+                UserId = userId
+            };
+
+            try
+            {
+                // Enable IDENTITY_INSERT for the Properties table
+                _context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT Properties ON");
+
+                // Add reservations to the transaction
+                foreach (var reservation in reservationList.Reservations)
+                {
+                    var property = await _context.Properties.FirstOrDefaultAsync(p => p.PropertyID == reservation.Properties.PropertyID);
+
+                    if (property == null)
+                    {
+                        return NotFound($"Property with ID {reservation.Properties.PropertyID} not found.");
+                    }
+
+                    reservation.ReservationStatus = true;
+                    reservation.Properties = property;
+                    transaction.Reservations.Add(reservation); // Link reservations to the transaction
+                    _context.Reservations.Add(reservation);    // Add each reservation to the database
+                }
+
+                _context.Transactions.Add(transaction);
+
+                await _context.SaveChangesAsync();
+            }
+            finally
+            {
+                // Disable IDENTITY_INSERT for the Properties table
+                _context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT Properties OFF");
             }
 
-            await _context.SaveChangesAsync();
+            HttpContext.Session.Remove("Reservations");
 
-            // Redirect to a thank-you page or the home page
             TempData["Message"] = "Your reservations have been confirmed!";
-            return RedirectToAction("ThankYou");
+            return RedirectToAction("ThankYou", new { confirmationNumber = transaction.ConfirmationNumber });
         }
 
         // GET: Reservations/ThankYou
-        public IActionResult ThankYou()
+        public IActionResult ThankYou(string confirmationNumber)
         {
-            return View();
+            return View((object)confirmationNumber);
         }
     }
 }

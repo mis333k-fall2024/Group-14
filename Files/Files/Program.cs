@@ -1,33 +1,38 @@
-﻿//add a using statement for currency
-using System.Globalization;
+﻿using System.Globalization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
-
-// Be sure to remove the []
 using Files.DAL;
 using Files.Models;
+using Files.Utilities; // For session extensions
 
-//create a web application builder
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-// Add session services
-builder.Services.AddSession();
+// Add session services for storing and retrieving data across user interactions
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30); // Set session timeout
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true; // Ensure compatibility with GDPR/CCPA regulations
+});
 
-String connectionString = "Server=tcp:fa24group14finalproject.database.windows.net,1433;Initial Catalog=FA24Group14FinalProject;Persist Security Info=False;User ID=MISAdmin;Password=Password123;MultipleActiveResultSets=True;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+// Define the database connection string
+string connectionString = "Server=tcp:fa24group14finalproject.database.windows.net,1433;Initial Catalog=FA24Group14FinalProject;Persist Security Info=False;User ID=MISAdmin;Password=Password123;MultipleActiveResultSets=True;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
 
+// Add DbContext for dependency injection
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connectionString));
 
+// Configure Identity
 builder.Services.AddDefaultIdentity<AppUser>()
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<AppDbContext>();
 
 builder.Services.Configure<IdentityOptions>(options =>
 {
-    // Password settings.
+    // Password settings
     options.Password.RequireDigit = false;
     options.Password.RequireLowercase = false;
     options.Password.RequireNonAlphanumeric = false;
@@ -35,59 +40,63 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.Password.RequiredLength = 6;
     options.Password.RequiredUniqueChars = 1;
 
-    // User settings.
+    // User settings
     options.User.AllowedUserNameCharacters =
         "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
     options.User.RequireUniqueEmail = true;
 });
 
+// Configure application cookies
 builder.Services.ConfigureApplicationCookie(options =>
 {
     // Cookie settings
     options.Cookie.HttpOnly = true;
-    options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+    options.ExpireTimeSpan = TimeSpan.FromMinutes(30); // Match session timeout
 
     options.LoginPath = "/Account/Login";
     options.AccessDeniedPath = "/Account/AccessDenied";
     options.SlidingExpiration = true;
 });
 
-//build the app
+// Build the application
 var app = builder.Build();
 
-//These lines allow you to see more detailed error messages
-app.UseDeveloperExceptionPage();
-app.UseStatusCodePages();
+// Enable detailed error messages in development
+if (app.Environment.IsDevelopment())
+{
+    app.UseDeveloperExceptionPage();
+    app.UseStatusCodePages();
+}
+else
+{
+    app.UseExceptionHandler("/Home/Error");
+    app.UseHsts();
+}
 
-//This line allows you to use static pages like style sheets and images
+// Enable serving of static files (e.g., CSS, JS, images)
 app.UseStaticFiles();
 
-//This marks the position in the middleware pipeline where a routing decision
-//is made for a URL.
+// Set up authentication and authorization (order matters here)
 app.UseRouting();
+app.UseAuthentication(); // Ensure this is before UseAuthorization
+app.UseAuthorization();
 
 // Enable session middleware
 app.UseSession();
 
-app.UseAuthentication();
-app.UseAuthorization();
-
-//This allows the data annotations for currency to work on Macs
+// Configure middleware for custom culture settings (currency, date formatting)
 app.Use(async (context, next) =>
 {
-    CultureInfo.CurrentCulture = System.Globalization.CultureInfo.CreateSpecificCulture("en-US");
+    CultureInfo.CurrentCulture = CultureInfo.CreateSpecificCulture("en-US");
     CultureInfo.CurrentUICulture = CultureInfo.CurrentCulture;
 
     await next.Invoke();
 });
 
-//This method maps the controllers and their actions to a pattern for
-//requests that's known as the default route. This route identifies
-//the Home controller as the default controller and the Index() action
-//method as the default action. The default route also identifies a 
-//third segment of the URL that's a parameter named id.
+// Configure default routing
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
+// Run the application
 app.Run();

@@ -91,7 +91,7 @@ namespace Files.Models
         public List<DateTime> UnavailableDates { get; set; } //multiple dates tho??
 
         [Required(ErrorMessage = "Property Status is required")]
-        [Display(Name = "Active Property")]
+        [Display(Name = "Approved Property")]
         public Boolean PropertyStatus { get; set; }
 
         // Setting the PropIDNumber

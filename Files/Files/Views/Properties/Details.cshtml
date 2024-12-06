@@ -115,8 +115,43 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Index" class="btn" style="background-color: #BF5700; color: white; border: none; text-decoration: none; padding: 8px 16px; border-radius: 4px;">Back to List</a> 
-    <a class="btn" asp-controller="Reservations" asp-action="Cart" style="background-color: #BF5700; color: white; border: none; text-decoration: none; padding: 8px 16px; border-radius: 4px;">Add To Cart</a> 
-    <a class="btn" asp-controller="Reviews" asp-action="Index" style="background-color: #BF5700; color: white; border: none; text-decoration: none; padding: 8px 16px; border-radius: 4px;">Reviews</a>
+    <a asp-action="Index" class="btn" style="background-color: #BF5700; color: white; border: none; text-decoration: none; padding: 8px 16px; border-radius: 4px;">Back to List</a>
+    <a asp-action="Index" asp-controller="Reviews" asp-route-propertyId="@Model.PropertyID" class="btn" style="background-color: #BF5700; color: white; border: none; text-decoration: none; padding: 8px 16px; border-radius: 4px;">Reviews</a>
+    <form asp-action="AddToCart" asp-controller="Reservations" method="post">
+        <input type="hidden" name="propertyId" value="@Model.PropertyID" />
+        <div class="form-group">
+            <label for="checkIn">Check-In Date</label>
+            <input type="date" id="checkIn" name="checkIn" class="form-control" required />
+        </div>
+        <div class="form-group">
+            <label for="checkOut">Check-Out Date</label>
+            <input type="date" id="checkOut" name="checkOut" class="form-control" required />
+        </div>
+        <button type="submit" class="btn btn-primary" style="margin-top: 10px;">Add to Cart</button>
+    </form>
 </div>
 
+<script>
+    const checkInInput = document.getElementById('checkIn');
+    const checkOutInput = document.getElementById('checkOut');
+
+    checkInInput.addEventListener('change', () => {
+        const today = new Date();
+        const checkInDate = new Date(checkInInput.value);
+
+        if (checkInDate < today) {
+            alert('Check-In date cannot be in the past.');
+            checkInInput.value = '';
+        }
+    });
+
+    checkOutInput.addEventListener('change', () => {
+        const checkInDate = new Date(checkInInput.value);
+        const checkOutDate = new Date(checkOutInput.value);
+
+        if (checkOutDate <= checkInDate) {
+            alert('Check-Out date must be after Check-In date.');
+            checkOutInput.value = '';
+        }
+    });
+</script>

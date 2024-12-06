@@ -1,0 +1,52 @@
+@model Files.Models.Transaction
+
+@{
+    ViewData["Title"] = "Transaction Summary";
+}
+
+<h2>Transaction Summary</h2>
+
+<div>
+    <h4>Reservation Details</h4>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Property</th>
+                <th>Check-In</th>
+                <th>Check-Out</th>
+                <th>Guests</th>
+                <th>Total Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var reservation in Model.Reservations)
+            {
+                <tr>
+                    <td>@reservation.Properties.Street, @reservation.Properties.City</td>
+                    <td>@reservation.CheckIn.ToShortDateString()</td>
+                    <td>@reservation.CheckOut.ToShortDateString()</td>
+                    <td>@reservation.NumOfGuests</td>
+                    <td>@reservation.CalculateStayPrice().ToString("C")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<div>
+    <h4>Transaction Summary</h4>
+    <dl class="row">
+        <dt class="col-sm-4">Subtotal:</dt>
+        <dd class="col-sm-8">@Model.Subtotal.ToString("C")</dd>
+        <dt class="col-sm-4">Tax (10%):</dt>
+        <dd class="col-sm-8">@Model.Tax.ToString("C")</dd>
+        <dt class="col-sm-4">Grand Total:</dt>
+        <dd class="col-sm-8"><strong>@Model.GrandTotal.ToString("C")</strong></dd>
+    </dl>
+</div>
+
+<div>
+    <form asp-action="Confirm" asp-controller="Reservations" method="post">
+        <button type="submit" class="btn btn-primary">Confirm and Checkout</button>
+    </form>
+</div>

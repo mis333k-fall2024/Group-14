@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/Users/staronadele/Documents/GitHub/Group-14/Files/Files/Files.csproj": {}
+    "/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/Files.csproj": {}
   },
   "projects": {
-    "/Users/staronadele/Documents/GitHub/Group-14/Files/Files/Files.csproj": {
+    "/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/Files.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/staronadele/Documents/GitHub/Group-14/Files/Files/Files.csproj",
+        "projectUniqueName": "/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/Files.csproj",
         "projectName": "Files",
-        "projectPath": "/Users/staronadele/Documents/GitHub/Group-14/Files/Files/Files.csproj",
-        "packagesPath": "/Users/staronadele/.nuget/packages/",
-        "outputPath": "/Users/staronadele/Documents/GitHub/Group-14/Files/Files/obj/",
+        "projectPath": "/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/Files.csproj",
+        "packagesPath": "/Users/jordanburks/.nuget/packages/",
+        "outputPath": "/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/staronadele/.nuget/NuGet/NuGet.Config"
+          "/Users/jordanburks/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -45,6 +45,12 @@
             "Microsoft.AspNetCore.Identity.UI": {
               "target": "Package",
               "version": "[8.0.11, )"
+            },
+            "Microsoft.CodeAnalysis.Analyzers": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[3.11.0, )"
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",

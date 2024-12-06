@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.AspNetCore.Identity;
 
 namespace Files.Models
@@ -30,6 +31,18 @@ namespace Files.Models
 
         [Display(Name = "Hire Status")]
         public HireStatus? Status { get; set; }
+
+        [NotMapped]
+        public bool IsOver18
+        {
+            get
+            {
+                var today = DateTime.Today;
+                var age = today.Year - DOB.Year;
+                if (DOB.Date > today.AddYears(-age)) age--;
+                return age >= 18;
+            }
+        }
 
         // Navigation Properties
         public List<Reservation> Reservations { get; } = new List<Reservation>();// One-to-Many with Reservations
