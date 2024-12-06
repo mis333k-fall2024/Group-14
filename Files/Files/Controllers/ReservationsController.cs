@@ -46,7 +46,7 @@ namespace Files.Controllers
         }
 
         // GET: Reservations/Cart
-        [AllowAnonymous]
+        [Authorize(Roles = "Customer")]
         public IActionResult Cart()
         {
             var reservations = HttpContext.Session.GetObjectFromJson<ReservationList>("Reservations") ?? new ReservationList();
@@ -184,9 +184,94 @@ namespace Files.Controllers
         }
 
         // GET: Reservations/ThankYou
-        public IActionResult ThankYou(string confirmationNumber)
+    public IActionResult ThankYou(string confirmationNumber)
+{
+    if (string.IsNullOrEmpty(confirmationNumber))
+    {
+        return BadRequest("Confirmation number is required.");
+    }
+    ViewBag.ConfirmationNumber = confirmationNumber;
+    return View();
+}
+
+
+        // --- Admin Functionality to Make Reservations for Customers ---
+
+        // GET: Reservations/MakeReservation
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
+        public IActionResult MakeReservation()
         {
-            return View((object)confirmationNumber);
+            var model = new MakeReservationViewModel
+            {
+                Customers = _context.Users.ToList(),
+                Properties = _context.Properties.ToList()
+            };
+
+            return View(model);
+        }
+
+        // POST: Reservations/MakeReservation
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> MakeReservation(MakeReservationViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                // Fetch customer and property from the database
+                var customer = await _context.Users.FirstOrDefaultAsync(u => u.Id == model.CustomerId);
+                var property = await _context.Properties.FirstOrDefaultAsync(p => p.PropertyID == model.PropertyId);
+
+                if (customer == null || property == null)
+                {
+                    ModelState.AddModelError("", "Invalid customer or property selection.");
+                    model.Customers = _context.Users.ToList();
+                    model.Properties = _context.Properties.ToList();
+                    return View(model);
+                }
+
+                // Check for overlapping reservations
+                var isOverlapping = _context.Reservations.Any(r => r.Properties.PropertyID == model.PropertyId &&
+                                                                   r.CheckIn < model.CheckOut &&
+                                                                   r.CheckOut > model.CheckIn);
+                if (isOverlapping)
+                {
+                    ModelState.AddModelError("", "This property is already reserved for the selected dates.");
+                    model.Customers = _context.Users.ToList();
+                    model.Properties = _context.Properties.ToList();
+                    return View(model);
+                }
+
+                // Create reservation
+                var reservation = new Reservation
+                {
+                    AppUsers = customer,
+                    Properties = property,
+                    CheckIn = model.CheckIn,
+                    CheckOut = model.CheckOut,
+                    NumOfGuests = model.NumOfGuests,
+                    WeekdayPrice = property.WeekdayPrice,
+                    WeekendPrice = property.WeekendPrice,
+                    CleaningFee = property.CleaningFee,
+                    DiscountRate = property.DiscountRate ?? 0m,
+                    ReservationStatus = true
+                };
+
+                // Calculate total amount (method from Reservation model)
+                reservation.CalculateTotalAmount();
+
+                // Add reservation to the database
+                _context.Reservations.Add(reservation);
+                await _context.SaveChangesAsync();
+
+                TempData["Message"] = $"Reservation created for {customer.FirstName} {customer.LastName}.";
+                return RedirectToAction("Index");
+            }
+
+            model.Customers = _context.Users.ToList();
+            model.Properties = _context.Properties.ToList();
+            return View(model);
         }
     }
 }

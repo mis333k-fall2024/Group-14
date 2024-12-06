@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -287,5 +287,38 @@ namespace Files.Controllers
 
             return View(model);
         }
+
+        [Authorize(Roles = "Admin")]
+        public IActionResult AdminReports(DateTime? startDate, DateTime? endDate)
+        {
+            // Bring necessary data into memory
+            var reservations = _context.Reservations
+                .Include(r => r.Properties) // Ensure navigation property is loaded
+                .Where(r => !startDate.HasValue || !endDate.HasValue ||
+                            r.CheckIn <= endDate && r.CheckOut >= startDate)
+                .ToList();
+
+            // Process report data
+            var report = new AdminReport
+            {
+                TotalCommissionEarned = reservations.Sum(r => r.CalculateStayPrice() * 0.1m), // 10% commission
+                TotalNumberOfReservations = reservations.Count(),
+                AverageCommissionPerReservation = reservations.Any()
+                    ? reservations.Average(r => r.CalculateStayPrice() * 0.1m)
+                    : 0m,
+                TotalNumberOfProperties = _context.Properties.Count()
+            };
+
+            // Prepare the view model
+            var model = new AdminReportViewModel
+            {
+                StartDate = startDate ?? DateTime.Now.AddMonths(-1),
+                EndDate = endDate ?? DateTime.Now,
+                Report = report
+            };
+
+            return View(model);
+        }
+
     }
 }
