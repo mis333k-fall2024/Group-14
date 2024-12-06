@@ -184,10 +184,16 @@ namespace Files.Controllers
         }
 
         // GET: Reservations/ThankYou
-        public IActionResult ThankYou(string confirmationNumber)
-        {
-            return View((object)confirmationNumber);
-        }
+    public IActionResult ThankYou(string confirmationNumber)
+{
+    if (string.IsNullOrEmpty(confirmationNumber))
+    {
+        return BadRequest("Confirmation number is required.");
+    }
+    ViewBag.ConfirmationNumber = confirmationNumber;
+    return View();
+}
+
 
         // --- Admin Functionality to Make Reservations for Customers ---
 
