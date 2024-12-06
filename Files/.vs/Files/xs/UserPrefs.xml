@@ -1,32 +1,40 @@
 ﻿<Properties StartupConfiguration="{4093AD08-3465-427B-81E2-2C099D378B96}|http">
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.Files PreferredExecutionTarget="/Applications/Google Chrome.app" />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.ItemProperties.Files PreferredExecutionTarget="/Applications/Google Chrome.app" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Files/Models/ViewModels/ModifyProfileViewModel.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Files/Views/Home/AdminReport.cshtml">
     <Files>
       <File FileName="Files/Controllers/ReservationsController.cs" Line="1" Column="1" />
-      <File FileName="Files/Controllers/ReviewsController.cs" Line="1" Column="1" />
+      <File FileName="Files/Controllers/ReviewsController.cs" />
       <File FileName="Files/Models/Reservation.cs" />
-      <File FileName="Files/Models/ViewModels/ModifyProfileViewModel.cs" Line="1" Column="1" />
-      <File FileName="Files/Controllers/PropertiesController.cs" Line="1" Column="1" />
-      <File FileName="Files/Models/ViewModels/PropertyViewModel.cs" Line="1" Column="1" />
+      <File FileName="Files/Models/ViewModels/ModifyProfileViewModel.cs" />
+      <File FileName="Files/Controllers/PropertiesController.cs" />
+      <File FileName="Files/Models/ViewModels/PropertyViewModel.cs" />
+      <File FileName="Files/Views/Reservations/MakeReservation.cshtml" />
+      <File FileName="Files/Models/ViewModels/ReservationViewModel.cs" />
+      <File FileName="Files/Controllers/AccountController.cs" />
+      <File FileName="Files/Controllers/HomeController.cs" Line="324" Column="2" />
+      <File FileName="Files/Models/ViewModels/AdminReport.cs" Line="22" Column="1" />
+      <File FileName="Files/Models/ViewModels/HostReportViewModel.cs" Line="2" Column="34" />
+      <File FileName="Files/Views/Home/AdminReport.cshtml" Line="30" Column="75" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="Files" expanded="True">
-            <Node name="Files" expanded="True">
+            <Node name="Files">
               <Node name="Controllers" expanded="True" />
               <Node name="Models" expanded="True">
-                <Node name="ViewModels" expanded="True">
-                  <Node name="ModifyProfileViewModel.cs" selected="True" />
-                </Node>
+                <Node name="ViewModels" expanded="True" />
               </Node>
               <Node name="Views" expanded="True">
+                <Node name="Home" expanded="True">
+                  <Node name="AdminReport.cshtml" selected="True" />
+                </Node>
                 <Node name="Reservations" expanded="True" />
               </Node>
             </Node>
