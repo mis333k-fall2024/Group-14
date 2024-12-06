@@ -3,12 +3,12 @@
 <h2>Your Reservations</h2>
 
 @if (Model.Reservations == null || !Model.Reservations.Any())
-{
+    {
     <p>Sorry, your cart is empty!</p>
     <a asp-controller="Properties" asp-action="Index" class="btn" style="background-color: #BF5700; color: white;">Add a reservation!</a>
-}
-else
-{
+    }
+    else
+    {
     <table class="table">
         <thead>
             <tr>
@@ -21,7 +21,7 @@ else
         </thead>
         <tbody>
             @foreach (var item in Model.Reservations)
-            {
+                {
                 <tr>
                     <td>@item.Properties.Street, @item.Properties.City</td>
                     <td>@item.CheckIn.ToShortDateString()</td>
@@ -29,12 +29,12 @@ else
                     <td>@item.NumOfGuests</td>
                     <td>@item.CalculateStayPrice().ToString("C")</td>
                 </tr>
-            }
+                }
         </tbody>
     </table>
 
     <p><strong>Total Price:</strong> @Model.TotalPrice.ToString("C")</p>
-    <form asp-action="Confirm" asp-controller="Reservations" method="post">
-        <button type="submit" class="btn btn-primary" style="background-color: #BF5700; color: white;">Confirm Reservations</button>
+    <form asp-action="Transaction" asp-controller="Reservations" method="get">
+        <button type="submit" class="btn btn-primary" style="background-color: #BF5700; color: white;">Checkout</button>
     </form>
-}
+    }
