@@ -166,8 +166,20 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUm9sZUFkbWluL0VkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/Views/RoleAdmin/FireAdmin.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUm9sZUFkbWluL0ZpcmVBZG1pbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/Views/RoleAdmin/HireAdmin.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUm9sZUFkbWluL0hpcmVBZG1pbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/Views/RoleAdmin/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUm9sZUFkbWluL0luZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/Views/RoleAdmin/RehireAdmin.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUm9sZUFkbWluL1JlaGlyZUFkbWluLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/Views/Seed/Confirm.cshtml]
