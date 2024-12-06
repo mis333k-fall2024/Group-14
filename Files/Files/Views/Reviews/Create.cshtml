@@ -4,35 +4,39 @@
     ViewData["Title"] = "Create Review";
 }
 
-<h1>Create Review for @((ViewData["Properties"] as Files.Models.Property)?.Street ?? "Unknown Property")</h1>
+<h1>Create Review for @ViewData["PropertyName"]</h1> <!-- Updated to use PropertyName directly -->
 
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
-            <!-- Ensure the form submits the property details -->
-            <input type="hidden" name="Properties.PropertyID" value="@(ViewData["Properties"] as Files.Models.Property)?.PropertyID" />
-
+        <!-- Form with propertyId passed as a query string -->
+        <form asp-action="Create" asp-route-propertyId="@ViewData["PropertyId"]" method="post">
+            @Html.AntiForgeryToken() <!-- Include CSRF token -->
+            <!-- Validation summary for the model -->
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
+            <!-- Rating input -->
             <div class="form-group">
                 <label asp-for="Rating" class="control-label"></label>
                 <input asp-for="Rating" class="form-control" />
                 <span asp-validation-for="Rating" class="text-danger"></span>
             </div>
 
+            <!-- TextReview input -->
             <div class="form-group">
                 <label asp-for="TextReview" class="control-label"></label>
                 <textarea asp-for="TextReview" class="form-control"></textarea>
                 <span asp-validation-for="TextReview" class="text-danger"></span>
             </div>
 
+            <!-- Submit button -->
             <div class="form-group">
-                <button type="submit" class="btn btn-primary" style="background-color: #CC5500; border-color: #CC5500; color: white;">Create</button>
+                <button type="submit" class="btn btn-primary" style="background-color: #CC5500; border-color: #CC5500; color: white;">Submit Review</button>
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index" asp-route-propertyId="@(ViewData["Properties"] as Files.Models.Property)?.PropertyID" style="color: #CC5500; text-decoration: none;">Back to Reviews</a>
+    <!-- Back to Reviews button with the correct propertyId -->
+    <a asp-action="Index" asp-route-propertyId="@ViewData["PropertyId"]" style="color: #CC5500; text-decoration: none;">Back to Reviews</a>
 </div>
