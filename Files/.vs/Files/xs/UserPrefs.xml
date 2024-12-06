@@ -1,19 +1,33 @@
 ﻿<Properties StartupConfiguration="{4093AD08-3465-427B-81E2-2C099D378B96}|http">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Files/Controllers/ReservationsController.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.Files PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Files/Models/ViewModels/ModifyProfileViewModel.cs">
     <Files>
       <File FileName="Files/Controllers/ReservationsController.cs" Line="1" Column="1" />
-      <File FileName="Files/Controllers/ReviewsController.cs" />
-      <File FileName="Files/Models/Reservation.cs" Line="1" Column="1" />
+      <File FileName="Files/Controllers/ReviewsController.cs" Line="1" Column="1" />
+      <File FileName="Files/Models/Reservation.cs" />
+      <File FileName="Files/Models/ViewModels/ModifyProfileViewModel.cs" Line="1" Column="1" />
+      <File FileName="Files/Controllers/PropertiesController.cs" Line="1" Column="1" />
+      <File FileName="Files/Models/ViewModels/PropertyViewModel.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="Files" expanded="True">
-            <Node name="Files">
-              <Node name="Controllers" expanded="True">
-                <Node name="ReservationsController.cs" selected="True" />
+            <Node name="Files" expanded="True">
+              <Node name="Controllers" expanded="True" />
+              <Node name="Models" expanded="True">
+                <Node name="ViewModels" expanded="True">
+                  <Node name="ModifyProfileViewModel.cs" selected="True" />
+                </Node>
+              </Node>
+              <Node name="Views" expanded="True">
+                <Node name="Reservations" expanded="True" />
               </Node>
             </Node>
           </Node>
@@ -21,9 +35,4 @@
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.ItemProperties.Files PreferredExecutionTarget="/Applications/Google Chrome.app" />
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
-  </MonoDevelop.Ide.DebuggingService.Breakpoints>
 </Properties>
