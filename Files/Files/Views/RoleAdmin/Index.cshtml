@@ -5,46 +5,53 @@
     ViewBag.Title = "Roles";
 }
 
-<h2>Index</h2>
+<h2>Roles</h2>
 
 <div class="panel panel-primary">
-    <div class="panel-heading">Roles</div>
+    <div class="panel-heading">
+        <h3 class="panel-title">Roles</h3>
+    </div>
     <table class="table table-striped">
-        <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Users</th>
-            <th></th>
-        </tr>
-        @if (Model.Count() == 0)
-        {
+        <thead>
             <tr>
-                <td colspan="4" class="text-center">No roles</td>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Users</th>
+                <th>Actions</th>
             </tr>
-        }
-        else
-        {
-            foreach (RoleEditModel role in Model)
+        </thead>
+        <tbody>
+            @if (!Model.Any())
             {
                 <tr>
-                    <td>@role.Role.Id</td>
-                    <td>@role.Role.Name</td>
-                    <td>
-                        @if (role.RoleMembers == null || role.RoleMembers.Count() == 0)
-                        {
-                            @: No Users in role
-                        }
-                        else
-                        {
-                            <p>@string.Join(", ", role.RoleMembers.Select(x => x.Email))</p>
-                        }
-                    </td>
-                    <td>
-                        @Html.ActionLink("Edit", "Edit", new { id = role.Role.Id }, new { @class = "btn btn-primary" })
-                    </td>
+                    <td colspan="4" class="text-center">No roles available</td>
                 </tr>
             }
-        }
+            else
+            {
+                foreach (var role in Model)
+                {
+                    <tr>
+                        <td>@role.Role.Id</td>
+                        <td>@role.Role.Name</td>
+                        <td>
+                            @if (role.RoleMembers == null || !role.RoleMembers.Any())
+                            {
+                                <span>No users in role</span>
+                            }
+                            else
+                            {
+                                <p>@string.Join(", ", role.RoleMembers.Select(user => user.Email))</p>
+                            }
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@role.Role.Id" class="btn btn-primary">Edit</a>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
     </table>
 </div>
-@Html.ActionLink("Create", "Create", null, new { @class = "btn btn-primary" })
+
+<a asp-action="Create" class="btn btn-primary">Create New Role</a>
