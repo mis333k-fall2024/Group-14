@@ -22,6 +22,9 @@ namespace Files.DAL
                 .HasIndex(u => u.Email)
                 .IsUnique();
 
+            builder.Entity<Review>()
+            .HasKey(r => r.ReviewID); // Set ReviewID as the primary key
+
             //this code makes sure the database is re-created on the $5/month Azure tier
             builder.HasPerformanceLevel("Basic");
             builder.HasServiceTier("Basic");

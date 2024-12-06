@@ -35,6 +35,7 @@ namespace Files.Controllers
 
             // Retrieve reviews for the specific property
             var reviews = await _context.Reviews
+                .Include(r => r.AppUsers) // Eager load AppUsers
                 .Where(r => r.Properties.PropertyID == propertyId) // Use PropertyID directly
                 .ToListAsync();
 
@@ -54,6 +55,7 @@ namespace Files.Controllers
             }
 
             var review = await _context.Reviews
+                .Include(r => r.AppUsers) // Eager load AppUsers
                 .Include(r => r.Properties) // Include navigation property
                 .FirstOrDefaultAsync(m => m.ReviewID == id);
 
@@ -69,6 +71,7 @@ namespace Files.Controllers
         [Authorize]
         public IActionResult Create(int propertyId)
         {
+            // Fetch the property
             var property = _context.Properties.FirstOrDefault(p => p.PropertyID == propertyId);
             if (property == null)
             {
@@ -82,46 +85,60 @@ namespace Files.Controllers
             return View();
         }
 
-
         // POST: Reviews/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public async Task<IActionResult> Create(Review review)
+        public async Task<IActionResult> Create(Review review, int propertyId)
         {
-            // Retrieve propertyId from the form or ViewBag
-            int propertyId = Convert.ToInt32(Request.Form["PropertyId"]);
-
+            // Retrieve the property based on propertyId
             var property = await _context.Properties.FirstOrDefaultAsync(p => p.PropertyID == propertyId);
             if (property == null)
             {
                 return NotFound("Property not found.");
             }
 
+            // Assign the property navigation property
+            review.Properties = property;
+
+            // Retrieve the logged-in user
+            string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (string.IsNullOrEmpty(userId))
+            {
+                return Unauthorized("User not logged in.");
+            }
+
+            // Fetch the user object from the database
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == userId);
+            if (user == null)
+            {
+                return NotFound("User not found.");
+            }
+
+            // Assign the user navigation property
+            review.AppUsers = user;
+
+            // Validate the model state
             if (!ModelState.IsValid)
             {
                 // Re-populate ViewBag with property details for validation errors
                 ViewBag.PropertyId = property.PropertyID;
                 ViewBag.PropertyName = $"{property.Street}, {property.City}";
-
-                return View(review); // Return to form with validation errors
+                return View(review);
             }
 
-            // Associate the property with the review
-            review.Properties = property;
+            // Debugging: Log the ReviewID before saving (it should be 0 at this point)
+            Console.WriteLine($"Before SaveChanges: ReviewID = {review.ReviewID}");
 
-            // Add and save the review
+            // Save the review
             _context.Reviews.Add(review);
             await _context.SaveChangesAsync();
 
-            // Redirect to the reviews index page
-            return RedirectToAction("Index", new { propertyId });
+            // Debugging: Log the ReviewID after saving (it should now have a non-zero value)
+            Console.WriteLine($"After SaveChanges: ReviewID = {review.ReviewID}");
+
+            return RedirectToAction("Index", new { propertyId = property.PropertyID });
         }
-
-
-
-
-
 
 
         // GET: Reviews/Edit/5
