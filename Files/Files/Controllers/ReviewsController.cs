@@ -121,6 +121,8 @@ namespace Files.Controllers
             // Validate the model state
             if (!ModelState.IsValid)
             {
+                //error message
+                TempData["SuccessMessage"] = "Property successfully created and is pending approval.";
                 // Re-populate ViewBag with property details for validation errors
                 ViewBag.PropertyId = property.PropertyID;
                 ViewBag.PropertyName = $"{property.Street}, {property.City}";

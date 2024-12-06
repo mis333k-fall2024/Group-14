@@ -99,6 +99,12 @@
                 </label>
             </div>
             <div class="form-group">
+                <div class="form-group">
+                <label for="PropertyStatus">Approval Status: @ViewBag.ApprovalStatus</label>
+                <select class="form-control" name="PropertyStatus">
+                    <option value="true">Approve</option>
+                    <option value="false">Reject</option>
+                </select> </div>
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
