@@ -8286,19 +8286,19 @@
     ]
   },
   "packageFolders": {
-    "/Users/marianaalvarez/.nuget/packages/": {}
+    "/Users/jordanburks/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/marianaalvarez/Documents/GitHub/Group-14/Files/Files/Files.csproj",
+      "projectUniqueName": "/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/Files.csproj",
       "projectName": "Files",
-      "projectPath": "/Users/marianaalvarez/Documents/GitHub/Group-14/Files/Files/Files.csproj",
-      "packagesPath": "/Users/marianaalvarez/.nuget/packages/",
-      "outputPath": "/Users/marianaalvarez/Documents/GitHub/Group-14/Files/Files/obj/",
+      "projectPath": "/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/Files.csproj",
+      "packagesPath": "/Users/jordanburks/.nuget/packages/",
+      "outputPath": "/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/marianaalvarez/.nuget/NuGet/NuGet.Config"
+        "/Users/jordanburks/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
@@ -8316,6 +8316,11 @@
         "warnAsError": [
           "NU1605"
         ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
       }
     },
     "frameworks": {

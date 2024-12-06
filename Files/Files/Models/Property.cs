@@ -55,11 +55,11 @@ namespace Files.Models
 
         [Required(ErrorMessage = "Pets Allowed is required")]
         [Display(Name = "Pets Allowed")]
-        public Boolean PetsAllowed { get; set; } 
+        public Boolean PetsAllowed { get; set; }
 
         [Required(ErrorMessage = "Parking option is required")]
         [Display(Name = "Free Parking")]
-        public Boolean FreeParking { get; set; } 
+        public Boolean FreeParking { get; set; }
 
         [Required(ErrorMessage = "Weekday Price is required")]
         [Display(Name = "Weekday Price")]
@@ -79,7 +79,7 @@ namespace Files.Models
         //[DisplayFormat(DataFormatString = "{0:C}")]
         [Display(Name = "Discount Rate")]
         public decimal? DiscountRate { get; set; } //int/dec in 2 dec place,not req
-                                      //still have display when said should just be in dollars (aka result of drate*amt)
+                                                   //still have display when said should just be in dollars (aka result of drate*amt)
 
         [RequiredIf("DiscountRate", "DiscountMinStay is required when a DiscountRate is specified.")]
         [Display(Name = "Minimum Nights for Discount")]
@@ -149,4 +149,3 @@ namespace Files.Models
     }
 
 }
-

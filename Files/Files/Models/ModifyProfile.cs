@@ -1,9 +1,9 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Files
+namespace Files.Models
 {
-    public class ModifyProfileViewModel
+    public class ModifyProfile
     {
         [Required(ErrorMessage = "First name is required.")]
         [Display(Name = "First Name")]
@@ -26,12 +26,32 @@ namespace Files
         [Display(Name = "Date of Birth")]
         public DateTime DOB { get; set; }
 
+        // For password change
+        [DataType(DataType.Password)]
+        [Display(Name = "Current Password")]
+        public string OldPassword { get; set; }
+
         [DataType(DataType.Password)]
         [Display(Name = "New Password")]
         public string NewPassword { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Current Password")]
-        public string OldPassword { get; set; }
+        [Display(Name = "Confirm New Password")]
+        [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
+        public string ConfirmNewPassword { get; set; }
+
+        // Read-only Email
+        [Required(ErrorMessage = "Email address is required.")]
+        [EmailAddress]
+        [Display(Name = "Email Address")]
+        public string Email { get; set; }
+
+        // Custom validation to check if the user is 18 or older (can be moved to server-side validation if needed)
+        public bool IsAdult()
+        {
+            return (DateTime.Now - DOB).TotalDays / 365 >= 18;
+        }
     }
 }
+
+

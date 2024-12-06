@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -10,6 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Files.Controllers
 {
+    [Authorize(Roles = "Admin")] // Only admins can resolve disputes
     public class ReviewsController : Controller
     {
         private readonly AppDbContext _context;
@@ -19,7 +19,7 @@ namespace Files.Controllers
             _context = context;
         }
 
-        // GET: Reviews
+        // GET: Reviews/Index/PropertyID
         public async Task<IActionResult> Index(int propertyId)
         {
             // Retrieve the property details for display purposes
@@ -44,7 +44,7 @@ namespace Files.Controllers
             return View(reviews);
         }
 
-        // GET: Reviews/Details/5
+        // GET: Reviews/Details/ReviewID
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -53,7 +53,7 @@ namespace Files.Controllers
             }
 
             var review = await _context.Reviews
-                .Include(r => r.Properties) // Include navigation property
+                .Include(r => r.Properties) // Include the property info
                 .FirstOrDefaultAsync(m => m.ReviewID == id);
 
             if (review == null)
@@ -64,7 +64,7 @@ namespace Files.Controllers
             return View(review);
         }
 
-        // GET: Reviews/Create
+        // GET: Reviews/Create/PropertyID
         [Authorize]
         public IActionResult Create(int propertyId)
         {
@@ -82,7 +82,7 @@ namespace Files.Controllers
             return View();
         }
 
-        // POST: Reviews/Create
+        // POST: Reviews/Create/PropertyID
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
@@ -111,8 +111,7 @@ namespace Files.Controllers
             return RedirectToAction("Index", new { propertyId = propertyId });
         }
 
-
-        // GET: Reviews/Edit/5
+        // GET: Reviews/Edit/ReviewID
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -134,7 +133,7 @@ namespace Files.Controllers
             return View(review);
         }
 
-        // POST: Reviews/Edit/5
+        // POST: Reviews/Edit/ReviewID
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("ReviewID,Rating,TextReview,HostComments,DisputeStatus")] Review review)
@@ -181,7 +180,7 @@ namespace Files.Controllers
             return View(review);
         }
 
-        // GET: Reviews/Delete/5
+        // GET: Reviews/Delete/ReviewID
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -202,7 +201,7 @@ namespace Files.Controllers
             return View(review);
         }
 
-        // POST: Reviews/Delete/5
+        // POST: Reviews/Delete/ReviewID
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -221,6 +220,67 @@ namespace Files.Controllers
             }
 
             return RedirectToAction(nameof(Index));
+        }
+
+        // GET: Reviews/ResolveDispute/ReviewID
+        public async Task<IActionResult> ResolveDispute(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var review = await _context.Reviews
+                .Include(r => r.Properties) // Include the property info
+                .FirstOrDefaultAsync(m => m.ReviewID == id);
+
+            if (review == null)
+            {
+                return NotFound();
+            }
+
+            return View(review);
+        }
+
+        // POST: Reviews/ResolveDispute/ReviewID
+        [HttpPost, ActionName("ResolveDispute")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ResolveDisputeConfirmed(int id, bool acceptDispute)
+        {
+            var review = await _context.Reviews.FindAsync(id);
+            if (review == null)
+            {
+                return NotFound();
+            }
+
+            // Resolve the dispute based on admin's decision
+            if (acceptDispute)
+            {
+                review.DisputeStatus = StatusDispute.ValidDispute; // Mark as valid dispute
+            }
+            else
+            {
+                review.DisputeStatus = StatusDispute.InvalidDispute; // Mark as invalid dispute
+            }
+
+            try
+            {
+                _context.Update(review);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!ReviewExists(review.ReviewID))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return RedirectToAction(nameof(Index), new { propertyId = review.Properties.PropertyID });
         }
 
         private bool ReviewExists(int id)

@@ -753,9 +753,16 @@
 /Users/marianaalvarez/Documents/GitHub/Group-14/Files/Files/obj/Debug/net8.0/Files.pdb
 /Users/marianaalvarez/Documents/GitHub/Group-14/Files/Files/obj/Debug/net8.0/Files.genruntimeconfig.cache
 /Users/marianaalvarez/Documents/GitHub/Group-14/Files/Files/obj/Debug/net8.0/ref/Files.dll
-/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/obj/Debug/net8.0/Files.dll
-/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/obj/Debug/net8.0/refint/Files.dll
-/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/obj/Debug/net8.0/Files.pdb
+/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/obj/Debug/net8.0/Files.csproj.AssemblyReference.cache
+/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/obj/Debug/net8.0/Files.GeneratedMSBuildEditorConfig.editorconfig
+/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/obj/Debug/net8.0/Files.AssemblyInfoInputs.cache
+/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/obj/Debug/net8.0/Files.AssemblyInfo.cs
+/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/obj/Debug/net8.0/Files.csproj.CoreCompileInputs.cache
+/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/obj/Debug/net8.0/Files.MvcApplicationPartsAssemblyInfo.cs
+/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/obj/Debug/net8.0/Files.MvcApplicationPartsAssemblyInfo.cache
+/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/obj/Debug/net8.0/Files.RazorAssemblyInfo.cache
+/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/obj/Debug/net8.0/Files.RazorAssemblyInfo.cs
+/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/obj/Debug/net8.0/Files.sourcelink.json
 /Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/bin/Debug/net8.0/appsettings.Development.json
 /Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/bin/Debug/net8.0/appsettings.json
 /Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/bin/Debug/net8.0/libman.json
@@ -1024,16 +1031,6 @@
 /Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/bin/Debug/net8.0/runtimes/win/lib/net7.0/System.Security.Cryptography.ProtectedData.dll
 /Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/bin/Debug/net8.0/runtimes/browser/lib/net8.0/System.Text.Encodings.Web.dll
 /Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/bin/Debug/net8.0/runtimes/win/lib/net7.0/System.Windows.Extensions.dll
-/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/obj/Debug/net8.0/Files.csproj.AssemblyReference.cache
-/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/obj/Debug/net8.0/Files.GeneratedMSBuildEditorConfig.editorconfig
-/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/obj/Debug/net8.0/Files.AssemblyInfoInputs.cache
-/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/obj/Debug/net8.0/Files.AssemblyInfo.cs
-/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/obj/Debug/net8.0/Files.csproj.CoreCompileInputs.cache
-/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/obj/Debug/net8.0/Files.MvcApplicationPartsAssemblyInfo.cs
-/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/obj/Debug/net8.0/Files.MvcApplicationPartsAssemblyInfo.cache
-/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/obj/Debug/net8.0/Files.RazorAssemblyInfo.cache
-/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/obj/Debug/net8.0/Files.RazorAssemblyInfo.cs
-/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/obj/Debug/net8.0/Files.sourcelink.json
 /Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/obj/Debug/net8.0/staticwebassets.build.json
 /Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/obj/Debug/net8.0/staticwebassets.development.json
 /Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/obj/Debug/net8.0/staticwebassets/msbuild.Files.Microsoft.AspNetCore.StaticWebAssets.props
@@ -1043,5 +1040,8 @@
 /Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/obj/Debug/net8.0/staticwebassets.pack.json
 /Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/obj/Debug/net8.0/scopedcss/bundle/Files.styles.css
 /Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/obj/Debug/net8.0/Files.csproj.Up2Date
+/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/obj/Debug/net8.0/Files.dll
+/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/obj/Debug/net8.0/refint/Files.dll
+/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/obj/Debug/net8.0/Files.pdb
 /Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/obj/Debug/net8.0/Files.genruntimeconfig.cache
 /Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/obj/Debug/net8.0/ref/Files.dll

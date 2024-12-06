@@ -1,0 +1,35 @@
+﻿@model IEnumerable<Files.Models.Reservation>
+
+@{
+    ViewBag.Title = "Your Reservation History";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Reservation ID</th>
+            <th>Property Name</th>
+            <th>Check In</th>
+            <th>Check Out</th>
+            <th>Number of Guests</th>
+            <th>Total Amount</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var reservation in Model)
+        {
+            <tr>
+                <td>@reservation.ReservationID</td>
+                <td>@reservation.Properties?Name</td>
+                <td>@reservation.CheckIn.ToShortDateString()</td>
+                <td>@reservation.CheckOut.ToShortDateString()</td>
+                <td>@reservation.NumOfGuests</td>
+                <td>@reservation.CalculateTotalAmount()ToString("C")</td>
+                <td>@(reservation.ReservationStatus ? "Confirmed" : "Pending")</td>
+            </tr>
+        }
+    </tbody>
+</table>

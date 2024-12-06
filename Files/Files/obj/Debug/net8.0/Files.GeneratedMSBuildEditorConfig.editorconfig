@@ -38,12 +38,12 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWNjb3VudC9Mb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/Views/Account/ModifyProfile.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWNjb3VudC9Nb2RpZnlQcm9maWxlLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
 [/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/Views/Account/Register.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWNjb3VudC9SZWdpc3Rlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/Views/Account/ReservationHistory.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWNjb3VudC9SZXNlcnZhdGlvbkhpc3RvcnkuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/Views/Categories/Create.cshtml]
@@ -94,6 +94,14 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/Views/ModifyProfile/AdminModifyProfile.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTW9kaWZ5UHJvZmlsZS9BZG1pbk1vZGlmeVByb2ZpbGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/Views/ModifyProfile/UserModifyProfile.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTW9kaWZ5UHJvZmlsZS9Vc2VyTW9kaWZ5UHJvZmlsZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/Views/Properties/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUHJvcGVydGllcy9DcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -138,6 +146,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUmVzZXJ2YXRpb25zL0luZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/Views/Reservations/MakeReservation.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUmVzZXJ2YXRpb25zL01ha2VSZXNlcnZhdGlvbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/Views/Reviews/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUmV2aWV3cy9DcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -156,6 +168,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/Views/Reviews/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUmV2aWV3cy9JbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/Views/Reviews/ResolveDispute.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUmV2aWV3cy9SZXNvbHZlRGlzcHV0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/Views/RoleAdmin/Create.cshtml]

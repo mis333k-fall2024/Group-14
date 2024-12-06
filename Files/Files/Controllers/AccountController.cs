@@ -7,6 +7,7 @@ using Files.DAL;
 using Files.Models;
 using Files.Utilities;
 using System;
+using Microsoft.EntityFrameworkCore;
 
 //Change this namespace to match your project
 namespace Files.Controllers
@@ -172,7 +173,25 @@ namespace Files.Controllers
             return View(ivm);
         }
 
+        // GET: /Account/ReservationHistory
+        [Authorize(Roles = "Admin, Customer")]
+        public async Task<IActionResult> ReservationHistory()
+        {
+            var userId = User.Identity.Name; // Get the current logged-in user's email (or use user ID)
+            var user = await _userManager.FindByNameAsync(userId); // Get the user from the database
 
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            // Fetch all reservations associated with this user
+            var reservations = await _context.Reservations
+                .Where(r => r.AppUsers.UserName == userId) // Use AppUser UserName to filter reservations
+                .ToListAsync();
+
+            return View(reservations); // Return the reservations to the view
+        }
 
         //Logic for change password
         // GET: /Account/ChangePassword
