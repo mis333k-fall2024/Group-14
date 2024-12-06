@@ -105,7 +105,7 @@ namespace Files.Controllers
             var user = await _userManager.FindByIdAsync(id);
             if (user == null) return NotFound();
 
-            var model = new ModifyProfile
+            var model = new ModifyProfileViewModel
             {
                 FirstName = user.FirstName,
                 LastName = user.LastName,
@@ -119,7 +119,7 @@ namespace Files.Controllers
 
         // POST: /RoleAdmin/ModifyProfile
         [HttpPost]
-        public async Task<ActionResult> ModifyProfile(string id, ModifyProfile model)
+        public async Task<ActionResult> ModifyProfile(string id, ModifyProfileViewModel model)
         {
             var user = await _userManager.FindByIdAsync(id);
             if (user == null) return NotFound();

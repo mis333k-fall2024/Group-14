@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -23,7 +24,7 @@ namespace Files.Controllers
         // GET: Reservations
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Reservations.Include(r => r.AppUsers).Include(r => r.Properties).ToListAsync());
+            return View(await _context.Reservations.ToListAsync());
         }
 
         // GET: Reservations/Details/5
@@ -35,8 +36,6 @@ namespace Files.Controllers
             }
 
             var reservation = await _context.Reservations
-                .Include(r => r.AppUsers)
-                .Include(r => r.Properties)
                 .FirstOrDefaultAsync(m => m.ReservationID == id);
             if (reservation == null)
             {
@@ -59,22 +58,24 @@ namespace Files.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult AddToCart(int propertyId, DateTime checkIn, DateTime checkOut, int numOfGuests)
         {
+            if (checkIn < DateTime.Today)
+            {
+                TempData["Error"] = "Check-in date cannot be in the past.";
+                return RedirectToAction("Cart");
+            }
+
+            if (checkOut <= checkIn)
+            {
+                TempData["Error"] = "Check-out date must be after the check-in date.";
+                return RedirectToAction("Cart");
+            }
+
             var reservationList = HttpContext.Session.GetObjectFromJson<ReservationList>("Reservations") ?? new ReservationList();
 
             var property = _context.Properties.FirstOrDefault(p => p.PropertyID == propertyId);
             if (property == null)
             {
                 return NotFound("Property not found.");
-            }
-
-            // Check for overlapping reservations
-            var isOverlapping = _context.Reservations.Any(r => r.Properties.PropertyID == propertyId &&
-                                                               r.CheckIn < checkOut &&
-                                                               r.CheckOut > checkIn);
-            if (isOverlapping)
-            {
-                TempData["Error"] = "This property is already reserved for the selected dates.";
-                return RedirectToAction("Cart");
             }
 
             var reservation = new Reservation
@@ -86,11 +87,10 @@ namespace Files.Controllers
                 WeekendPrice = property.WeekendPrice,
                 CleaningFee = property.CleaningFee,
                 DiscountRate = property.DiscountRate ?? 0m,
-                Properties = property
+                Properties = property,
+                City = property.City,
+                State = property.State,
             };
-
-            // Calculate Total Amount
-            var TotalAmount = reservation.CalculateTotalAmount();
 
             reservationList.Reservations.Add(reservation);
             HttpContext.Session.SetObjectAsJson("Reservations", reservationList);
@@ -98,111 +98,95 @@ namespace Files.Controllers
             return RedirectToAction("Cart");
         }
 
+        // GET: Reservations/Transaction
+        public IActionResult Transaction()
+        {
+            var reservationList = HttpContext.Session.GetObjectFromJson<ReservationList>("Reservations");
+
+            if (reservationList == null || !reservationList.Reservations.Any())
+            {
+                TempData["Error"] = "Your cart is empty. Please add reservations before checking out.";
+                return RedirectToAction("Cart");
+            }
+
+            var transaction = new Transaction
+            {
+                Reservations = reservationList.Reservations,
+                Subtotal = reservationList.TotalPrice,
+                Tax = reservationList.TotalPrice * 0.1m, // 10% tax
+                GrandTotal = reservationList.TotalPrice + (reservationList.TotalPrice * 0.1m),
+                TransactionDate = DateTime.Now
+            };
+
+            return View(transaction);
+        }
+
         // POST: Reservations/Confirm
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Confirm()
         {
-            var userId = User.Identity.Name;
+            var userId = User.FindFirstValue(System.Security.Claims.ClaimTypes.NameIdentifier);
 
-            var reservations = await _context.Reservations
-                .Where(r => r.AppUsers.UserName == userId && !r.ReservationStatus)
-                .ToListAsync();
+            var reservationList = HttpContext.Session.GetObjectFromJson<ReservationList>("Reservations");
 
-            if (!reservations.Any())
+            if (reservationList == null || !reservationList.Reservations.Any())
             {
-                TempData["Error"] = "Your cart is empty. Please add reservations before confirming.";
+                TempData["Error"] = "Your cart is empty.";
                 return RedirectToAction("Cart");
             }
 
-            foreach (var reservation in reservations)
+            var transaction = new Transaction
             {
-                reservation.ReservationStatus = true;
+                ConfirmationNumber = Guid.NewGuid().ToString(),
+                TransactionDate = DateTime.Now,
+                Subtotal = reservationList.TotalPrice,
+                Tax = reservationList.TotalPrice * 0.1m,
+                GrandTotal = reservationList.TotalPrice + (reservationList.TotalPrice * 0.1m),
+                UserId = userId
+            };
+
+            try
+            {
+                // Enable IDENTITY_INSERT for the Properties table
+                _context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT Properties ON");
+
+                // Add reservations to the transaction
+                foreach (var reservation in reservationList.Reservations)
+                {
+                    var property = await _context.Properties.FirstOrDefaultAsync(p => p.PropertyID == reservation.Properties.PropertyID);
+
+                    if (property == null)
+                    {
+                        return NotFound($"Property with ID {reservation.Properties.PropertyID} not found.");
+                    }
+
+                    reservation.ReservationStatus = true;
+                    reservation.Properties = property;
+                    transaction.Reservations.Add(reservation); // Link reservations to the transaction
+                    _context.Reservations.Add(reservation);    // Add each reservation to the database
+                }
+
+                _context.Transactions.Add(transaction);
+
+                await _context.SaveChangesAsync();
+            }
+            finally
+            {
+                // Disable IDENTITY_INSERT for the Properties table
+                _context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT Properties OFF");
             }
 
-            await _context.SaveChangesAsync();
+            HttpContext.Session.Remove("Reservations");
 
             TempData["Message"] = "Your reservations have been confirmed!";
-            return RedirectToAction("ThankYou");
+            return RedirectToAction("ThankYou", new { confirmationNumber = transaction.ConfirmationNumber });
         }
 
-        public IActionResult ThankYou()
+        // GET: Reservations/ThankYou
+        public IActionResult ThankYou(string confirmationNumber)
         {
-            return View();
-        }
-
-        // --- Admin Functionality to Make Reservations for Customers ---
-
-        // GET: Reservations/MakeReservation
-        [Authorize(Roles = "Admin")]
-        public IActionResult MakeReservation()
-        {
-            return View(new ReservationViewModel());
-        }
-
-        // POST: Reservations/MakeReservation
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> MakeReservation(ReservationViewModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                // Validate Customer Profile
-                var customer = await _context.Users.FirstOrDefaultAsync(u => u.Id == model.CustomerId);
-                if (customer == null)
-                {
-                    ModelState.AddModelError("", "Customer not found. Ensure the customer has a valid profile.");
-                    return View(model);
-                }
-
-                // Validate Property
-                var property = await _context.Properties.FirstOrDefaultAsync(p => p.PropertyID == model.PropertyId);
-                if (property == null)
-                {
-                    ModelState.AddModelError("", "Property not found.");
-                    return View(model);
-                }
-
-                // Check for overlapping reservations
-                var isOverlapping = _context.Reservations.Any(r => r.Properties.PropertyID == model.PropertyId &&
-                                                                   r.CheckIn < model.CheckOut &&
-                                                                   r.CheckOut > model.CheckIn);
-                if (isOverlapping)
-                {
-                    ModelState.AddModelError("", "This property is already reserved for the selected dates.");
-                    return View(model);
-                }
-
-                // Create Reservation
-                var reservation = new Reservation
-                {
-                    AppUsers = customer,
-                    Properties = property,
-                    CheckIn = model.CheckIn,
-                    CheckOut = model.CheckOut,
-                    NumOfGuests = model.NumOfGuests,
-                    WeekdayPrice = property.WeekdayPrice,
-                    WeekendPrice = property.WeekendPrice,
-                    CleaningFee = property.CleaningFee,
-                    DiscountRate = model.DiscountRate / 100, // Convert to decimal for calculation
-                    ReservationStatus = true, // Active and confirmed
-                    City = property.City,
-                    State = property.State
-                };
-
-                // Calculate Total Amount
-                var TotalAmount = reservation.CalculateTotalAmount();
-
-                // Save to Database
-                _context.Reservations.Add(reservation);
-                await _context.SaveChangesAsync();
-
-                TempData["Message"] = $"Reservation successfully created for {customer.FirstName} {customer.LastName}.";
-                return RedirectToAction("Index");
-            }
-
-            return View(model);
+            return View((object)confirmationNumber);
         }
     }
 }
