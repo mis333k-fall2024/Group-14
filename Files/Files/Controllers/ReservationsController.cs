@@ -46,7 +46,7 @@ namespace Files.Controllers
         }
 
         // GET: Reservations/Cart
-        [AllowAnonymous]
+        [Authorize(Roles = "Customer")]
         public IActionResult Cart()
         {
             var reservations = HttpContext.Session.GetObjectFromJson<ReservationList>("Reservations") ?? new ReservationList();
