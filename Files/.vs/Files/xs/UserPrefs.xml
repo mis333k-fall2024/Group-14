@@ -1,32 +1,36 @@
 ﻿<Properties StartupConfiguration="{4093AD08-3465-427B-81E2-2C099D378B96}|http">
-  <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.Files PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Files/Models/ViewModels/ModifyProfileViewModel.cs">
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Files/Controllers/AccountController.cs">
     <Files>
-      <File FileName="Files/Models/Reservation.cs" Line="1" Column="1" />
-      <File FileName="Files/Models/Review.cs" />
+      <File FileName="Files/Models/Reservation.cs" />
+      <File FileName="Files/Models/Review.cs" Line="39" Column="1" />
       <File FileName="Files/Controllers/HomeController.cs" />
       <File FileName="Files/Views/Index.cshtml" />
-      <File FileName="Files/DAL/AppDbContext.cs" />
+      <File FileName="Files/DAL/AppDbContext.cs" Line="24" Column="1" />
       <File FileName="Files/Models/Category.cs" />
       <File FileName="Files/Models/Property.cs" />
       <File FileName="Files/Seeding/SeedRoles.cs" />
-      <File FileName="Files/Models/AppUser.cs" />
-      <File FileName="Files/Controllers/AccountController.cs" Line="238" Column="2" />
+      <File FileName="Files/Models/AppUser.cs" Line="26" Column="1" />
+      <File FileName="Files/Controllers/AccountController.cs" Line="14" Column="1" />
       <File FileName="Files/Controllers/RoleAdminController.cs" />
       <File FileName="Files/Views/_ViewImports.cshtml" />
       <File FileName="Files/Program.cs" />
       <File FileName="Files/Views/Account/ChangePassword.cshtml" />
-      <File FileName="Files/Views/Account/Index.cshtml" />
-      <File FileName="Files/Views/Account/Login.cshtml" Line="2" Column="1" />
+      <File FileName="Files/Views/Account/Index.cshtml" Line="26" Column="7" />
+      <File FileName="Files/Views/Account/Login.cshtml" />
       <File FileName="Files/Controllers/SeedController.cs" />
+      <File FileName="../../../../../../usr/local/share/dotnet/sdk/8.0.401/Sdks/Microsoft.NET.Sdk/targets/Microsoft.PackageDependencyResolution.targets" />
       <File FileName="Files/Views/Home/Index.cshtml" />
       <File FileName="Files/Views/Shared/_Layout.cshtml" />
       <File FileName="Files/Controllers/CategoriesController.cs" />
       <File FileName="Files/Controllers/PropertiesController.cs" />
       <File FileName="Files/Seeding/SeedProperties.cs" />
-      <File FileName="Files/Controllers/ReservationsController.cs" Line="206" Column="1" />
+      <File FileName="Files/Controllers/ReservationsController.cs" />
       <File FileName="Files/Models/Transaction.cs" />
       <File FileName="Files/Views/Checkout/ThankYouView.cshtml" />
       <File FileName="Files/Views/Shared/_LoginPartial.cshtml" />
@@ -50,7 +54,7 @@
       <File FileName="Files/Views/Reservations/Details.cshtml" />
       <File FileName="Files/Views/Reservations/Edit.cshtml" />
       <File FileName="Files/Views/Reservations/Cart.cshtml" />
-      <File FileName="Files/Models/ReservationList.cs" Line="1" Column="1" />
+      <File FileName="Files/Models/ReservationList.cs" />
       <File FileName="Files/Utilities/SessionExtensions.cs" />
       <File FileName="Files/Models/ViewModels/SearchViewModel.cs" />
       <File FileName="Files/Views/Home/Search.cshtml" />
@@ -58,41 +62,32 @@
       <File FileName="Files/Views/Home/HostReports.cshtml" />
       <File FileName="Files/Models/ViewModels/HostReportViewModel.cs" />
       <File FileName="Files/Seeding/SeedReviews.cs" />
-      <File FileName="Files/Models/ViewModels/PropertyViewModel.cs" Line="24" Column="6" />
-      <File FileName="Files/Models/ViewModels/AccountViewModels.cs" Line="106" Column="1" />
-      <File FileName="Files/Views/Account/ModifyProfile.cshtml" Line="5" Column="2" />
-      <File FileName="Files/Views/Account/Register.cshtml" Line="87" Column="1" />
-      <File FileName="Files/Models/ViewModels/ModifyProfileViewModel.cs" Line="2" Column="1" />
-      <File FileName="../../../../../../../usr/local/share/dotnet/sdk/8.0.401/Sdks/Microsoft.NET.Sdk/targets/Microsoft.PackageDependencyResolution.targets" />
-      <File FileName="Files/Views/RoleAdmin/Edit.cshtml" Line="92" Column="1" />
-      <File FileName="Files/Views/RoleAdmin/Index.cshtml" Line="58" Column="1" />
-      <File FileName="Files/Views/RoleAdmin/HireAdmin.cshtml" Line="63" Column="1" />
-      <File FileName="Files/Views/RoleAdmin/FireAdmin.cshtml" Line="15" Column="1" />
-      <File FileName="Files/Views/RoleAdmin/RehireAdmin.cshtml" Line="15" Column="1" />
-      <File FileName="Files/Controllers/ModifyProfileController.cs" Line="95" Column="1" />
+      <File FileName="Files/Models/ViewModels/PropertyViewModel.cs" />
+      <File FileName="Files/Controllers/ReviewsController.cs" />
+      <File FileName="Files/Views/Account/Register.cshtml" Line="1" Column="1" />
+      <File FileName="Files/Models/ViewModels/EditProfileViewModel.cs" Line="11" Column="34" />
+      <File FileName="Files/Views/Account/EditProfile.cshtml" Line="3" Column="5" />
+      <File FileName="Files/Models/ViewModels/AccountViewModels.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
-          <Node name="Files">
+          <Node name="Files" expanded="True">
             <Node name="Files">
-              <Node name="Models" expanded="True">
-                <Node name="ViewModels" expanded="True">
-                  <Node name="ModifyProfileViewModel.cs" selected="True" />
-                </Node>
+              <Node name="Controllers">
+                <Node name="AccountController.cs" selected="True" />
               </Node>
-              <Node name="Views" expanded="True">
-                <Node name="Account" expanded="True" />
-                <Node name="RoleAdmin" expanded="True" />
+              <Node name="Models">
+                <Node name="ViewModels" expanded="True" />
               </Node>
             </Node>
           </Node>
         </State>
       </Pad>
+      <Pad Id="MonoDevelop.Debugger.WatchPad">
+        <State />
+      </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.ItemProperties.Files PreferredExecutionTarget="/Applications/Google Chrome.app" />
-  <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
-  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>

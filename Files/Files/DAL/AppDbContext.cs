@@ -17,6 +17,11 @@ namespace Files.DAL
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            // Enforce unique Email field
+            builder.Entity<AppUser>()
+                .HasIndex(u => u.Email)
+                .IsUnique();
+
             //this code makes sure the database is re-created on the $5/month Azure tier
             builder.HasPerformanceLevel("Basic");
             builder.HasServiceTier("Basic");

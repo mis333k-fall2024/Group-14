@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -6,10 +7,10 @@ using Microsoft.EntityFrameworkCore;
 using Files.DAL;
 using Files.Models;
 using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace Files.Controllers
 {
-    [Authorize(Roles = "Admin")] // Only admins can resolve disputes
     public class ReviewsController : Controller
     {
         private readonly AppDbContext _context;
@@ -19,7 +20,7 @@ namespace Files.Controllers
             _context = context;
         }
 
-        // GET: Reviews/Index/PropertyID
+        // GET: Reviews
         public async Task<IActionResult> Index(int propertyId)
         {
             // Retrieve the property details for display purposes
@@ -44,7 +45,7 @@ namespace Files.Controllers
             return View(reviews);
         }
 
-        // GET: Reviews/Details/ReviewID
+        // GET: Reviews/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -53,7 +54,7 @@ namespace Files.Controllers
             }
 
             var review = await _context.Reviews
-                .Include(r => r.Properties) // Include the property info
+                .Include(r => r.Properties) // Include navigation property
                 .FirstOrDefaultAsync(m => m.ReviewID == id);
 
             if (review == null)
@@ -64,54 +65,66 @@ namespace Files.Controllers
             return View(review);
         }
 
-        // GET: Reviews/Create/PropertyID
+        // GET: Reviews/Create
         [Authorize]
         public IActionResult Create(int propertyId)
         {
             var property = _context.Properties.FirstOrDefault(p => p.PropertyID == propertyId);
             if (property == null)
             {
-                return NotFound();
+                return NotFound("Property not found.");
             }
 
-            // Pass the property object to the view
-            ViewData["Properties"] = property;
-            ViewData["PropertyId"] = property.PropertyID; // Pass PropertyID explicitly
-            ViewData["PropertyName"] = $"{property.Street}, {property.City}"; // Adjust details as needed
+            // Populate ViewBag with property details
+            ViewBag.PropertyId = property.PropertyID;
+            ViewBag.PropertyName = $"{property.Street}, {property.City}";
 
             return View();
         }
 
-        // POST: Reviews/Create/PropertyID
+
+        // POST: Reviews/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public async Task<IActionResult> Create([Bind("ReviewID,Rating,TextReview,HostComments,DisputeStatus")] Review review, int propertyId)
+        public async Task<IActionResult> Create(Review review)
         {
-            if (!ModelState.IsValid)
-            {
-                // If validation fails, re-display the form with validation errors
-                ViewData["PropertyId"] = propertyId;
-                ViewData["PropertyName"] = "Your Property Name Here"; // Replace or retrieve dynamically
-                return View(review);
-            }
+            // Retrieve propertyId from the form or ViewBag
+            int propertyId = Convert.ToInt32(Request.Form["PropertyId"]);
 
-            // Retrieve the property and associate it with the review
             var property = await _context.Properties.FirstOrDefaultAsync(p => p.PropertyID == propertyId);
             if (property == null)
             {
-                return NotFound();
+                return NotFound("Property not found.");
             }
 
-            review.Properties = property; // Associate the review with the property
+            if (!ModelState.IsValid)
+            {
+                // Re-populate ViewBag with property details for validation errors
+                ViewBag.PropertyId = property.PropertyID;
+                ViewBag.PropertyName = $"{property.Street}, {property.City}";
+
+                return View(review); // Return to form with validation errors
+            }
+
+            // Associate the property with the review
+            review.Properties = property;
+
+            // Add and save the review
             _context.Reviews.Add(review);
             await _context.SaveChangesAsync();
 
-            // Redirect to the Index action for the list of reviews to avoid re-submission
-            return RedirectToAction("Index", new { propertyId = propertyId });
+            // Redirect to the reviews index page
+            return RedirectToAction("Index", new { propertyId });
         }
 
-        // GET: Reviews/Edit/ReviewID
+
+
+
+
+
+
+        // GET: Reviews/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -133,7 +146,7 @@ namespace Files.Controllers
             return View(review);
         }
 
-        // POST: Reviews/Edit/ReviewID
+        // POST: Reviews/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("ReviewID,Rating,TextReview,HostComments,DisputeStatus")] Review review)
@@ -180,7 +193,7 @@ namespace Files.Controllers
             return View(review);
         }
 
-        // GET: Reviews/Delete/ReviewID
+        // GET: Reviews/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -201,7 +214,7 @@ namespace Files.Controllers
             return View(review);
         }
 
-        // POST: Reviews/Delete/ReviewID
+        // POST: Reviews/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -220,67 +233,6 @@ namespace Files.Controllers
             }
 
             return RedirectToAction(nameof(Index));
-        }
-
-        // GET: Reviews/ResolveDispute/ReviewID
-        public async Task<IActionResult> ResolveDispute(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var review = await _context.Reviews
-                .Include(r => r.Properties) // Include the property info
-                .FirstOrDefaultAsync(m => m.ReviewID == id);
-
-            if (review == null)
-            {
-                return NotFound();
-            }
-
-            return View(review);
-        }
-
-        // POST: Reviews/ResolveDispute/ReviewID
-        [HttpPost, ActionName("ResolveDispute")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ResolveDisputeConfirmed(int id, bool acceptDispute)
-        {
-            var review = await _context.Reviews.FindAsync(id);
-            if (review == null)
-            {
-                return NotFound();
-            }
-
-            // Resolve the dispute based on admin's decision
-            if (acceptDispute)
-            {
-                review.DisputeStatus = StatusDispute.ValidDispute; // Mark as valid dispute
-            }
-            else
-            {
-                review.DisputeStatus = StatusDispute.InvalidDispute; // Mark as invalid dispute
-            }
-
-            try
-            {
-                _context.Update(review);
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ReviewExists(review.ReviewID))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return RedirectToAction(nameof(Index), new { propertyId = review.Properties.PropertyID });
         }
 
         private bool ReviewExists(int id)
