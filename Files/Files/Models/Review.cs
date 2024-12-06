@@ -34,9 +34,11 @@ namespace Files.Models
         public StatusDispute DisputeStatus { get; set; }
 
         //one property
+        public int PropertiesPropertyID { get; set; }
         public Property Properties { get; set; }
 
         //one user
+        public string AppUsersId { get; set; }
         public AppUser AppUsers { get; set; }
     }
 }

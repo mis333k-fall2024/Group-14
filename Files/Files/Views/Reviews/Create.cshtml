@@ -4,14 +4,18 @@
     ViewData["Title"] = "Create Review";
 }
 
-<h1>Create Review for @ViewData["PropertyName"]</h1> <!-- Updated to use PropertyName directly -->
+<h1>Create Review for @ViewBag.PropertyName</h1>
 
 <div class="row">
     <div class="col-md-4">
-        <!-- Form with propertyId passed as a query string -->
-        <form asp-action="Create" asp-route-propertyId="@ViewData["PropertyId"]" method="post">
-            @Html.AntiForgeryToken() <!-- Include CSRF token -->
-            <!-- Validation summary for the model -->
+        <!-- Form for creating a review -->
+        <form asp-action="Create" method="post">
+            @Html.AntiForgeryToken()
+
+            <!-- Hidden input for PropertyId -->
+            <input type="hidden" name="PropertyId" value="@ViewBag.PropertyId" />
+
+            <!-- Validation summary -->
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
             <!-- Rating input -->
@@ -30,13 +34,12 @@
 
             <!-- Submit button -->
             <div class="form-group">
-                <button type="submit" class="btn btn-primary" style="background-color: #CC5500; border-color: #CC5500; color: white;">Submit Review</button>
+                <button type="submit" class="btn btn-primary">Submit Review</button>
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <!-- Back to Reviews button with the correct propertyId -->
-    <a asp-action="Index" asp-route-propertyId="@ViewData["PropertyId"]" style="color: #CC5500; text-decoration: none;">Back to Reviews</a>
+    <a asp-action="Index" asp-route-propertyId="@ViewBag.PropertyId" style="color: #CC5500; text-decoration: none;">Back to Reviews</a>
 </div>

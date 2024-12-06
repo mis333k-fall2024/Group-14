@@ -1,12 +1,12 @@
 ﻿<Properties StartupConfiguration="{4093AD08-3465-427B-81E2-2C099D378B96}|http">
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.ItemProperties.Files PreferredExecutionTarget="/Applications/Google Chrome.app" />
-  <MultiItemStartupConfigurations />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.Files PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.Workbench ActiveDocument="Files/Controllers/AccountController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Files/Controllers/ReviewsController.cs">
     <Files>
       <File FileName="Files/Models/Reservation.cs" />
       <File FileName="Files/Models/Review.cs" />
@@ -17,7 +17,7 @@
       <File FileName="Files/Models/Property.cs" />
       <File FileName="Files/Seeding/SeedRoles.cs" />
       <File FileName="Files/Models/AppUser.cs" />
-      <File FileName="Files/Controllers/AccountController.cs" Line="238" Column="2" />
+      <File FileName="Files/Controllers/AccountController.cs" />
       <File FileName="Files/Controllers/RoleAdminController.cs" />
       <File FileName="Files/Views/_ViewImports.cshtml" />
       <File FileName="Files/Program.cs" />
@@ -27,7 +27,7 @@
       <File FileName="Files/Controllers/SeedController.cs" />
       <File FileName="../../../../../../usr/local/share/dotnet/sdk/8.0.401/Sdks/Microsoft.NET.Sdk/targets/Microsoft.PackageDependencyResolution.targets" />
       <File FileName="Files/Views/Home/Index.cshtml" />
-      <File FileName="Files/Views/Shared/_Layout.cshtml" Line="41" Column="87" />
+      <File FileName="Files/Views/Shared/_Layout.cshtml" />
       <File FileName="Files/Controllers/CategoriesController.cs" />
       <File FileName="Files/Controllers/PropertiesController.cs" />
       <File FileName="Files/Seeding/SeedProperties.cs" />
@@ -45,7 +45,7 @@
       <File FileName="Files/Views/Properties/Edit.cshtml" />
       <File FileName="Files/Views/Reviews/Index.cshtml" />
       <File FileName="Files/Views/Checkout/CheckoutView.cshtml" />
-      <File FileName="Files/Views/Reviews/Create.cshtml" />
+      <File FileName="Files/Views/Reviews/Create.cshtml" Line="12" Column="49" />
       <File FileName="Files/Views/Reservations/Index.cshtml" />
       <File FileName="Files/Views/Reviews/Delete.cshtml" />
       <File FileName="Files/Views/Reviews/Details.cshtml" />
@@ -64,17 +64,20 @@
       <File FileName="Files/Models/ViewModels/HostReportViewModel.cs" />
       <File FileName="Files/Seeding/SeedReviews.cs" />
       <File FileName="Files/Models/ViewModels/PropertyViewModel.cs" />
-      <File FileName="Files/Controllers/ReviewsController.cs" Line="112" Column="10" />
+      <File FileName="Files/Controllers/ReviewsController.cs" Line="84" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
-          <Node name="Files">
+          <Node name="Files" expanded="True">
             <Node name="Files">
-              <Node name="Controllers">
-                <Node name="AccountController.cs" selected="True" />
+              <Node name="Controllers" expanded="True">
+                <Node name="ReviewsController.cs" selected="True" />
               </Node>
               <Node name="Models" expanded="True" />
+              <Node name="Views" expanded="True">
+                <Node name="Reviews" expanded="True" />
+              </Node>
             </Node>
           </Node>
         </State>

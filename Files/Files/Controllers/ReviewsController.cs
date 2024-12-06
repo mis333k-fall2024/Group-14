@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Files.DAL;
 using Files.Models;
 using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace Files.Controllers
 {
@@ -71,45 +72,56 @@ namespace Files.Controllers
             var property = _context.Properties.FirstOrDefault(p => p.PropertyID == propertyId);
             if (property == null)
             {
-                return NotFound();
+                return NotFound("Property not found.");
             }
 
-            // Pass the property object to the view
-            ViewData["Properties"] = property;
-            ViewData["PropertyId"] = property.PropertyID; // Pass PropertyID explicitly
-            ViewData["PropertyName"] = $"{property.Street}, {property.City}"; // Adjust details as needed
+            // Populate ViewBag with property details
+            ViewBag.PropertyId = property.PropertyID;
+            ViewBag.PropertyName = $"{property.Street}, {property.City}";
 
             return View();
         }
+
 
         // POST: Reviews/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public async Task<IActionResult> Create([Bind("ReviewID,Rating,TextReview,HostComments,DisputeStatus")] Review review, int propertyId)
+        public async Task<IActionResult> Create(Review review)
         {
-            if (!ModelState.IsValid)
-            {
-                // If validation fails, re-display the form with validation errors
-                ViewData["PropertyId"] = propertyId;
-                ViewData["PropertyName"] = "Your Property Name Here"; // Replace or retrieve dynamically
-                return View(review);
-            }
+            // Retrieve propertyId from the form or ViewBag
+            int propertyId = Convert.ToInt32(Request.Form["PropertyId"]);
 
-            // Retrieve the property and associate it with the review
             var property = await _context.Properties.FirstOrDefaultAsync(p => p.PropertyID == propertyId);
             if (property == null)
             {
-                return NotFound();
+                return NotFound("Property not found.");
             }
 
-            review.Properties = property; // Associate the review with the property
+            if (!ModelState.IsValid)
+            {
+                // Re-populate ViewBag with property details for validation errors
+                ViewBag.PropertyId = property.PropertyID;
+                ViewBag.PropertyName = $"{property.Street}, {property.City}";
+
+                return View(review); // Return to form with validation errors
+            }
+
+            // Associate the property with the review
+            review.Properties = property;
+
+            // Add and save the review
             _context.Reviews.Add(review);
             await _context.SaveChangesAsync();
 
-            // Redirect to the Index action for the list of reviews to avoid re-submission
-            return RedirectToAction("Index", new { propertyId = propertyId });
+            // Redirect to the reviews index page
+            return RedirectToAction("Index", new { propertyId });
         }
+
+
+
+
+
 
 
         // GET: Reviews/Edit/5
