@@ -296,5 +296,69 @@ namespace Files.Controllers
             model.Properties = _context.Properties.ToList();
             return View(model);
         }
+
+
+        // GET: ResAtt/Delete/5
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var reservation = await _context.Reservations
+                .Include(r => r.AppUsers) //by user
+                .Include(r => r.Properties) // Include navigation property
+                .FirstOrDefaultAsync(r => r.ReservationID == id);
+
+            if (reservation == null)
+            {
+                return NotFound();
+            }
+
+            ViewData["Properties"] = reservation.Properties;
+
+            var reservationList = new ReservationList
+            {
+                Reservations = await _context.Reservations.ToListAsync()
+            };
+
+            ViewBag.TotalPrice = reservationList.TotalPrice;
+
+            return View(reservation);
+        }
+
+        // POST: Reservations/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> DeleteReservationConfirmed(int id)
+        {
+            // Fetch the reservation to delete
+            var reservation = await _context.Reservations
+                .FirstOrDefaultAsync(r => r.ReservationID == id);
+
+            if (reservation == null)
+            {
+                return NotFound();
+            }
+
+            // Remove the reservation from the database
+            _context.Reservations.Remove(reservation);
+            await _context.SaveChangesAsync();
+
+            // Update ReservationList and recalculate TotalPrice
+            var reservationList = new ReservationList
+            {
+                Reservations = await _context.Reservations.ToListAsync()
+            };
+            var updatedTotalPrice = reservationList.TotalPrice;
+
+            TempData["Message"] = $"Reservation deleted successfully. New total price for all reservations: {updatedTotalPrice:C}.";
+
+            return RedirectToAction("Index"); // Redirect to the reservations list or another appropriate page
+        }
     }
 }
+
+
