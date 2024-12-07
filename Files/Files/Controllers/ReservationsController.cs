@@ -299,6 +299,7 @@ namespace Files.Controllers
 
 
         // GET: ResAtt/Delete/5
+        [Authorize(Roles = "Admin,Host")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -331,7 +332,7 @@ namespace Files.Controllers
         // POST: Reservations/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin,Host")]
         public async Task<IActionResult> DeleteReservationConfirmed(int id)
         {
             // Fetch the reservation to delete
@@ -342,6 +343,14 @@ namespace Files.Controllers
             {
                 return NotFound();
             }
+
+            // Check if the reservation starts within a day or less
+            if (reservation.CheckIn <= DateTime.Now.AddDays(1))
+            {
+                TempData["ErrorMessage"] = "You cannot delete a reservation that starts within a day or less.";
+                return RedirectToAction("Index"); // Redirect back to the reservations list
+            }
+
 
             // Remove the reservation from the database
             _context.Reservations.Remove(reservation);

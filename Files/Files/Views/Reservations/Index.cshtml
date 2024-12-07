@@ -79,9 +79,14 @@
                 @Html.DisplayFor(modelItem => item.Properties.PropertyNumber)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.ReservationID">Edit</a> |
+                @if (User.IsInRole("Admin, Host"))
+                {
+                    <a asp-action="Edit" asp-route-id="@item.ReservationID">Edit</a>}; |
                 <a asp-action="Details" asp-route-id="@item.ReservationID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ReservationID">Delete</a>
+                @if (User.IsInRole("Admin, Host"))
+                {
+                    <a asp-action="Delete" asp-route-id="@item.ReservationID">Delete</a>};
+                
             </td>
         </tr>
 }
