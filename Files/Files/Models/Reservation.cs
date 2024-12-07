@@ -65,14 +65,31 @@ namespace Files.Models
         [Display(Name = "State")]
         public string State { get; set; }
 
-        // Method to calculate total price for the stay
-        public decimal CalculateStayPrice()
+
+        public decimal CalculatePreDiscountPrice()
         {
             int totalDays = (CheckOut - CheckIn).Days;
             int weekendDays = CalculateWeekendDays(CheckIn, CheckOut);
             int weekdayDays = totalDays - weekendDays;
 
+            // Calculate the total stay price before applying any discounts
             return (weekdayDays * WeekdayPrice) + (weekendDays * WeekendPrice);
+        }
+
+        public decimal CalculateStayPrice()
+        {
+            decimal preDiscountPrice = CalculatePreDiscountPrice();
+
+            // Apply discount if applicable
+            int totalDays = (CheckOut - CheckIn).Days;
+            if (totalDays >= Properties.DiscountMinStay)
+            {
+                decimal discountRate = Properties.DiscountRate ?? 0m; // Use 0m if DiscountRate is null
+                decimal discount = preDiscountPrice * discountRate;
+                preDiscountPrice -= discount; // Apply the discount
+            }
+
+            return preDiscountPrice;
         }
 
         // Method to calculate total amount (including cleaning fee and discounts)
