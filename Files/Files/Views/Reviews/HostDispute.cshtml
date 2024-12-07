@@ -1,0 +1,18 @@
+﻿@model IEnumerable<Files.Models.Review>
+
+@foreach (var review in Model)
+{
+    @if (review.DisputeStatus == StatusDispute.NoDispute)
+    {
+        <form asp-action="MarkAsDisputed" method="post">
+            @Html.AntiForgeryToken()
+            <input type="hidden" name="id" value="@review.ReviewID" />
+            <button type="submit" class="btn btn-warning">Dispute Submission</button>
+        </form>
+    }
+
+    @if (review.DisputeStatus == StatusDispute.NoDispute)
+    {
+        <p>This review is currently being disputed.</p>
+    }
+}
