@@ -73,7 +73,7 @@ namespace Files.Controllers
             // Start with the full list of properties
             IQueryable<Property> query = _context.Properties
                 .Include(p => p.Categories)
-                .Include(p => p.Reviews); // Include Reviews for GuestRating calculations
+                .Include(p => p.Reviews);
 
 
             // Check-In and Check-Out Date filter
@@ -82,8 +82,11 @@ namespace Files.Controllers
                 DateTime checkInDate = svm.CheckInDate.Value;
                 DateTime checkOutDate = svm.CheckOutDate.Value;
 
-                // Filter properties that do not have unavailable dates overlapping with the stay period
-                query = query.Where(p => !p.UnavailableDates.Any(d => d >= checkInDate && d <= checkOutDate));
+                // Filter properties with no unavailable dates or conflicting reservations
+                query = query.Where(p =>
+                    !p.UnavailableDates.Any(d => d >= checkInDate && d <= checkOutDate) &&
+                    !p.Reservations.Any(r =>
+                        (r.CheckIn < checkOutDate && r.CheckOut > checkInDate))); // Conflicting reservation logic
             }
 
             // City search

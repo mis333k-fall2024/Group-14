@@ -8286,19 +8286,19 @@
     ]
   },
   "packageFolders": {
-    "/Users/jordanburks/.nuget/packages/": {}
+    "/Users/sophier/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/Files.csproj",
+      "projectUniqueName": "/Users/sophier/Documents/GitHub/Group-14/Files/Files/Files.csproj",
       "projectName": "Files",
-      "projectPath": "/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/Files.csproj",
-      "packagesPath": "/Users/jordanburks/.nuget/packages/",
-      "outputPath": "/Users/jordanburks/Documents/GitHub/Group-14/MIS 333K Project/Files/Files/obj/",
+      "projectPath": "/Users/sophier/Documents/GitHub/Group-14/Files/Files/Files.csproj",
+      "packagesPath": "/Users/sophier/.nuget/packages/",
+      "outputPath": "/Users/sophier/Documents/GitHub/Group-14/Files/Files/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/jordanburks/.nuget/NuGet/NuGet.Config"
+        "/Users/sophier/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"

@@ -10,152 +10,107 @@
     <h4>Details</h4>
     <hr />
     <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.PropertyNumber)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.PropertyNumber)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Street)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Street)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.City)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.City)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.State)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.State)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Zip)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Zip)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Bedrooms)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Bedrooms)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Bathrooms)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Bathrooms)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.GuestsAllowed)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.GuestsAllowed)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.PetsAllowed)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.PetsAllowed)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.FreeParking)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.FreeParking)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.WeekdayPrice)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.WeekdayPrice)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.WeekendPrice)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.WeekendPrice)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.CleaningFee)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.CleaningFee)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.DiscountRate)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.DiscountRate)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.DiscountMinStay)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.DiscountMinStay)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.UnavailableDates)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.UnavailableDates)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.PropertyStatus)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.PropertyStatus)
-        </dd>
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.PropertyNumber)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.PropertyNumber)</dd>
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.Street)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.Street)</dd>
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.City)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.City)</dd>
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.State)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.State)</dd>
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.Zip)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.Zip)</dd>
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.Bedrooms)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.Bedrooms)</dd>
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.Bathrooms)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.Bathrooms)</dd>
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.GuestsAllowed)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.GuestsAllowed)</dd>
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.PetsAllowed)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.PetsAllowed)</dd>
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.FreeParking)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.FreeParking)</dd>
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.WeekdayPrice)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.WeekdayPrice)</dd>
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.WeekendPrice)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.WeekendPrice)</dd>
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.CleaningFee)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.CleaningFee)</dd>
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.DiscountRate)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.DiscountRate)</dd>
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.DiscountMinStay)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.DiscountMinStay)</dd>
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.UnavailableDates)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.UnavailableDates)</dd>
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.PropertyStatus)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.PropertyStatus)</dd>
     </dl>
 </div>
-<div>
-    <a asp-action="Index" class="btn" style="background-color: #BF5700; color: white; border: none; text-decoration: none; padding: 8px 16px; border-radius: 4px;">Back to List</a>
-    <a asp-action="Index" asp-controller="Reviews" asp-route-propertyId="@Model.PropertyID" class="btn" style="background-color: #BF5700; color: white; border: none; text-decoration: none; padding: 8px 16px; border-radius: 4px;">Reviews</a>
 
-    @if (User.IsInRole("Customer"))
-    {
-        <form asp-action="AddToCart" asp-controller="Reservations" method="post">
+
+    <div class="mt-4">
+        <!-- Add to Cart Form -->
+        <form asp-action="AddToCart" asp-controller="Reservations" method="post" onsubmit="return validateForm()" style="display: inline-block; width: 100%;">
+            @Html.AntiForgeryToken()
             <input type="hidden" name="propertyId" value="@Model.PropertyID" />
-            <div class="form-group">
+
+            <div class="form-group" style="text-align: left;">
                 <label for="checkIn">Check-In Date</label>
-                <input type="date" id="checkIn" name="checkIn" class="form-control" required />
+                <input type="date" id="checkIn" name="checkIn" class="form-control" style="width: auto;" required />
+
+                <label for="checkOut" class="mt-2">Check-Out Date</label>
+                <input type="date" id="checkOut" name="checkOut" class="form-control" style="width: auto;" required />
             </div>
-            <div class="form-group">
-                <label for="checkOut">Check-Out Date</label>
-                <input type="date" id="checkOut" name="checkOut" class="form-control" required />
+
+            <div class="btn-group mt-3" role="group" style="display: flex; justify-content: center; gap: 10px;">
+                <button type="submit" class="btn btn-warning btn-sm" style="background-color: #BF5700; border-color: #BF5700; color: white;">Add to Cart</button>
+                <a asp-action="Index" class="btn btn-secondary btn-sm" style="background-color: #BF5700; color: white;">Back to List</a>
+                <a asp-action="Index" asp-controller="Reviews" asp-route-propertyId="@Model.PropertyID" class="btn btn-secondary btn-sm" style="background-color: #BF5700; color: white;">Reviews</a>
             </div>
-            <button type="submit" class="btn btn-primary" style="margin-top: 10px;">Add to Cart</button>
         </form>
-    }
-</div>
+    </div>
+
 
 <script>
-    const checkInInput = document.getElementById('checkIn');
-    const checkOutInput = document.getElementById('checkOut');
+    async function validateForm() {
+        const propertyId = @Model.PropertyID;
+        const checkInInput = document.getElementById('checkIn').value;
+        const checkOutInput = document.getElementById('checkOut').value;
+        const today = new Date().toISOString().split('T')[0];
 
-    checkInInput?.addEventListener('change', () => {
-        const today = new Date();
-        const checkInDate = new Date(checkInInput.value);
-
-        if (checkInDate < today) {
-            alert('Check-In date cannot be in the past.');
-            checkInInput.value = '';
+        if (!checkInInput || !checkOutInput) {
+            alert('Both Check-In and Check-Out dates are required.');
+            return false;
         }
-    });
 
-    checkOutInput?.addEventListener('change', () => {
-        const checkInDate = new Date(checkInInput.value);
-        const checkOutDate = new Date(checkOutInput.value);
-
-        if (checkOutDate <= checkInDate) {
-            alert('Check-Out date must be after Check-In date.');
-            checkOutInput.value = '';
+        if (checkInInput <= today) {
+            alert('Check-In date must be after today.');
+            return false;
         }
-    });
+
+        if (checkOutInput <= checkInInput) {
+            alert('Check-Out date must be after the Check-In date.');
+            return false;
+        }
+
+        // Check for overlapping reservations via AJAX
+        try {
+            const response = await fetch(`/Reservations/CheckAvailability?propertyId=${propertyId}&checkIn=${checkInInput}&checkOut=${checkOutInput}`);
+            const result = await response.json();
+
+            if (!result.isAvailable) {
+                alert(result.message);
+                return false;
+            }
+        } catch (error) {
+            console.error('Error checking property availability:', error);
+            alert('An error occurred while checking property availability. Please try again.');
+            return false;
+        }
+
+        return true; // Allow the form to submit if everything is valid
+    }
 </script>
+
+
+

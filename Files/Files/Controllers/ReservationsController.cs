@@ -24,7 +24,10 @@ namespace Files.Controllers
         // GET: Reservations
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Reservations.ToListAsync());
+            var reservations = await _context.Reservations
+                .Include(r => r.Properties) // Ensure Properties is included
+                .ToListAsync();
+            return View(reservations);
         }
 
         // GET: Reservations/Details/5
@@ -52,15 +55,71 @@ namespace Files.Controllers
             var reservations = HttpContext.Session.GetObjectFromJson<ReservationList>("Reservations") ?? new ReservationList();
             return View(reservations);
         }
+        // GET: Reservations/UserReservations
+        [Authorize(Roles = "Customer")]
+        public async Task<IActionResult> UserReservations()
+        {
+            // Retrieve the logged-in user's ID
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            if (string.IsNullOrEmpty(userId))
+            {
+                TempData["Error"] = "You must be logged in to view your reservations.";
+                return RedirectToAction("Index", "Home");
+            }
+
+            // Fetch reservations for the logged-in user
+            var userReservations = await _context.Reservations
+                .Include(r => r.Properties) // Include property details
+                .Where(r => r.AppUsers.Id == userId) // Filter by user ID
+                .ToListAsync();
+
+            if (!userReservations.Any())
+            {
+                TempData["Message"] = "You have no reservations.";
+                return RedirectToAction("Cart"); // Redirect to cart if no reservations
+            }
+
+            return View(userReservations); // Pass reservations to the view
+        }
+
+
+        // POST: Reservations/RemoveFromCart
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult RemoveFromCart(int reservationId)
+        {
+            // Get the reservation list from session
+            var reservationList = HttpContext.Session.GetObjectFromJson<ReservationList>("Reservations") ?? new ReservationList();
+
+            // Find the reservation to remove
+            var reservationToRemove = reservationList.Reservations.FirstOrDefault(r => r.ReservationID == reservationId);
+            if (reservationToRemove != null)
+            {
+                // Remove the reservation from the list
+                reservationList.Reservations.Remove(reservationToRemove);
+
+                // Update the session
+                HttpContext.Session.SetObjectAsJson("Reservations", reservationList);
+
+                TempData["Message"] = "Reservation removed successfully!";
+            }
+            else
+            {
+                TempData["Error"] = "Reservation not found.";
+            }
+
+            return RedirectToAction("Cart");
+        }
 
         // POST: Reservations/AddToCart
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult AddToCart(int propertyId, DateTime checkIn, DateTime checkOut, int numOfGuests)
         {
-            if (checkIn < DateTime.Today)
+            if (checkIn <= DateTime.Today)
             {
-                TempData["Error"] = "Check-in date cannot be in the past.";
+                TempData["Error"] = "Check-In date must be after today.";
                 return RedirectToAction("Cart");
             }
 
@@ -70,7 +129,23 @@ namespace Files.Controllers
                 return RedirectToAction("Cart");
             }
 
+            // Load or create the reservation list from session
             var reservationList = HttpContext.Session.GetObjectFromJson<ReservationList>("Reservations") ?? new ReservationList();
+
+            // Check for overlapping dates for this property
+            if (_context.Reservations.Any(r => r.Properties.PropertyID == propertyId &&
+                                               ((checkIn < r.CheckOut && checkOut > r.CheckIn))))
+            {
+                TempData["Error"] = "This property is already booked for the selected dates.";
+                return RedirectToAction("Details", "Properties", new { id = propertyId });
+            }
+
+            // Check for overlapping dates in the cart
+            if (reservationList.Reservations.Any(r => checkIn < r.CheckOut && checkOut > r.CheckIn))
+            {
+                TempData["Error"] = "You cannot add reservations with overlapping dates.";
+                return RedirectToAction("Cart");
+            }
 
             var property = _context.Properties.FirstOrDefault(p => p.PropertyID == propertyId);
             if (property == null)
@@ -82,7 +157,7 @@ namespace Files.Controllers
             {
                 CheckIn = checkIn,
                 CheckOut = checkOut,
-                NumOfGuests = numOfGuests,
+                NumOfGuests = property.GuestsAllowed,
                 WeekdayPrice = property.WeekdayPrice,
                 WeekendPrice = property.WeekendPrice,
                 CleaningFee = property.CleaningFee,
@@ -121,12 +196,30 @@ namespace Files.Controllers
             return View(transaction);
         }
 
+        // GET: Reservations/CheckAvailability
+        [HttpGet]
+        [AllowAnonymous]
+        public JsonResult CheckAvailability(int propertyId, DateTime checkIn, DateTime checkOut)
+        {
+            var overlappingReservations = _context.Reservations.Any(r =>
+                r.Properties.PropertyID == propertyId &&
+                (checkIn < r.CheckOut && checkOut > r.CheckIn));
+
+            if (overlappingReservations)
+            {
+                return Json(new { isAvailable = false, message = "This property is already booked for the selected dates." });
+            }
+
+            return Json(new { isAvailable = true });
+        }
+
+
         // POST: Reservations/Confirm
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Confirm()
         {
-            var userId = User.FindFirstValue(System.Security.Claims.ClaimTypes.NameIdentifier);
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
             var reservationList = HttpContext.Session.GetObjectFromJson<ReservationList>("Reservations");
 
@@ -148,10 +241,6 @@ namespace Files.Controllers
 
             try
             {
-                // Enable IDENTITY_INSERT for the Properties table
-                _context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT Properties ON");
-
-                // Add reservations to the transaction
                 foreach (var reservation in reservationList.Reservations)
                 {
                     var property = await _context.Properties.FirstOrDefaultAsync(p => p.PropertyID == reservation.Properties.PropertyID);
@@ -161,38 +250,45 @@ namespace Files.Controllers
                         return NotFound($"Property with ID {reservation.Properties.PropertyID} not found.");
                     }
 
+                    // Assign the next confirmation number using the utility
+                    reservation.ConfirmationNumber = GenerateNextConfirmationNumber.GetNextConfirmationNumber(_context);
                     reservation.ReservationStatus = true;
                     reservation.Properties = property;
-                    transaction.Reservations.Add(reservation); // Link reservations to the transaction
-                    _context.Reservations.Add(reservation);    // Add each reservation to the database
+
+                    transaction.Reservations.Add(reservation);
+                    _context.Reservations.Add(reservation);
                 }
 
                 _context.Transactions.Add(transaction);
-
                 await _context.SaveChangesAsync();
             }
             finally
             {
-                // Disable IDENTITY_INSERT for the Properties table
-                _context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT Properties OFF");
+                HttpContext.Session.Remove("Reservations");
             }
 
-            HttpContext.Session.Remove("Reservations");
-
             TempData["Message"] = "Your reservations have been confirmed!";
-            return RedirectToAction("ThankYou", new { confirmationNumber = transaction.ConfirmationNumber });
+            return RedirectToAction("ThankYou", new { confirmationNumber = reservationList.Reservations.FirstOrDefault()?.ConfirmationNumber });
         }
 
         // GET: Reservations/ThankYou
-    public IActionResult ThankYou(string confirmationNumber)
-{
-    if (string.IsNullOrEmpty(confirmationNumber))
-    {
-        return BadRequest("Confirmation number is required.");
-    }
-    ViewBag.ConfirmationNumber = confirmationNumber;
-    return View();
-}
+        public IActionResult ThankYou(int confirmationNumber)
+        {
+            if (confirmationNumber == 0)
+            {
+                return BadRequest("Confirmation number is required.");
+            }
+
+            var reservation = _context.Reservations.FirstOrDefault(r => r.ConfirmationNumber == confirmationNumber);
+
+            if (reservation == null)
+            {
+                return NotFound("Reservation with this confirmation number not found.");
+            }
+
+            ViewBag.ConfirmationNumber = confirmationNumber;
+            return View();
+        }
 
 
         // --- Admin Functionality to Make Reservations for Customers ---
@@ -250,7 +346,7 @@ namespace Files.Controllers
                     Properties = property,
                     CheckIn = model.CheckIn,
                     CheckOut = model.CheckOut,
-                    NumOfGuests = model.NumOfGuests,
+                    NumOfGuests = property.GuestsAllowed,
                     WeekdayPrice = property.WeekdayPrice,
                     WeekendPrice = property.WeekendPrice,
                     CleaningFee = property.CleaningFee,
@@ -272,6 +368,79 @@ namespace Files.Controllers
             model.Customers = _context.Users.ToList();
             model.Properties = _context.Properties.ToList();
             return View(model);
+        }
+
+
+        // GET: ResAtt/Delete/5
+        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Host")]
+        [Authorize(Roles = "Customer")]
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var reservation = await _context.Reservations
+                .Include(r => r.AppUsers) //by user
+                .Include(r => r.Properties) // Include navigation property
+                .FirstOrDefaultAsync(r => r.ReservationID == id);
+
+            if (reservation == null)
+            {
+                return NotFound();
+            }
+
+            ViewData["Properties"] = reservation.Properties;
+
+            var reservationList = new ReservationList
+            {
+                Reservations = await _context.Reservations.ToListAsync()
+            };
+
+            ViewBag.TotalPrice = reservationList.TotalPrice;
+
+            return View(reservation);
+        }
+
+        // POST: Reservations/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Host")]
+        [Authorize(Roles = "Customer")]
+        public async Task<IActionResult> DeleteReservationConfirmed(int id)
+        {
+            // Fetch the reservation to delete
+            var reservation = await _context.Reservations
+                .FirstOrDefaultAsync(r => r.ReservationID == id);
+
+            if (reservation == null)
+            {
+                return NotFound();
+            }
+
+            // Check if the reservation starts within a day or less
+            if (reservation.CheckIn <= DateTime.Now.AddDays(1))
+            {
+                TempData["ErrorMessage"] = "You cannot delete a reservation that starts within a day or less.";
+                return RedirectToAction("Index"); // Redirect back to the reservations list
+            }
+            // Remove the reservation from the database
+            _context.Reservations.Remove(reservation);
+            await _context.SaveChangesAsync();
+
+            // Update ReservationList and recalculate TotalPrice
+            var reservationList = new ReservationList
+            {
+                Reservations = await _context.Reservations.ToListAsync()
+            };
+            var updatedTotalPrice = reservationList.TotalPrice;
+
+            TempData["Message"] = $"Reservation deleted successfully. New total price for all reservations: {updatedTotalPrice:C}.";
+
+            return RedirectToAction("Index"); // Redirect to the reservations list or another appropriate page
         }
     }
 }

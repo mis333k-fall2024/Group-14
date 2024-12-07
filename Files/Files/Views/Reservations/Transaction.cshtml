@@ -15,14 +15,14 @@
                 <th>Check-In</th>
                 <th>Check-Out</th>
                 <th>Guests</th>
-                <th>Total Price</th>
+                <th>Stay Price</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var reservation in Model.Reservations)
             {
                 <tr>
-                    <td>@reservation.Properties.Street, @reservation.Properties.City</td>
+                    <td>@reservation.Properties.Street, @reservation.Properties.City, @reservation.Properties.State</td>
                     <td>@reservation.CheckIn.ToShortDateString()</td>
                     <td>@reservation.CheckOut.ToShortDateString()</td>
                     <td>@reservation.NumOfGuests</td>
@@ -36,10 +36,17 @@
 <div>
     <h4>Transaction Summary</h4>
     <dl class="row">
-        <dt class="col-sm-4">Subtotal:</dt>
+        <dt class="col-sm-4">Subtotal of Individual Reservations:</dt>
         <dd class="col-sm-8">@Model.Subtotal.ToString("C")</dd>
-        <dt class="col-sm-4">Tax (10%):</dt>
+
+        <dt class="col-sm-4">Total Cleaning Fees:</dt>
+        <dd class="col-sm-8">
+            @Model.Reservations.Sum(r => r.CleaningFee).ToString("C")
+        </dd>
+
+        <dt class="col-sm-4">Tax (10% of Subtotal):</dt>
         <dd class="col-sm-8">@Model.Tax.ToString("C")</dd>
+
         <dt class="col-sm-4">Grand Total:</dt>
         <dd class="col-sm-8"><strong>@Model.GrandTotal.ToString("C")</strong></dd>
     </dl>
