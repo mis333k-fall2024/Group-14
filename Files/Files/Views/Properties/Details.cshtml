@@ -72,7 +72,9 @@
     </div>
 }
 
-<script>function validateForm() {
+<script>
+    async function validateForm() {
+        const propertyId = @Model.PropertyID;
         const checkInInput = document.getElementById('checkIn').value;
         const checkOutInput = document.getElementById('checkOut').value;
         const today = new Date().toISOString().split('T')[0];
@@ -92,7 +94,24 @@
             return false;
         }
 
-        return true;
-    }</script>
+        // Check for overlapping reservations via AJAX
+        try {
+            const response = await fetch(`/Reservations/CheckAvailability?propertyId=${propertyId}&checkIn=${checkInInput}&checkOut=${checkOutInput}`);
+            const result = await response.json();
+
+            if (!result.isAvailable) {
+                alert(result.message);
+                return false;
+            }
+        } catch (error) {
+            console.error('Error checking property availability:', error);
+            alert('An error occurred while checking property availability. Please try again.');
+            return false;
+        }
+
+        return true; // Allow the form to submit if everything is valid
+    }
+</script>
+
 
 

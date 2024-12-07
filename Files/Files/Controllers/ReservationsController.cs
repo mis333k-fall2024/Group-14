@@ -140,6 +140,22 @@ namespace Files.Controllers
             return View(transaction);
         }
 
+        // GET: Reservations/CheckAvailability
+        [HttpGet]
+        [AllowAnonymous]
+        public JsonResult CheckAvailability(int propertyId, DateTime checkIn, DateTime checkOut)
+        {
+            var overlappingReservations = _context.Reservations.Any(r =>
+                r.Properties.PropertyID == propertyId &&
+                (checkIn < r.CheckOut && checkOut > r.CheckIn));
+
+            if (overlappingReservations)
+            {
+                return Json(new { isAvailable = false, message = "This property is already booked for the selected dates." });
+            }
+
+            return Json(new { isAvailable = true });
+        }
 
         // POST: Reservations/Confirm
         [HttpPost]
