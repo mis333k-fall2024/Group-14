@@ -26,7 +26,7 @@
                     <td>@item.Properties.Street, @item.Properties.City</td>
                     <td>@item.CheckIn.ToShortDateString()</td>
                     <td>@item.CheckOut.ToShortDateString()</td>
-                    <td>@item.NumOfGuests</td>
+                    <td>@item.Properties.GuestsAllowed</td>
                     <td>@item.CalculateStayPrice().ToString("C")</td>
                 </tr>
                 }

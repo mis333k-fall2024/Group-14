@@ -120,7 +120,7 @@
 
     @if (User.IsInRole("Customer"))
     {
-        <form asp-action="AddToCart" asp-controller="Reservations" method="post">
+        <form asp-action="AddToCart" asp-controller="Reservations" method="post" onsubmit="return validateForm()">
             <input type="hidden" name="propertyId" value="@Model.PropertyID" />
             <div class="form-group">
                 <label for="checkIn">Check-In Date</label>
@@ -135,27 +135,25 @@
     }
 </div>
 
-<script>
-    const checkInInput = document.getElementById('checkIn');
-    const checkOutInput = document.getElementById('checkOut');
+<script>function validateForm() {
+        const checkInInput = document.getElementById('checkIn').value;
+        const checkOutInput = document.getElementById('checkOut').value;
+        const today = new Date().toISOString().split('T')[0]; // Get today's date in yyyy-MM-dd format
 
-    checkInInput?.addEventListener('change', () => {
-        const today = new Date();
-        const checkInDate = new Date(checkInInput.value);
-
-        if (checkInDate < today) {
-            alert('Check-In date cannot be in the past.');
-            checkInInput.value = '';
+        if (!checkInInput || !checkOutInput) {
+            alert('Both Check-In and Check-Out dates are required.');
+            return false;
         }
-    });
 
-    checkOutInput?.addEventListener('change', () => {
-        const checkInDate = new Date(checkInInput.value);
-        const checkOutDate = new Date(checkOutInput.value);
-
-        if (checkOutDate <= checkInDate) {
-            alert('Check-Out date must be after Check-In date.');
-            checkOutInput.value = '';
+        if (checkInInput <= today) {
+            alert('Check-In date must be after today');
+            return false;
         }
-    });
-</script>
+
+        if (checkOutInput <= checkInInput) {
+            alert('Check-Out date must be after the Check-In date.');
+            return false;
+        }
+
+        return true; // Allow the form to submit
+    }</script>

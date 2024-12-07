@@ -24,7 +24,10 @@ namespace Files.Controllers
         // GET: Reservations
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Reservations.ToListAsync());
+            var reservations = await _context.Reservations
+                .Include(r => r.Properties) // Ensure Properties is included
+                .ToListAsync();
+            return View(reservations);
         }
 
         // GET: Reservations/Details/5
@@ -58,9 +61,9 @@ namespace Files.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult AddToCart(int propertyId, DateTime checkIn, DateTime checkOut, int numOfGuests)
         {
-            if (checkIn < DateTime.Today)
+            if (checkIn <= DateTime.Today)
             {
-                TempData["Error"] = "Check-in date cannot be in the past.";
+                TempData["Error"] = "Check-In date must be after today.";
                 return RedirectToAction("Cart");
             }
 
@@ -70,7 +73,23 @@ namespace Files.Controllers
                 return RedirectToAction("Cart");
             }
 
+            // Load or create the reservation list from session
             var reservationList = HttpContext.Session.GetObjectFromJson<ReservationList>("Reservations") ?? new ReservationList();
+
+            // Check for overlapping dates for this property
+            if (_context.Reservations.Any(r => r.Properties.PropertyID == propertyId &&
+                                               ((checkIn < r.CheckOut && checkOut > r.CheckIn))))
+            {
+                TempData["Error"] = "This property is already booked for the selected dates.";
+                return RedirectToAction("Details", "Properties", new { id = propertyId });
+            }
+
+            // Check for overlapping dates in the cart
+            if (reservationList.Reservations.Any(r => checkIn < r.CheckOut && checkOut > r.CheckIn))
+            {
+                TempData["Error"] = "You cannot add reservations with overlapping dates.";
+                return RedirectToAction("Cart");
+            }
 
             var property = _context.Properties.FirstOrDefault(p => p.PropertyID == propertyId);
             if (property == null)
@@ -82,7 +101,7 @@ namespace Files.Controllers
             {
                 CheckIn = checkIn,
                 CheckOut = checkOut,
-                NumOfGuests = numOfGuests,
+                NumOfGuests = property.GuestsAllowed,
                 WeekdayPrice = property.WeekdayPrice,
                 WeekendPrice = property.WeekendPrice,
                 CleaningFee = property.CleaningFee,
@@ -254,7 +273,7 @@ namespace Files.Controllers
                     Properties = property,
                     CheckIn = model.CheckIn,
                     CheckOut = model.CheckOut,
-                    NumOfGuests = model.NumOfGuests,
+                    NumOfGuests = property.GuestsAllowed,
                     WeekdayPrice = property.WeekdayPrice,
                     WeekendPrice = property.WeekendPrice,
                     CleaningFee = property.CleaningFee,
