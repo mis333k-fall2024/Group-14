@@ -1,9 +1,14 @@
 ﻿<Properties StartupConfiguration="{4093AD08-3465-427B-81E2-2C099D378B96}|http">
-  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Files/Controllers/ReviewsController.cs">
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.ItemProperties.Files PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Files/Views/Reservations/Index.cshtml">
     <Files>
-      <File FileName="Files/Controllers/ReservationsController.cs" />
+      <File FileName="Files/Controllers/ReservationsController.cs" Line="349" Column="37" />
       <File FileName="Files/Controllers/ReviewsController.cs" Line="1" Column="1" />
       <File FileName="Files/Models/Reservation.cs" />
       <File FileName="Files/Models/ViewModels/ModifyProfileViewModel.cs" />
@@ -19,30 +24,28 @@
       <File FileName="Files/Utilities/GenerateNextConfirmationNumber.cs" />
       <File FileName="Files/Views/Reservations/Cart.cshtml" />
       <File FileName="Files/Models/Property.cs" />
-      <File FileName="Files/Views/Reservations/Index.cshtml" />
+      <File FileName="Files/Views/Reservations/Index.cshtml" Line="83" Column="21" />
       <File FileName="Files/Models/ReservationList.cs" />
       <File FileName="Files/Views/Properties/Details.cshtml" />
       <File FileName="Files/Views/Shared/Error.cshtml" />
       <File FileName="Files/Views/Reservations/Transaction.cshtml" />
+      <File FileName="Files/Views/Home/Index.cshtml" Line="13" Column="9" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="Files">
             <Node name="Files">
-              <Node name="Controllers" expanded="True">
-                <Node name="ReviewsController.cs" selected="True" />
+              <Node name="Views">
+                <Node name="Home" expanded="True" />
+                <Node name="Reservations">
+                  <Node name="Index.cshtml" selected="True" />
+                </Node>
               </Node>
-              <Node name="Models" expanded="True" />
             </Node>
           </Node>
         </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Files PreferredExecutionTarget="/Applications/Google Chrome.app" />
-  <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
-  </MonoDevelop.Ide.DebuggingService.Breakpoints>
 </Properties>
