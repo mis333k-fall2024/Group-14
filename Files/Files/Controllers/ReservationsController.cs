@@ -121,12 +121,13 @@ namespace Files.Controllers
             return View(transaction);
         }
 
+
         // POST: Reservations/Confirm
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Confirm()
         {
-            var userId = User.FindFirstValue(System.Security.Claims.ClaimTypes.NameIdentifier);
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
             var reservationList = HttpContext.Session.GetObjectFromJson<ReservationList>("Reservations");
 
@@ -148,10 +149,6 @@ namespace Files.Controllers
 
             try
             {
-                // Enable IDENTITY_INSERT for the Properties table
-                _context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT Properties ON");
-
-                // Add reservations to the transaction
                 foreach (var reservation in reservationList.Reservations)
                 {
                     var property = await _context.Properties.FirstOrDefaultAsync(p => p.PropertyID == reservation.Properties.PropertyID);
@@ -161,38 +158,45 @@ namespace Files.Controllers
                         return NotFound($"Property with ID {reservation.Properties.PropertyID} not found.");
                     }
 
+                    // Assign the next confirmation number using the utility
+                    reservation.ConfirmationNumber = GenerateNextConfirmationNumber.GetNextConfirmationNumber(_context);
                     reservation.ReservationStatus = true;
                     reservation.Properties = property;
-                    transaction.Reservations.Add(reservation); // Link reservations to the transaction
-                    _context.Reservations.Add(reservation);    // Add each reservation to the database
+
+                    transaction.Reservations.Add(reservation);
+                    _context.Reservations.Add(reservation);
                 }
 
                 _context.Transactions.Add(transaction);
-
                 await _context.SaveChangesAsync();
             }
             finally
             {
-                // Disable IDENTITY_INSERT for the Properties table
-                _context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT Properties OFF");
+                HttpContext.Session.Remove("Reservations");
             }
 
-            HttpContext.Session.Remove("Reservations");
-
             TempData["Message"] = "Your reservations have been confirmed!";
-            return RedirectToAction("ThankYou", new { confirmationNumber = transaction.ConfirmationNumber });
+            return RedirectToAction("ThankYou", new { confirmationNumber = reservationList.Reservations.FirstOrDefault()?.ConfirmationNumber });
         }
 
         // GET: Reservations/ThankYou
-    public IActionResult ThankYou(string confirmationNumber)
-{
-    if (string.IsNullOrEmpty(confirmationNumber))
-    {
-        return BadRequest("Confirmation number is required.");
-    }
-    ViewBag.ConfirmationNumber = confirmationNumber;
-    return View();
-}
+        public IActionResult ThankYou(int confirmationNumber)
+        {
+            if (confirmationNumber == 0)
+            {
+                return BadRequest("Confirmation number is required.");
+            }
+
+            var reservation = _context.Reservations.FirstOrDefault(r => r.ConfirmationNumber == confirmationNumber);
+
+            if (reservation == null)
+            {
+                return NotFound("Reservation with this confirmation number not found.");
+            }
+
+            ViewBag.ConfirmationNumber = confirmationNumber;
+            return View();
+        }
 
 
         // --- Admin Functionality to Make Reservations for Customers ---

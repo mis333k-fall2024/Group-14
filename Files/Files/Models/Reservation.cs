@@ -7,10 +7,6 @@ namespace Files.Models
     {
         public const Decimal TaxRate = 0.07m;
 
-        private const int START_CONFIRMATION_NUMBER = 21901;
-
-        private static int _nextConfirmationNumber = START_CONFIRMATION_NUMBER;
-
         [Key]
         public Int32 ReservationID { get; set; }
 
@@ -68,18 +64,6 @@ namespace Files.Models
 
         [Display(Name = "State")]
         public string State { get; set; }
-
-        // Constructor to set the ConfirmationNumber
-        public Reservation()
-        {
-            ConfirmationNumber = GenerateConfirmationNumber();
-        }
-
-        // Method to generate a confirmation number
-        private static int GenerateConfirmationNumber()
-        {
-            return _nextConfirmationNumber++;
-        }
 
         // Method to calculate total price for the stay
         public decimal CalculateStayPrice()
