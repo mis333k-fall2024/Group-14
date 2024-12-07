@@ -16,14 +16,14 @@
                 <th>Check-In</th>
                 <th>Check-Out</th>
                 <th>Guests</th>
-                <th>Total Price</th>
+                <th>Stay Price</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var item in Model.Reservations)
                 {
                 <tr>
-                    <td>@item.Properties.Street, @item.Properties.City</td>
+                    <td>@item.Properties.Street, @item.Properties.City, @item.Properties.State</td>
                     <td>@item.CheckIn.ToShortDateString()</td>
                     <td>@item.CheckOut.ToShortDateString()</td>
                     <td>@item.Properties.GuestsAllowed</td>
@@ -33,7 +33,7 @@
         </tbody>
     </table>
 
-    <p><strong>Total Price:</strong> @Model.TotalPrice.ToString("C")</p>
+    <p><strong>Stay Price:</strong> @Model.TotalPrice.ToString("C")</p>
     <form asp-action="Transaction" asp-controller="Reservations" method="get">
         <button type="submit" class="btn btn-primary" style="background-color: #BF5700; color: white;">Checkout</button>
     </form>
