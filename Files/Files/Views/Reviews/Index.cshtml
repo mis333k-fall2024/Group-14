@@ -9,21 +9,24 @@
 <p>
     <a asp-action="Create" asp-route-propertyId="@ViewData["PropertyId"]" class="btn btn-primary" style="background-color: #CC5500;">Write a Review</a>
 
-    <p>
-        <strong>Average Guest Rating:</strong> @ViewData["AverageRating"] out of 5
-    </p>
 </p>
-
+  
     <table class="table">
         <thead>
             <tr>
                 <th>Rating</th>
                 <th>Review</th>
-                @if (User.IsInRole("Admin,Host"))
+                @if (User.IsInRole("Admin"))
                 {
                     <th>Host Comments</th>
                     <th>Dispute Status</th>
                 }
+                @if (User.IsInRole("Host"))
+                {
+                    <th>Host Comments</th>
+                    <th>Dispute Status</th>
+                }
+
                 <th></th>
             </tr>
         </thead>
@@ -33,15 +36,21 @@
                 <tr>
                     <td>@item.Rating</td>
                     <td>@item.TextReview</td>
-                    @if (User.IsInRole("Admin,Host"))
+                    @if (User.IsInRole("Admin"))
                     {
                         <td>@item.HostComments</td>
                         <td>@item.DisputeStatus</td>
                     }
                     <td>
-                        <a asp-action="Details" asp-route-id="@item.ReviewID" style="color: #CC5500;">Details</a>
-                    </td>
-                </tr>
+                        @if (User.IsInRole("Host"))
+                        {
+                        <td>@item.HostComments</td>
+                        <td>@item.DisputeStatus</td>
+                    }
+                        <td>
+                            <a asp-action="Details" asp-route-id="@item.ReviewID" style="color: #CC5500;">Details</a>
+                        </td>
+                    </tr>
             }
         </tbody>
     </table>

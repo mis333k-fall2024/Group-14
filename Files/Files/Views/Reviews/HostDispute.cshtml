@@ -2,9 +2,10 @@
 
 @foreach (var review in Model)
 {
-    @if (review.DisputeStatus == StatusDispute.NoDispute && User.IsInRole("Host"))
+    @if (review.DisputeStatus == StatusDispute.NoDispute)
     {
         <form asp-action="MarkAsDisputed" method="post">
+            @Html.AntiForgeryToken()
             <input type="hidden" name="id" value="@review.ReviewID" />
             <button type="submit" class="btn btn-warning">Dispute Submission</button>
         </form>
