@@ -102,7 +102,7 @@ namespace Files.Controllers
         }
 
         // GET: Reviews/Create
-        [Authorize]
+        [Authorize(Roles = "Customer")]
         public IActionResult Create(int propertyId)
         {
             // Fetch the property
@@ -121,6 +121,7 @@ namespace Files.Controllers
 
         // POST: Reviews/Create
         [HttpPost]
+        [Authorize(Roles = "Customer")]
         [ValidateAntiForgeryToken]
         [Authorize]
         public async Task<IActionResult> Create(Review review, int propertyId)
