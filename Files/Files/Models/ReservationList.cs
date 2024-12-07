@@ -11,7 +11,7 @@ namespace Files.Models
         {
             get
             {
-                return Reservations.Sum(r => r.CalculateStayPrice());
+                return Reservations.Sum(r => r.CalculateStayPrice() + r.CleaningFee);
             }
         }
     }

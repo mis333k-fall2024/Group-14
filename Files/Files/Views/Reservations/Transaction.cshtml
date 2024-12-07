@@ -15,18 +15,27 @@
                 <th>Check-In</th>
                 <th>Check-Out</th>
                 <th>Guests</th>
+                <th>Discount</th>
                 <th>Stay Price</th>
+                <th>Cleaning Fee</th>
+                <th>Individual Subtotals</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var reservation in Model.Reservations)
             {
+                var stayPrice = reservation.CalculateStayPrice();
+                var discountAmount = reservation.DiscountAmount;
+                var totalReservationPrice = stayPrice + reservation.CleaningFee;
                 <tr>
                     <td>@reservation.Properties.Street, @reservation.Properties.City, @reservation.Properties.State</td>
                     <td>@reservation.CheckIn.ToShortDateString()</td>
                     <td>@reservation.CheckOut.ToShortDateString()</td>
                     <td>@reservation.NumOfGuests</td>
-                    <td>@reservation.CalculateStayPrice().ToString("C")</td>
+                    <td>@discountAmount.ToString("C")</td>
+                    <td>@stayPrice.ToString("C")</td>
+                    <td>@reservation.CleaningFee.ToString("C")</td>
+                    <td>@totalReservationPrice.ToString("C")</td>
                 </tr>
             }
         </tbody>
@@ -36,16 +45,13 @@
 <div>
     <h4>Transaction Summary</h4>
     <dl class="row">
-        <dt class="col-sm-4">Subtotal of Individual Reservations:</dt>
+        <dt class="col-sm-4">Subtotal of Reservations:</dt>
         <dd class="col-sm-8">@Model.Subtotal.ToString("C")</dd>
 
-        <dt class="col-sm-4">Total Cleaning Fees:</dt>
-        <dd class="col-sm-8">
-            @Model.Reservations.Sum(r => r.CleaningFee).ToString("C")
-        </dd>
 
-        <dt class="col-sm-4">Tax (10% of Subtotal):</dt>
-        <dd class="col-sm-8">@Model.Tax.ToString("C")</dd>
+        <dt class="col-sm-4">Tax (7% of Total Price):</dt>
+        <dd class="col-sm-8">@((Model.Reservations.Sum(r => r.CalculateStayPrice() + r.CleaningFee) * Files.Models.Reservation.TaxRate).ToString("C"))</dd>
+
 
         <dt class="col-sm-4">Grand Total:</dt>
         <dd class="col-sm-8"><strong>@Model.GrandTotal.ToString("C")</strong></dd>

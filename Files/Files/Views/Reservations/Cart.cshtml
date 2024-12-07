@@ -16,7 +16,10 @@ else
                 <th>Check-In</th>
                 <th>Check-Out</th>
                 <th>Guests</th>
+                <th>Discount</th>
                 <th>Stay Price</th>
+                <th>Cleaning Fee</th>
+                <th>Individual Subtotals</th>
                 <th>Action</th> <!-- New column for the Remove button -->
             </tr>
         </thead>
@@ -28,7 +31,10 @@ else
                     <td>@item.CheckIn.ToShortDateString()</td>
                     <td>@item.CheckOut.ToShortDateString()</td>
                     <td>@item.Properties.GuestsAllowed</td>
+                    <td>@item.DiscountAmount.ToString("C")</td>
                     <td>@item.CalculateStayPrice().ToString("C")</td>
+                    <td>@item.CleaningFee.ToString("C")</td>
+                    <td>@((item.CalculateStayPrice() + item.CleaningFee).ToString("C"))</td>
                     <td>
                         <!-- Remove Button -->
                         <form asp-action="RemoveFromCart" method="post" style="display:inline;">
@@ -42,9 +48,13 @@ else
         </tbody>
     </table>
 
-    <p><strong>Total Price:</strong> @Model.TotalPrice.ToString("C")</p>
+    <p><strong>Subtotal:</strong> @Model.TotalPrice.ToString("C")</p>
 
     <form asp-action="Transaction" asp-controller="Reservations" method="get">
         <button type="submit" class="btn btn-primary" style="background-color: #BF5700; color: white;">Checkout</button>
+    </form>
+
+    <form asp-action="Index" asp-controller="Properties" method="get">
+        <button type="submit" class="btn btn-secondary" style="background-color: #6c757d; color: white; margin-top: 10px;">Keep browsing</button>
     </form>
 }

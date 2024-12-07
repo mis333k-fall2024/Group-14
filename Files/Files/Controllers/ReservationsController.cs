@@ -161,11 +161,23 @@ namespace Files.Controllers
                 WeekdayPrice = property.WeekdayPrice,
                 WeekendPrice = property.WeekendPrice,
                 CleaningFee = property.CleaningFee,
-                DiscountRate = property.DiscountRate ?? 0m,
                 Properties = property,
                 City = property.City,
                 State = property.State,
             };
+
+            // Apply discount logic
+            int totalDays = (checkOut - checkIn).Days;
+            if (totalDays >= property.DiscountMinStay)
+            {
+                reservation.DiscountRate = property.DiscountRate ?? 0m;
+                reservation.DiscountAmount = reservation.CalculatePreDiscountPrice() * reservation.DiscountRate; // Calculate the discount amount
+            }
+            else
+            {
+                reservation.DiscountRate = 0m; // No discount
+                reservation.DiscountAmount = 0m;
+            }
 
             reservationList.Reservations.Add(reservation);
             HttpContext.Session.SetObjectAsJson("Reservations", reservationList);
@@ -187,9 +199,9 @@ namespace Files.Controllers
             var transaction = new Transaction
             {
                 Reservations = reservationList.Reservations,
-                Subtotal = reservationList.TotalPrice,
-                Tax = reservationList.TotalPrice * 0.1m, // 10% tax
-                GrandTotal = reservationList.TotalPrice + (reservationList.TotalPrice * 0.1m),
+                Subtotal = reservationList.Reservations.Sum(r => r.CalculateStayPrice() + r.CleaningFee),
+                Tax = reservationList.Reservations.Sum(r => r.CalculateStayPrice() + r.CleaningFee) * Reservation.TaxRate,
+                GrandTotal = reservationList.Reservations.Sum(r => r.CalculateStayPrice() + r.CleaningFee) * (1 + Reservation.TaxRate),
                 TransactionDate = DateTime.Now
             };
 
