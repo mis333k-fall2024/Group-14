@@ -8,11 +8,12 @@
 
 @if (User.IsInRole("Admin, Host"))
 {<p>
-    <a asp-action="Create" class="btn btn-secondary btn-sm" style="background-color: #BF5700; color: white;">Create New</a>
+        <a asp-action="Create" class="btn btn-secondary btn-sm" style="background-color: #BF5700; color: white;">Create New</a>
 
-</p>}
+    </p>}
 
-<a asp-action="Search" asp-controller="Home" class="btn btn-primary">Search Properties</a>
+<a asp-action="Search" asp-controller="Home" class="btn btn-primary" style="background-color: #BF5700; border-color: #BF5700; color: white;">Search Properties</a>
+
 
 <table class="table">
     <thead>

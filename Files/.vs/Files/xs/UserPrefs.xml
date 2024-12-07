@@ -1,34 +1,29 @@
 ﻿<Properties StartupConfiguration="{4093AD08-3465-427B-81E2-2C099D378B96}|http">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
-  </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.ItemProperties.Files PreferredExecutionTarget="/Applications/Google Chrome.app" />
   <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workbench ActiveDocument="Files/Controllers/ReviewsController.cs">
     <Files>
-      <File FileName="Files/Controllers/ReservationsController.cs" Line="31" Column="10" />
+      <File FileName="Files/Controllers/ReservationsController.cs" />
       <File FileName="Files/Controllers/ReviewsController.cs" Line="1" Column="1" />
-      <File FileName="Files/Models/Reservation.cs" Line="78" Column="55" />
+      <File FileName="Files/Models/Reservation.cs" />
       <File FileName="Files/Models/ViewModels/ModifyProfileViewModel.cs" />
       <File FileName="Files/Controllers/PropertiesController.cs" />
       <File FileName="Files/Models/ViewModels/PropertyViewModel.cs" />
       <File FileName="Files/Views/Reservations/MakeReservation.cshtml" />
       <File FileName="Files/Models/ViewModels/ReservationViewModel.cs" />
       <File FileName="Files/Controllers/AccountController.cs" />
-      <File FileName="Files/Controllers/HomeController.cs" Line="76" Column="42" />
+      <File FileName="Files/Controllers/HomeController.cs" />
       <File FileName="Files/Models/ViewModels/HostReportViewModel.cs" />
       <File FileName="Files/Program.cs" />
-      <File FileName="Files/Views/Reservations/ThankYou.cshtml" Line="8" Column="1" />
+      <File FileName="Files/Views/Reservations/ThankYou.cshtml" />
       <File FileName="Files/Utilities/GenerateNextConfirmationNumber.cs" />
-      <File FileName="Files/Views/Reservations/Cart.cshtml" Line="19" Column="25" />
-      <File FileName="Files/Models/Property.cs" Line="54" Column="22" />
+      <File FileName="Files/Views/Reservations/Cart.cshtml" />
+      <File FileName="Files/Models/Property.cs" />
       <File FileName="Files/Views/Reservations/Index.cshtml" />
-      <File FileName="Files/Models/ReservationList.cs" Line="1" Column="1" />
+      <File FileName="Files/Models/ReservationList.cs" />
       <File FileName="Files/Views/Properties/Details.cshtml" />
       <File FileName="Files/Views/Shared/Error.cshtml" />
-      <File FileName="Files/Views/Reservations/Transaction.cshtml" Line="60" Column="1" />
+      <File FileName="Files/Views/Reservations/Transaction.cshtml" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -45,4 +40,9 @@
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.Files PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
 </Properties>
