@@ -55,6 +55,34 @@ namespace Files.Controllers
             var reservations = HttpContext.Session.GetObjectFromJson<ReservationList>("Reservations") ?? new ReservationList();
             return View(reservations);
         }
+        // GET: Reservations/UserReservations
+        [Authorize(Roles = "Customer")]
+        public async Task<IActionResult> UserReservations()
+        {
+            // Retrieve the logged-in user's ID
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            if (string.IsNullOrEmpty(userId))
+            {
+                TempData["Error"] = "You must be logged in to view your reservations.";
+                return RedirectToAction("Index", "Home");
+            }
+
+            // Fetch reservations for the logged-in user
+            var userReservations = await _context.Reservations
+                .Include(r => r.Properties) // Include property details
+                .Where(r => r.AppUsers.Id == userId) // Filter by user ID
+                .ToListAsync();
+
+            if (!userReservations.Any())
+            {
+                TempData["Message"] = "You have no reservations.";
+                return RedirectToAction("Cart"); // Redirect to cart if no reservations
+            }
+
+            return View(userReservations); // Pass reservations to the view
+        }
+
 
         // POST: Reservations/RemoveFromCart
         [HttpPost]
