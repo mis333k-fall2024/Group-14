@@ -1,5 +1,44 @@
 ﻿@model IEnumerable<Files.Models.Review>
 
+
+
+<h2>Dispute Reviews for @ViewData["PropertyName"]</h2>
+
+@if (!Model.Any())
+{
+    <p>No reviews are eligible for dispute for this property.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Review ID</th>
+                <th>Rating</th>
+                <th>Review Text</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var review in Model)
+            {
+                <tr>
+                    <td>@review.ReviewID</td>
+                    <td>@review.Rating</td>
+                    <td>@review.TextReview</td>
+                    <td>
+                        <form asp-action="MarkAsDisputed" method="post">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="id" value="@review.ReviewID" />
+                            <button type="submit" class="btn btn-warning">Mark as Disputed</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
 @foreach (var review in Model)
 {
     @if (review.DisputeStatus == StatusDispute.NoDispute)
