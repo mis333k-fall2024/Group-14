@@ -1,20 +1,27 @@
-﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Files.Models;
-using System.Linq;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
+//Change these using statements to match your project
+using Files.Models;
+
+//Change this namespace to match your project
 namespace Files.Controllers
 {
+    //TODO: Uncomment this line once you have roles working correctly
     [Authorize(Roles = "Admin")]
     public class RoleAdminController : Controller
     {
+        //create private variables for the services needed in this controller
         private readonly UserManager<AppUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
 
+
+        //RoleAdminController constructor
         public RoleAdminController(UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager)
         {
+            //populate the values of the variables passed into the controller
             _userManager = userManager;
             _roleManager = roleManager;
         }
@@ -22,51 +29,71 @@ namespace Files.Controllers
         // GET: /RoleAdmin/
         public async Task<ActionResult> Index()
         {
-            var roles = _roleManager.Roles.Select(role => new RoleEditModel
-            {
-                Role = role,
-                RoleMembers = _userManager.Users.Where(user => _userManager.IsInRoleAsync(user, role.Name).Result).ToList(),
-                RoleNonMembers = _userManager.Users.Where(user => !_userManager.IsInRoleAsync(user, role.Name).Result).ToList()
-            }).ToList();
+            //Create a list of roles that will need to be edited
+            List<RoleEditModel> roles = new List<RoleEditModel>();
 
+            //loop through each of the existing roles
+            foreach (IdentityRole role in _roleManager.Roles)
+            {
+                //this is a list of all the users who ARE in this role (members)
+                List<AppUser> RoleMembers = new List<AppUser>();
+
+                //this is a list of all the users who ARE NOT in this role (non-members)
+                List<AppUser> RoleNonMembers = new List<AppUser>();
+
+                //loop through ALL the users and decide if they are in the role(member) or not (non-member)
+                //every user will be evaluated for every role, so this is a SLOW chunk of code because
+                //it accesses the database so many times
+                foreach (AppUser user in _userManager.Users)
+                {
+                    if (await _userManager.IsInRoleAsync(user, role.Name) == true) //user is in the role
+                    {
+                        //add user to list of members
+                        RoleMembers.Add(user);
+                    }
+                    else //user is NOT in the role
+                    {
+                        //add user to list of non-members
+                        RoleNonMembers.Add(user);
+                    }
+                }
+
+                //create a new instance of the role edit model
+                RoleEditModel rem = new RoleEditModel();
+
+                //populate the properties of the role edit model
+                rem.Role = role; //role from database
+                rem.RoleMembers = RoleMembers; //list of users in this role
+                rem.RoleNonMembers = RoleNonMembers; //list of users NOT in this role
+
+                //add this role to the list of role edit models
+                roles.Add(rem);
+            }
+
+            //pass the list of roles to the view
             return View(roles);
         }
 
-        // GET: /RoleAdmin/HireAdmin
-        public IActionResult HireAdmin() => View(new RegisterViewModel());
+        public ActionResult Create()
+        {
+            return View();
+        }
 
-        // POST: /RoleAdmin/HireAdmin
         [HttpPost]
-        public async Task<ActionResult> HireAdmin(RegisterViewModel model)
+        public async Task<ActionResult> Create([Required] string name)
         {
             if (ModelState.IsValid)
             {
-                // Validate that the user is at least 18 years old
-                if ((DateTime.Now - model.DOB).TotalDays / 365 < 18)
-                {
-                    ModelState.AddModelError("DOB", "You must be at least 18 years old to create an account.");
-                    return View(model);
-                }
+                //attempt to create the new role using the role manager
+                IdentityResult result = await _roleManager.CreateAsync(new IdentityRole(name));
 
-                var admin = new AppUser
-                {
-                    UserName = model.Email,
-                    Email = model.Email,
-                    FirstName = model.FirstName,
-                    LastName = model.LastName,
-                    PhoneNumber = model.PhoneNumber,
-                    Address = model.Address,
-                    DOB = model.DOB
-                };
-
-                var result = await _userManager.CreateAsync(admin, model.Password);
-
+                //if the role was created successfully, take the user to the index page
                 if (result.Succeeded)
                 {
-                    await _userManager.AddToRoleAsync(admin, "Admin");
                     return RedirectToAction("Index");
                 }
-                else
+                else //role was not added succesfully, so add errors to model 
+                //and let the user try again
                 {
                     foreach (var error in result.Errors)
                     {
@@ -74,93 +101,106 @@ namespace Files.Controllers
                     }
                 }
             }
-            return View(model);
+
+            //if code gets this far, we need to show an error
+            return View(name);
         }
 
-        // GET: /RoleAdmin/FireAdmin
-        public async Task<ActionResult> FireAdmin(string id)
+        public async Task<ActionResult> Edit(string id)
         {
-            var admin = await _userManager.FindByIdAsync(id);
-            if (admin == null) return NotFound();
+            //look up the role requested by the user
+            IdentityRole role = await _roleManager.FindByIdAsync(id);
 
-            admin.LockoutEnabled = true;
-            await _userManager.UpdateAsync(admin);
-            return RedirectToAction("Index");
-        }
+            //create a list for the members of the role
+            List<AppUser> RoleMembers = new List<AppUser>();
 
-        // GET: /RoleAdmin/RehireAdmin
-        public async Task<ActionResult> RehireAdmin(string id)
-        {
-            var admin = await _userManager.FindByIdAsync(id);
-            if (admin == null) return NotFound();
+            //create a list for the non-members of the role
+            List<AppUser> RoleNonMembers = new List<AppUser>();
 
-            admin.LockoutEnabled = false;
-            await _userManager.UpdateAsync(admin);
-            return RedirectToAction("Index");
-        }
-
-        // GET: /RoleAdmin/ModifyProfile
-        public async Task<ActionResult> ModifyProfile(string id)
-        {
-            var user = await _userManager.FindByIdAsync(id);
-            if (user == null) return NotFound();
-
-            var model = new ModifyProfileViewModel
+            //through ALL the users and decide if they are in the role(member) or not (non-member)
+            foreach (AppUser user in _userManager.Users)
             {
-                FirstName = user.FirstName,
-                LastName = user.LastName,
-                PhoneNumber = user.PhoneNumber,
-                Address = user.Address,
-                DOB = user.DOB
-            };
-
-            return View(model);
-        }
-
-        // POST: /RoleAdmin/ModifyProfile
-        [HttpPost]
-        public async Task<ActionResult> ModifyProfile(string id, ModifyProfileViewModel model)
-        {
-            var user = await _userManager.FindByIdAsync(id);
-            if (user == null) return NotFound();
-
-            if (ModelState.IsValid)
-            {
-                user.FirstName = model.FirstName;
-                user.LastName = model.LastName;
-                user.PhoneNumber = model.PhoneNumber;
-                user.Address = model.Address;
-                user.DOB = model.DOB;
-
-                if (!string.IsNullOrEmpty(model.NewPassword))
+                if (await _userManager.IsInRoleAsync(user, role.Name) == true) //user is in the role
                 {
-                    var passwordToken = await _userManager.GeneratePasswordResetTokenAsync(user);
-                    var result = await _userManager.ResetPasswordAsync(user, passwordToken, model.NewPassword);
-
-                    if (!result.Succeeded)
-                    {
-                        foreach (var error in result.Errors)
-                        {
-                            ModelState.AddModelError("", error.Description);
-                        }
-                        return View(model);
-                    }
+                    //add the user to the list of members
+                    RoleMembers.Add(user);
                 }
-
-                var updateResult = await _userManager.UpdateAsync(user);
-                if (updateResult.Succeeded)
+                else //user is NOT in the role
                 {
-                    return RedirectToAction("Index");
-                }
-                else
-                {
-                    foreach (var error in updateResult.Errors)
-                    {
-                        ModelState.AddModelError("", error.Description);
-                    }
+                    RoleNonMembers.Add(user);
                 }
             }
-            return View(model);
+
+            //create a new instance of the role edit model
+            RoleEditModel rem = new RoleEditModel();
+
+            //populate the properties of the role edit model
+            rem.Role = role; //role looked up from database
+            rem.RoleMembers = RoleMembers; //list of users in the role
+            rem.RoleNonMembers = RoleNonMembers; //list of users NOT in the role
+
+            //send user to view with populated role edit model
+            return View(rem);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Edit(RoleModificationModel rmm)
+        {
+            //create a result to refer to later
+            IdentityResult result;
+
+            //if RoleModificationModel is valid, add new users
+            if (ModelState.IsValid)
+            {
+                //if there are users to add, then add them
+                if (rmm.IdsToAdd != null)
+                {
+                    foreach (string userId in rmm.IdsToAdd)
+                    {
+                        //find the user in the database using their id
+                        AppUser user = await _userManager.FindByIdAsync(userId);
+
+                        //attempt to add the user to the role using the UserManager
+                        result = await _userManager.AddToRoleAsync(user, rmm.RoleName);
+
+                        //if attempt to add user to role didn't work, show user the error page
+                        if (result.Succeeded == false)
+                        {
+                            //send user to error page
+                            return View("Error", result.Errors);
+                        }
+                    }
+                }
+
+                //if there are users to remove from the role, remove them
+                if (rmm.IdsToDelete != null)
+                {
+                    //loop through all the ids to remove from role
+                    foreach (string userId in rmm.IdsToDelete)
+                    {
+                        //find the user in the database using their id
+                        AppUser user = await _userManager.FindByIdAsync(userId);
+
+                        //attempt to remove the user from the role using the UserManager
+                        result = await _userManager.RemoveFromRoleAsync(user, rmm.RoleName);
+
+                        //if attempt to remove the user from role didn't work, show the error page
+                        if (result.Succeeded == false)
+                        {
+                            //show user the error page
+                            return View("Error", result.Errors);
+                        }
+                    }
+                }
+
+                //this is the happy path - all edits worked
+                //take the user back to the RoleAdmin Index page
+                return RedirectToAction("Index");
+            }
+
+            //this is a sad path - the role was not found
+            //show the user the error page
+            return View("Error", new string[] { "Role Not Found" });
         }
     }
 }
