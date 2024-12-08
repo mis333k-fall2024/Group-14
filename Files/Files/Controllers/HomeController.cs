@@ -295,6 +295,43 @@ namespace Files.Controllers
             return View(model);
         }
 
+//cancel res for host
+        [Authorize(Roles = "Host")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CancelRes(int id)
+        {
+            // Log or debug the incoming ID
+            if (id == 0)
+            {
+                return Content("Invalid reservation ID.");
+            }
+
+            var reservation = await _context.Reservations
+                .Include(r => r.Properties)
+                .FirstOrDefaultAsync(r => r.ReservationID == id);
+
+            if (reservation == null)
+            {
+                return Content("Reservation not found.");
+            }
+
+            // Check if cancellation is allowed
+            if (reservation.CheckIn <= DateTime.Now)
+            {
+                return Content("Cannot cancel past reservations.");
+            }
+
+            // Pass the cancellation details to the view
+            ViewBag.Title = "Reservation Canceled";
+            ViewBag.ReservationId = reservation.ReservationID;
+            ViewBag.Message = "Your reservation has been canceled successfully.";
+
+            return View("CancellationConfirmation");
+        }
+
+
+
         [Authorize(Roles = "Admin")]
         public IActionResult AdminReports(DateTime? startDate, DateTime? endDate)
         {

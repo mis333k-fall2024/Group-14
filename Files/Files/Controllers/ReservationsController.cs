@@ -406,9 +406,6 @@ namespace Files.Controllers
         // Cancel reservation
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Customer")]
-        [Authorize(Roles = "Host")]
-        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Cancel(int id)
         {
             var reservation = await _context.Reservations.FindAsync(id);
@@ -421,13 +418,11 @@ namespace Files.Controllers
             // Check if the reservation is eligible for cancellation
             var currentDateTime = DateTime.Now;
             var cancellationDeadline = reservation.CheckIn.AddDays(-1).Date; // Day before CheckIn at 12:00am
-
             if (currentDateTime >= cancellationDeadline)
             {
                 TempData["Error"] = "You cannot cancel reservations within 1 day of the check-in date.";
                 return RedirectToAction(nameof(Index));
             }
-
             if (reservation.CheckIn <= currentDateTime)
             {
                 TempData["Error"] = "You cannot cancel reservations for check-in dates that have already passed.";
@@ -438,7 +433,6 @@ namespace Files.Controllers
             reservation.ReservationStatus = false; // Mark as canceled
             await _context.SaveChangesAsync();
             TempData["Message"] = "Reservation canceled successfully.";
-
             return RedirectToAction(nameof(Index));
         }
 

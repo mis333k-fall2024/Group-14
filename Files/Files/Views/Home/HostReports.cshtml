@@ -40,13 +40,14 @@
                     <td>@report.TotalReservations</td>
                     <td>
                         <!-- List reservations with cancel buttons -->
+                        <!-- List reservations with cancel buttons -->
                         <ul>
                             @foreach (var reservation in report.Reservations)
                             {
                                 <li>
                                     @if (reservation.CheckIn > DateTime.Now)
                                     {
-                                        <form asp-action="Cancel" asp-controller="Reservations" method="post" style="display:inline;">
+                                        <form asp-action="CancelRes" asp-controller="Home" method="post" style="display:inline;">
                                             @Html.AntiForgeryToken()
                                             <input type="hidden" name="id" value="@reservation.ReservationID" />
                                             <button type="submit" class="btn btn-danger btn-sm">Cancel</button>
