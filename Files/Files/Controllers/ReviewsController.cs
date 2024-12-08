@@ -93,10 +93,10 @@ namespace Files.Controllers
             }
 
             var averageRating = property.Reviews
-                .Where(r => r.DisputeStatus != StatusDispute.ValidDispute && r.DisputeStatus != StatusDispute.Disputed)
+                .Where(r => r.DisputeStatus == StatusDispute.NoDispute || r.DisputeStatus == StatusDispute.InvalidDispute)
                 .Any()
                 ? (decimal?)property.Reviews
-                    .Where(r => r.DisputeStatus != StatusDispute.ValidDispute && r.DisputeStatus != StatusDispute.Disputed)
+                    .Where(r => r.DisputeStatus == StatusDispute.NoDispute || r.DisputeStatus == StatusDispute.InvalidDispute)
                     .Average(r => r.Rating)
                 : null;
 
