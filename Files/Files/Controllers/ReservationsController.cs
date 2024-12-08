@@ -113,6 +113,54 @@ namespace Files.Controllers
             return RedirectToAction("Cart");
         }
 
+        // Add this new method for assigning a user to a reservation
+        public async Task<IActionResult> AssignUserToReservation(string userId, int reservationId, int propertyId)
+        {
+            if (string.IsNullOrEmpty(userId))
+            {
+                return View("Error", new string[] { "Please specify a user to assign to the reservation." });
+            }
+
+            // Find the reservation in the database
+            var dbReservation = await _context.Reservations
+                .Include(r => r.AppUsers) // Include the user
+                .FirstOrDefaultAsync(r => r.ReservationID == reservationId);
+
+            if (dbReservation == null)
+            {
+                return View("Error", new string[] { "Reservation not found." });
+            }
+
+            // Find the user in the database
+            var appUser = await _context.Users.FirstOrDefaultAsync(u => u.Id == userId);
+
+            if (appUser == null)
+            {
+                return View("Error", new string[] { "User not found." });
+            }
+
+            // Assign the user to the reservation
+            dbReservation.AppUsers = appUser;
+
+            // Find the property in the database
+            var dbProperty = await _context.Properties.FirstOrDefaultAsync(p => p.PropertyID == propertyId);
+
+            if (dbProperty == null)
+            {
+                return View("Error", new string[] { "Property not found." });
+            }
+
+            dbReservation.Properties = dbProperty;
+
+            // Update the reservation in the database
+            _context.Update(dbReservation);
+            await _context.SaveChangesAsync();
+
+            // Redirect to a relevant page (e.g., reservation details)
+            return RedirectToAction("Details", new { id = dbReservation.ReservationID });
+        }
+
+
         // POST: Reservations/AddToCart
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -226,14 +274,12 @@ namespace Files.Controllers
             return Json(new { isAvailable = true });
         }
 
-
-        // POST: Reservations/Confirm
+        //post;Confirm
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Confirm()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-
             var reservationList = HttpContext.Session.GetObjectFromJson<ReservationList>("Reservations");
 
             if (reservationList == null || !reservationList.Reservations.Any())
@@ -247,13 +293,20 @@ namespace Files.Controllers
                 ConfirmationNumber = Guid.NewGuid().ToString(),
                 TransactionDate = DateTime.Now,
                 Subtotal = reservationList.TotalPrice,
-                Tax = reservationList.TotalPrice * 0.1m,
-                GrandTotal = reservationList.TotalPrice + (reservationList.TotalPrice * 0.1m),
+                Tax = reservationList.TotalPrice * Reservation.TaxRate,
+                GrandTotal = reservationList.TotalPrice + (reservationList.TotalPrice * Reservation.TaxRate),
                 UserId = userId
             };
 
             try
             {
+                // Retrieve the logged-in user
+                var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == userId);
+                if (user == null)
+                {
+                    return NotFound("User not found.");
+                }
+
                 foreach (var reservation in reservationList.Reservations)
                 {
                     var property = await _context.Properties.FirstOrDefaultAsync(p => p.PropertyID == reservation.Properties.PropertyID);
@@ -262,6 +315,9 @@ namespace Files.Controllers
                     {
                         return NotFound($"Property with ID {reservation.Properties.PropertyID} not found.");
                     }
+
+                    // Assign the logged-in user to the reservation
+                    reservation.AppUsers = user;
 
                     // Assign the next confirmation number using the utility
                     reservation.ConfirmationNumber = GenerateNextConfirmationNumber.GetNextConfirmationNumber(_context);
@@ -283,6 +339,7 @@ namespace Files.Controllers
             TempData["Message"] = "Your reservations have been confirmed!";
             return RedirectToAction("ThankYou", new { confirmationNumber = reservationList.Reservations.FirstOrDefault()?.ConfirmationNumber });
         }
+
 
         // GET: Reservations/ThankYou
         public IActionResult ThankYou(int confirmationNumber)

@@ -29,19 +29,4 @@ namespace Files
         [AgeValidation(ErrorMessage = "You must be at least 18 years old.")]
         public DateTime DOB { get; set; }
     }
-
-    // Custom validation to ensure the user is at least 18 years old
-    public class AgeValidation : ValidationAttribute
-    {
-        public override bool IsValid(object value)
-        {
-            var dob = (DateTime)value;
-            var age = DateTime.Now.Year - dob.Year;
-
-            if (DateTime.Now.DayOfYear < dob.DayOfYear)
-                age--;
-
-            return age >= 18;
-        }
-    }
 }

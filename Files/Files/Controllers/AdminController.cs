@@ -35,7 +35,7 @@ namespace Files.Controllers
             if (ModelState.IsValid)
             {
                 var DOB = model.DOB;
-                 if ((DateTime.Now - model.DOB).TotalDays / 365 < 18
+                 if ((DateTime.Now - model.DOB).TotalDays / 365 < 18)
                 {
                     ModelState.AddModelError("", "Admins must be at least 18 years old to create an account.");
                     return View(model);
