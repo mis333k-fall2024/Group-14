@@ -1,4 +1,3 @@
-using System;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Security.Claims;
@@ -21,6 +20,7 @@ namespace Files.Controllers
             _context = context;
         }
 
+
         // GET: Reservations
         public async Task<IActionResult> Index()
         {
@@ -29,6 +29,7 @@ namespace Files.Controllers
                 .ToListAsync();
             return View(reservations);
         }
+
 
         // GET: Reservations/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -301,6 +302,34 @@ namespace Files.Controllers
             ViewBag.ConfirmationNumber = confirmationNumber;
             return View();
         }
+
+        //cancel reservation
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Cancel(int id)
+        {
+            var reservation = await _context.Reservations.FindAsync(id);
+
+            if (reservation == null)
+            {
+                return NotFound();
+            }
+
+            // Only allow canceling future reservations
+            if (reservation.CheckIn > DateTime.Now)
+            {
+                reservation.ReservationStatus = false; // Mark as canceled
+                await _context.SaveChangesAsync();
+                TempData["Message"] = "Reservation canceled successfully.";
+            }
+            else
+            {
+                TempData["Error"] = "You cannot cancel past reservations.";
+            }
+
+            return RedirectToAction(nameof(Index));
+        }
+
 
 
         // --- Admin Functionality to Make Reservations for Customers ---

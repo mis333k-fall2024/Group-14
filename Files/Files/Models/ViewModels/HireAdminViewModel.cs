@@ -3,10 +3,11 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Files
 {
-    public class ModifyProfileViewModel
+    public class HireAdminViewModel
     {
         [Required]
-        public string UserId { get; set; }
+        [EmailAddress]
+        public string Email { get; set; }
 
         [Required]
         [StringLength(50, ErrorMessage = "First name cannot be longer than 50 characters.")]
@@ -26,11 +27,15 @@ namespace Files
 
         [Required]
         [DataType(DataType.Date)]
-        [AgeValidation(ErrorMessage = "You must be at least 18 years old.")]
+        [AgeValidation(ErrorMessage = "Admin must be at least 18 years old.")]
         public DateTime DOB { get; set; }
+
+        [Required]
+        [DataType(DataType.Password)]
+        public string Password { get; set; }
     }
 
-    // Custom validation to ensure the user is at least 18 years old
+    // Custom validation attribute to check if the user is at least 18 years old
     public class AgeValidation : ValidationAttribute
     {
         public override bool IsValid(object value)
