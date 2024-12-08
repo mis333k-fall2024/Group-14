@@ -6,57 +6,48 @@
 
 <h1>Reviews for @ViewData["PropertyName"]</h1>
 
-<p>
-    <a asp-action="Create" asp-route-propertyId="@ViewData["PropertyId"]" class="btn btn-primary" style="background-color: #CC5500;">Write a Review</a>
+@if (User.IsInRole("Customer"))
+{
+    <p>
+        <a asp-action="Create" asp-route-propertyId="@ViewData["PropertyId"]" class="btn btn-primary" style="background-color: #CC5500;">Write a Review</a>
+    </p>
+}
 
-</p>
-  
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Rating</th>
-                <th>Review</th>
-                @if (User.IsInRole("Admin"))
-                {
-                    <th>Host Comments</th>
-                    <th>Dispute Status</th>
-                }
-                @if (User.IsInRole("Host"))
-                {
-                    <th>Host Comments</th>
-                    <th>Dispute Status</th>
-                }
-
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
+<table class="table">
+    <thead>
+        <tr>
+            <th>Rating</th>
+            <th>Review</th>
+            @if (User.IsInRole("Admin") || User.IsInRole("Host"))
             {
-                <tr>
-                    <td>@item.Rating</td>
-                    <td>@item.TextReview</td>
-                    @if (User.IsInRole("Admin"))
-                    {
-                        <td>@item.HostComments</td>
-                        <td>@item.DisputeStatus</td>
-                    }
-                    <td>
-                        @if (User.IsInRole("Host"))
-                        {
-                        <td>@item.HostComments</td>
-                        <td>@item.DisputeStatus</td>
-                    }
-                        <td>
-                            <a asp-action="Details" asp-route-id="@item.ReviewID" style="color: #CC5500;">Details</a>
-                        </td>
-                    </tr>
+                <th>Host Comments</th>
+                <th>Dispute Status</th>
             }
-        </tbody>
-    </table>
-    <div>
-        <a asp-action="Index" asp-controller="Properties" style="color: #BF5700; text-decoration: none;">Back to Properties</a>
-    </div>
-    <div>
-        <a asp-action="Details" asp-controller="Properties" asp-route-id="@(ViewData["PropertyId"])" style="color: #BF5700; text-decoration: none;">Back to Property Details</a>
-    </div>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Rating</td>
+                <td>@item.TextReview</td>
+                @if (User.IsInRole("Admin") || User.IsInRole("Host"))
+                {
+                    <td>@item.HostComments</td>
+                    <td>@item.DisputeStatus</td>
+                }
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.ReviewID" style="color: #CC5500;">Details</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div>
+    <a asp-action="Index" asp-controller="Properties" style="color: #BF5700; text-decoration: none;">Back to Properties</a>
+</div>
+<div>
+    <a asp-action="Details" asp-controller="Properties" asp-route-id="@(ViewData["PropertyId"])" style="color: #BF5700; text-decoration: none;">Back to Property Details</a>
+</div>

@@ -1,34 +1,38 @@
 @model Files.Models.Review
 
-<h1>Create Review for @ViewBag.PropertyName</h1>
+<h1>Reviews for @ViewBag.PropertyName</h1>
 
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create" asp-route-propertyId="@ViewBag.PropertyId" method="post">
-            @Html.AntiForgeryToken()
+@if (User.IsInRole("Customer"))
+{
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Create" asp-route-propertyId="@ViewBag.PropertyId" method="post">
+                @Html.AntiForgeryToken()
 
-            <!-- Rating input -->
-            <div class="form-group">
-                <label asp-for="Rating" class="control-label"></label>
-                <input asp-for="Rating" class="form-control" />
-                <span asp-validation-for="Rating" class="text-danger"></span>
-            </div>
+                <!-- Rating input -->
+                <div class="form-group">
+                    <label asp-for="Rating" class="control-label"></label>
+                    <input asp-for="Rating" class="form-control" />
+                    <span asp-validation-for="Rating" class="text-danger"></span>
+                </div>
 
-            <!-- TextReview input -->
-            <div class="form-group">
-                <label asp-for="TextReview" class="control-label"></label>
-                <textarea asp-for="TextReview" class="form-control"></textarea>
-                <span asp-validation-for="TextReview" class="text-danger"></span>
-            </div>
+                <!-- TextReview input -->
+                <div class="form-group">
+                    <label asp-for="TextReview" class="control-label"></label>
+                    <textarea asp-for="TextReview" class="form-control"></textarea>
+                    <span asp-validation-for="TextReview" class="text-danger"></span>
+                </div>
 
-            <!-- Submit button -->
-            <div class="form-group">
-                <button type="submit" class="btn btn-primary">Submit Review</button>
-            </div>
-        </form>
+                <!-- Submit button -->
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Submit Review</button>
+                </div>
+            </form>
+        </div>
     </div>
-</div>
-@if (!ViewData.ModelState.IsValid)
+}
+
+@if (!ViewData.ModelState.IsValid && User.IsInRole("Customer"))
 {
     <div class="alert alert-danger">
         <p>There were errors with your submission:</p>
@@ -40,6 +44,7 @@
         </ul>
     </div>
 }
+
 <div>
     <a asp-action="Index" asp-route-propertyId="@ViewBag.PropertyId">Back to Reviews</a>
 </div>
