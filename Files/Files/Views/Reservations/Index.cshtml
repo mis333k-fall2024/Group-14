@@ -1,88 +1,82 @@
-@model IEnumerable<Files.Models.Reservation>
+@model ReservationHistoryViewModel
 
-@{
-    ViewData["Title"] = "Reservation History";
-}
+<h2>Reservation History</h2>
 
-<h1>Index</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+<h3>Future Reservations</h3>
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.CheckIn)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CheckOut)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NumOfGuests)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.WeekdayPrice)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.WeekendPrice)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CleaningFee)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DiscountRate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ReservationStatus)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ConfirmationNumber)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Properties.PropertyNumber)
-            </th>
-            <th></th>
+            <th>Property</th>
+            <th>Check-In</th>
+            <th>Check-Out</th>
+            <th>Status</th>
+            <th>Action</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @foreach (var reservation in Model.FutureReservations)
         {
             <tr>
+                <td>@reservation.Properties.Street, @reservation.Properties.City</td>
+                <td>@reservation.CheckIn.ToShortDateString()</td>
+                <td>@reservation.CheckOut.ToShortDateString()</td>
+                <td>@(reservation.ReservationStatus ? "Active" : "Canceled")</td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.CheckIn)
+                    <a asp-action="Details" asp-route-id="@reservation.ReservationID">View</a>
+                    @if (reservation.CheckIn > DateTime.Now)
+                    {
+                        <form asp-action="Cancel" method="post" style="display:inline;">
+                            <input type="hidden" name="id" value="@reservation.ReservationID" />
+                            <button type="submit" class="btn btn-danger btn-sm">Cancel</button>
+                        </form>
+                    }
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CheckOut)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.NumOfGuests)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.WeekdayPrice)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.WeekendPrice)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CleaningFee)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DiscountRate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ReservationStatus)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ConfirmationNumber)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Properties.PropertyNumber)
-                </td>
-                <td>
-                    <a asp-action="Details" asp-route-id="@item.ReservationID">Details</a>
+            </tr>
+        }
+    </tbody>
+</table>
 
-                </td>
+<h3>Past Reservations</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Property</th>
+            <th>Check-In</th>
+            <th>Check-Out</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var reservation in Model.PastReservations)
+        {
+            <tr>
+                <td>@reservation.Properties.Street, @reservation.Properties.City</td>
+                <td>@reservation.CheckIn.ToShortDateString()</td>
+                <td>@reservation.CheckOut.ToShortDateString()</td>
+                <td>@(reservation.ReservationStatus ? "Active" : "Canceled")</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h3>Canceled Reservations</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Property</th>
+            <th>Check-In</th>
+            <th>Check-Out</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var reservation in Model.CanceledReservations)
+        {
+            <tr>
+                <td>@reservation.Properties.Street, @reservation.Properties.City</td>
+                <td>@reservation.CheckIn.ToShortDateString()</td>
+                <td>@reservation.CheckOut.ToShortDateString()</td>
+                <td>Canceled</td>
             </tr>
         }
     </tbody>

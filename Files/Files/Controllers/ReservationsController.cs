@@ -22,13 +22,54 @@ namespace Files.Controllers
 
 
         // GET: Reservations
+        [Authorize]
         public async Task<IActionResult> Index()
         {
-            var reservations = await _context.Reservations
-                .Include(r => r.Properties) // Ensure Properties is included
-                .ToListAsync();
-            return View(reservations);
+            List<Reservation> reservations;
+
+            if (User.IsInRole("Host"))
+            {
+                // Retrieve all reservations for properties hosted by the logged-in user (Host role)
+                string hostId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+                reservations = await _context.Reservations
+                    .Include(r => r.Properties) // Include property details
+                    .Include(r => r.AppUsers)  // Include user details
+                    .Where(r => r.Properties.AppUsers.Id == hostId) // Filter by host's properties
+                    .ToListAsync();
+            }
+            else if (User.IsInRole("Customer"))
+            {
+                // Retrieve reservations for the logged-in customer
+                string customerId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+                reservations = await _context.Reservations
+                    .Include(r => r.Properties) // Include property details
+                    .Include(r => r.AppUsers)  // Include user details
+                    .Where(r => r.AppUsers.Id == customerId) // Filter by logged-in user ID
+                    .ToListAsync();
+            }
+            else
+            {
+                return Forbid(); // Forbid access for other roles
+            }
+
+            // Separate reservations into categories based on their status
+            var pastReservations = reservations.Where(r => r.CheckOut < DateTime.Now).ToList();
+            var futureReservations = reservations.Where(r => r.CheckIn > DateTime.Now && r.ReservationStatus).ToList();
+            var canceledReservations = reservations.Where(r => !r.ReservationStatus).ToList();
+
+            // Pass categorized reservations to the view using a ViewModel
+            var model = new ReservationHistoryViewModel
+            {
+                PastReservations = pastReservations,
+                FutureReservations = futureReservations,
+                CanceledReservations = canceledReservations
+            };
+
+            return View(model);
         }
+
 
 
         // GET: Reservations/Details/5
