@@ -44,6 +44,23 @@
         }
     </tbody>
 </table>
+@if (User.IsInRole("Host"))
+{
+    <div>
+        <a asp-action="HostDispute" asp-route-propertyId="@ViewData["PropertyId"]" style="color: #BF5700;">
+            Dispute Reviews
+        </a>
+
+    </div>
+}
+
+@if (User.IsInRole("Admin"))
+{
+    <div>
+        <a asp-action="AdminDispute" asp-route-propertyId="@ViewData["PropertyId"]">View Disputed Reviews</a>
+
+    </div>
+}
 
 <div>
     <a asp-action="Index" asp-controller="Properties" style="color: #BF5700; text-decoration: none;">Back to Properties</a>
