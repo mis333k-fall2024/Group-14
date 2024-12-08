@@ -6,10 +6,10 @@
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.ItemProperties.Files PreferredExecutionTarget="/Applications/Google Chrome.app" />
   <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Files/Controllers/ReservationsController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Files/Views/Home/Index.cshtml">
     <Files>
-      <File FileName="Files/Controllers/ReservationsController.cs" Line="72" Column="1" />
-      <File FileName="Files/Controllers/ReviewsController.cs" Line="130" Column="1" />
+      <File FileName="Files/Controllers/ReservationsController.cs" Line="39" Column="36" />
+      <File FileName="Files/Controllers/ReviewsController.cs" />
       <File FileName="Files/Models/Reservation.cs" />
       <File FileName="Files/Models/ViewModels/ModifyProfileViewModel.cs" />
       <File FileName="Files/Controllers/PropertiesController.cs" />
@@ -17,22 +17,22 @@
       <File FileName="Files/Views/Reservations/MakeReservation.cshtml" />
       <File FileName="Files/Models/ViewModels/ReservationViewModel.cs" />
       <File FileName="Files/Controllers/AccountController.cs" />
-      <File FileName="Files/Controllers/HomeController.cs" />
+      <File FileName="Files/Controllers/HomeController.cs" Line="1" Column="1" />
       <File FileName="Files/Models/ViewModels/HostReportViewModel.cs" />
       <File FileName="Files/Program.cs" />
       <File FileName="Files/Views/Reservations/ThankYou.cshtml" />
       <File FileName="Files/Utilities/GenerateNextConfirmationNumber.cs" />
       <File FileName="Files/Views/Reservations/Cart.cshtml" />
       <File FileName="Files/Models/Property.cs" />
-      <File FileName="Files/Views/Reservations/Index.cshtml" Line="84" Column="1" />
+      <File FileName="Files/Views/Reservations/Index.cshtml" />
       <File FileName="Files/Models/ReservationList.cs" />
       <File FileName="Files/Views/Properties/Details.cshtml" />
       <File FileName="Files/Views/Shared/Error.cshtml" />
       <File FileName="Files/Views/Reservations/Transaction.cshtml" />
-      <File FileName="Files/Views/Home/Index.cshtml" />
+      <File FileName="Files/Views/Home/Index.cshtml" Line="44" Column="1" />
       <File FileName="Files/Models/Transaction.cs" />
       <File FileName="Files/Controllers/RoleAdminController.cs" />
-      <File FileName="Files/Models/ViewModels/ReservationHistoryViewModel.cs" Line="1" Column="1" />
+      <File FileName="Files/Models/ViewModels/ReservationHistoryViewModel.cs" />
       <File FileName="Files/Views/Reservations/Create.cshtml" />
       <File FileName="Files/Controllers/AdminController.cs" />
       <File FileName="Files/Models/Review.cs" />
@@ -41,20 +41,22 @@
       <File FileName="Files/Views/Properties/Edit.cshtml" />
       <File FileName="Files/Views/Properties/Index.cshtml" />
       <File FileName="Files/Views/Properties/Create.cshtml" />
+      <File FileName="Files/Views/Reservations/Details.cshtml" Line="69" Column="6" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="Files" expanded="True">
             <Node name="Files">
-              <Node name="Controllers" expanded="True">
-                <Node name="ReservationsController.cs" selected="True" />
-              </Node>
+              <Node name="Controllers" expanded="True" />
               <Node name="Models" expanded="True">
                 <Node name="ViewModels" expanded="True" />
               </Node>
               <Node name="Views" expanded="True">
-                <Node name="Reviews" expanded="True" />
+                <Node name="Home" expanded="True">
+                  <Node name="Index.cshtml" selected="True" />
+                </Node>
+                <Node name="Reservations" expanded="True" />
               </Node>
             </Node>
           </Node>

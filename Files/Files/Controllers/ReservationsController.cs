@@ -27,15 +27,15 @@ namespace Files.Controllers
         {
             List<Reservation> reservations;
 
-            if (User.IsInRole("Host"))
+            if (User.IsInRole("Admin"))
             {
                 // Retrieve all reservations for properties hosted by the logged-in user (Host role)
                 string hostId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
+                // Admin can view all reservations
                 reservations = await _context.Reservations
                     .Include(r => r.Properties) // Include property details
                     .Include(r => r.AppUsers)  // Include user details
-                    .Where(r => r.Properties.AppUsers.Id == hostId) // Filter by host's properties
                     .ToListAsync();
             }
             else if (User.IsInRole("Customer"))
@@ -69,6 +69,8 @@ namespace Files.Controllers
 
             return View(model);
         }
+
+
 
 
 
@@ -401,7 +403,7 @@ namespace Files.Controllers
             return View();
         }
 
-        //cancel reservation
+        // Cancel reservation
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Cancel(int id)
@@ -410,23 +412,33 @@ namespace Files.Controllers
 
             if (reservation == null)
             {
-                return NotFound();
+                return NotFound("Reservation not found.");
             }
 
-            // Only allow canceling future reservations
-            if (reservation.CheckIn > DateTime.Now)
+            // Check if the reservation is eligible for cancellation
+            var currentDateTime = DateTime.Now;
+            var cancellationDeadline = reservation.CheckIn.AddDays(-1).Date; // Day before CheckIn at 12:00am
+
+            if (currentDateTime >= cancellationDeadline)
             {
-                reservation.ReservationStatus = false; // Mark as canceled
-                await _context.SaveChangesAsync();
-                TempData["Message"] = "Reservation canceled successfully.";
+                TempData["Error"] = "You cannot cancel reservations within 1 day of the check-in date.";
+                return RedirectToAction(nameof(Index));
             }
-            else
+
+            if (reservation.CheckIn <= currentDateTime)
             {
-                TempData["Error"] = "You cannot cancel past reservations.";
+                TempData["Error"] = "You cannot cancel reservations for check-in dates that have already passed.";
+                return RedirectToAction(nameof(Index));
             }
+
+            // Mark the reservation as canceled
+            reservation.ReservationStatus = false; // Mark as canceled
+            await _context.SaveChangesAsync();
+            TempData["Message"] = "Reservation canceled successfully.";
 
             return RedirectToAction(nameof(Index));
         }
+
 
 
 
@@ -508,78 +520,7 @@ namespace Files.Controllers
             model.Properties = _context.Properties.ToList();
             return View(model);
         }
-
-
-        // GET: ResAtt/Delete/5
-        [Authorize(Roles = "Admin")]
-        [Authorize(Roles = "Host")]
-        [Authorize(Roles = "Customer")]
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var reservation = await _context.Reservations
-                .Include(r => r.AppUsers) //by user
-                .Include(r => r.Properties) // Include navigation property
-                .FirstOrDefaultAsync(r => r.ReservationID == id);
-
-            if (reservation == null)
-            {
-                return NotFound();
-            }
-
-            ViewData["Properties"] = reservation.Properties;
-
-            var reservationList = new ReservationList
-            {
-                Reservations = await _context.Reservations.ToListAsync()
-            };
-
-            ViewBag.TotalPrice = reservationList.TotalPrice;
-
-            return View(reservation);
-        }
-
-        // POST: Reservations/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin")]
-        [Authorize(Roles = "Host")]
-        [Authorize(Roles = "Customer")]
-        public async Task<IActionResult> DeleteReservationConfirmed(int id)
-        {
-            // Fetch the reservation to delete
-            var reservation = await _context.Reservations
-                .FirstOrDefaultAsync(r => r.ReservationID == id);
-
-            if (reservation == null)
-            {
-                return NotFound();
-            }
-
-            // Check if the reservation starts within a day or less
-            if (reservation.CheckIn <= DateTime.Now.AddDays(1))
-            {
-                TempData["ErrorMessage"] = "You cannot delete a reservation that starts within a day or less.";
-                return RedirectToAction("Index"); // Redirect back to the reservations list
-            }
-            // Remove the reservation from the database
-            _context.Reservations.Remove(reservation);
-            await _context.SaveChangesAsync();
-
-            // Update ReservationList and recalculate TotalPrice
-            var reservationList = new ReservationList
-            {
-                Reservations = await _context.Reservations.ToListAsync()
-            };
-            var updatedTotalPrice = reservationList.TotalPrice;
-
-            TempData["Message"] = $"Reservation deleted successfully. New total price for all reservations: {updatedTotalPrice:C}.";
-
-            return RedirectToAction("Index"); // Redirect to the reservations list or another appropriate page
-        }
     }
 }
+
+        

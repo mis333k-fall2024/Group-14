@@ -6,24 +6,38 @@
     <h1>Welcome to BevoBnB!</h1>
     <img src="/images/Logo.JPG" alt="Website Logo" style="width:200px; height:auto; margin-top: 20px;" />
 
-    <div>
+    <div style="margin-bottom: 20px;">
         <a asp-action="Index" asp-controller="Properties" class="btn" style="margin-top: 30px; background-color: #BF5700; color: white; padding: 10px 20px; border: none; border-radius: 5px; text-decoration: none;">View Our Properties</a>
     </div>
 
     @if (User.Identity.IsAuthenticated)
     {
-        <div style="margin-top: 20px;">
-            <a asp-action="Index" asp-controller="Reservations" class="btn btn-info" style="background-color: #BF5700; border-color: #BF5700; color: white;">View Reservations</a>
-     
+        @if (User.IsInRole("Customer"))
+        {
+            <div style="margin-bottom: 20px;">
+                <a asp-action="Index" asp-controller="Reservations" class="btn btn-info" style="background-color: #BF5700; border-color: #BF5700; color: white;">View Reservations</a>
+            </div>
+        }
+
+        @if (User.IsInRole("Admin"))
+        {
+            <div style="margin-bottom: 20px;">
+                <a asp-action="Index" asp-controller="Reservations" class="btn btn-info" style="background-color: #BF5700; border-color: #BF5700; color: white;">View Reservations</a>
+            </div>
+        }
 
         @if (User.IsInRole("Host"))
         {
-            <a asp-action="HostReports" asp-controller="Home" class="btn btn-primary">Host Reports</a>
+            <div style="margin-bottom: 20px;">
+                <a asp-action="HostReports" asp-controller="Home" class="btn btn-primary">Host Reports</a>
+            </div>
         }
+
         @if (User.IsInRole("Admin"))
         {
-            <a asp-action="Index" asp-controller="RoleAdmin" class="btn btn-warning">Manage Users</a>
+            <div style="margin-bottom: 20px;">
+                <a asp-action="Index" asp-controller="RoleAdmin" class="btn btn-warning">Manage Users</a>
+            </div>
         }
-    </div>
     }
 </div>
