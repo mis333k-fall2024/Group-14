@@ -6,9 +6,9 @@
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.ItemProperties.Files PreferredExecutionTarget="/Applications/Google Chrome.app" />
   <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Files/Views/Home/Index.cshtml">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Files/Views/Properties/Details.cshtml">
     <Files>
-      <File FileName="Files/Controllers/ReservationsController.cs" Line="427" Column="14" />
+      <File FileName="Files/Controllers/ReservationsController.cs" />
       <File FileName="Files/Controllers/ReviewsController.cs" />
       <File FileName="Files/Models/Reservation.cs" />
       <File FileName="Files/Models/ViewModels/ModifyProfileViewModel.cs" />
@@ -17,19 +17,19 @@
       <File FileName="Files/Views/Reservations/MakeReservation.cshtml" />
       <File FileName="Files/Models/ViewModels/ReservationViewModel.cs" />
       <File FileName="Files/Controllers/AccountController.cs" />
-      <File FileName="Files/Controllers/HomeController.cs" Line="330" Column="53" />
+      <File FileName="Files/Controllers/HomeController.cs" Line="175" Column="14" />
       <File FileName="Files/Models/ViewModels/HostReportViewModel.cs" />
       <File FileName="Files/Program.cs" />
       <File FileName="Files/Views/Reservations/ThankYou.cshtml" />
-      <File FileName="Files/Utilities/GenerateNextConfirmationNumber.cs" />
+      <File FileName="Files/Utilities/GenerateNextConfirmationNumber.cs" Line="9" Column="106" />
       <File FileName="Files/Views/Reservations/Cart.cshtml" />
-      <File FileName="Files/Models/Property.cs" />
-      <File FileName="Files/Views/Reservations/Index.cshtml" Line="1" Column="1" />
+      <File FileName="Files/Models/Property.cs" Line="1" Column="1" />
+      <File FileName="Files/Views/Reservations/Index.cshtml" />
       <File FileName="Files/Models/ReservationList.cs" />
-      <File FileName="Files/Views/Properties/Details.cshtml" />
+      <File FileName="Files/Views/Properties/Details.cshtml" Line="44" Column="85" />
       <File FileName="Files/Views/Shared/Error.cshtml" />
       <File FileName="Files/Views/Reservations/Transaction.cshtml" />
-      <File FileName="Files/Views/Home/Index.cshtml" Line="32" Column="161" />
+      <File FileName="Files/Views/Home/Index.cshtml" />
       <File FileName="Files/Models/Transaction.cs" />
       <File FileName="Files/Controllers/RoleAdminController.cs" />
       <File FileName="Files/Models/ViewModels/ReservationHistoryViewModel.cs" />
@@ -42,21 +42,27 @@
       <File FileName="Files/Views/Properties/Index.cshtml" />
       <File FileName="Files/Views/Properties/Create.cshtml" />
       <File FileName="Files/Views/Reservations/Details.cshtml" />
-      <File FileName="Files/Views/Home/HostReports.cshtml" Line="59" Column="30" />
+      <File FileName="Files/Views/Home/HostReports.cshtml" />
       <File FileName="Files/Models/ViewModels/MakeReservationViewModel.cs" />
-      <File FileName="Files/Views/Home/CancellationConfirmation.cshtml" Line="7" Column="63" />
+      <File FileName="Files/Views/Home/CancellationConfirmation.cshtml" />
+      <File FileName="Files/Views/Reviews/AdminDispute.cshtml" Line="1" Column="1" />
+      <File FileName="Files/Seeding/SeedUsers.cs" Line="1240" Column="16" />
+      <File FileName="Files/Seeding/SeedRoles.cs" Line="1" Column="1" />
+      <File FileName="Files/Models/AppUser.cs" Line="1" Column="1" />
+      <File FileName="Files/Seeding/SeedReviews.cs" Line="1" Column="1" />
+      <File FileName="Files/Seeding/SeedCategories.cs" Line="1" Column="1" />
+      <File FileName="Files/Seeding/SeedProperties.cs" Line="12" Column="2" />
+      <File FileName="Files/Seeding/SeedReservations.cs" Line="853" Column="16" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="Files" expanded="True">
             <Node name="Files">
-              <Node name="Controllers" expanded="True" />
               <Node name="Views">
-                <Node name="Home">
-                  <Node name="Index.cshtml" selected="True" />
+                <Node name="Properties">
+                  <Node name="Details.cshtml" selected="True" />
                 </Node>
-                <Node name="Reservations" expanded="True" />
               </Node>
             </Node>
           </Node>

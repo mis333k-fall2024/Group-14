@@ -70,10 +70,11 @@ namespace Files.Controllers
             }
 
 
-            // Start with the full list of properties
+            // Start with the full list of properties, filtered by PropertyStatus
             IQueryable<Property> query = _context.Properties
                 .Include(p => p.Categories)
-                .Include(p => p.Reviews);
+                .Include(p => p.Reviews)
+                .Where(p => p.PropertyStatus == true); // Only include properties where PropertyStatus is true
 
 
             // Check-In and Check-Out Date filter

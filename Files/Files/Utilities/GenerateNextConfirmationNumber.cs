@@ -6,7 +6,7 @@ namespace Files.Utilities
     {
         public static int GetNextConfirmationNumber(AppDbContext context)
         {
-            const int START_NUMBER = 21936; // Starting number for confirmation numbers
+            const int START_NUMBER = 21936; // Starting number for confirmation numbers after seeded data
 
             int maxConfirmationNumber = context.Reservations.Any()
                 ? context.Reservations.Max(r => r.ConfirmationNumber)

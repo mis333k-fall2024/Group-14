@@ -1,4 +1,3 @@
-
 using Files.DAL;
 using Files.Models;
 using Files.Utilities;
@@ -34,6 +33,7 @@ namespace Files.Seeding
                 NumOfGuests = 1,
                 ConfirmationNumber = 21900,
                 ReservationStatus = true,
+
             });
 
             AllReservations.Add(new Reservation
@@ -50,6 +50,7 @@ namespace Files.Seeding
                 NumOfGuests = 2,
                 ConfirmationNumber = 21901,
                 ReservationStatus = true,
+
             });
 
             AllReservations.Add(new Reservation
@@ -65,7 +66,8 @@ namespace Files.Seeding
                 DiscountRate = 0.16m,
                 NumOfGuests = 14,
                 ConfirmationNumber = 21901,
-                ReservationStatus = true,
+                ReservationStatus = false,
+
             });
 
             AllReservations.Add(new Reservation
@@ -82,6 +84,7 @@ namespace Files.Seeding
                 NumOfGuests = 1,
                 ConfirmationNumber = 21902,
                 ReservationStatus = true,
+
             });
 
             AllReservations.Add(new Reservation
@@ -98,6 +101,7 @@ namespace Files.Seeding
                 NumOfGuests = 9,
                 ConfirmationNumber = 21903,
                 ReservationStatus = true,
+
             });
 
             AllReservations.Add(new Reservation
@@ -114,6 +118,7 @@ namespace Files.Seeding
                 NumOfGuests = 3,
                 ConfirmationNumber = 21904,
                 ReservationStatus = true,
+
             });
 
             AllReservations.Add(new Reservation
@@ -130,6 +135,7 @@ namespace Files.Seeding
                 NumOfGuests = 12,
                 ConfirmationNumber = 21905,
                 ReservationStatus = true,
+
             });
 
             AllReservations.Add(new Reservation
@@ -146,6 +152,7 @@ namespace Files.Seeding
                 NumOfGuests = 1,
                 ConfirmationNumber = 21906,
                 ReservationStatus = true,
+
             });
 
             AllReservations.Add(new Reservation
@@ -162,6 +169,7 @@ namespace Files.Seeding
                 NumOfGuests = 5,
                 ConfirmationNumber = 21907,
                 ReservationStatus = true,
+
             });
 
             AllReservations.Add(new Reservation
@@ -178,6 +186,7 @@ namespace Files.Seeding
                 NumOfGuests = 11,
                 ConfirmationNumber = 21908,
                 ReservationStatus = true,
+
             });
 
             AllReservations.Add(new Reservation
@@ -193,7 +202,8 @@ namespace Files.Seeding
                 DiscountRate = 0.17m,
                 NumOfGuests = 10,
                 ConfirmationNumber = 21909,
-                ReservationStatus = true,
+                ReservationStatus = false,
+
             });
 
             AllReservations.Add(new Reservation
@@ -210,6 +220,7 @@ namespace Files.Seeding
                 NumOfGuests = 13,
                 ConfirmationNumber = 21910,
                 ReservationStatus = true,
+
             });
 
             AllReservations.Add(new Reservation
@@ -226,6 +237,7 @@ namespace Files.Seeding
                 NumOfGuests = 9,
                 ConfirmationNumber = 21911,
                 ReservationStatus = true,
+
             });
 
             AllReservations.Add(new Reservation
@@ -241,7 +253,8 @@ namespace Files.Seeding
                 DiscountRate = 0.00m,
                 NumOfGuests = 14,
                 ConfirmationNumber = 21912,
-                ReservationStatus = true,
+                ReservationStatus = false,
+
             });
 
             AllReservations.Add(new Reservation
@@ -258,6 +271,7 @@ namespace Files.Seeding
                 NumOfGuests = 7,
                 ConfirmationNumber = 21913,
                 ReservationStatus = true,
+
             });
 
             AllReservations.Add(new Reservation
@@ -274,6 +288,7 @@ namespace Files.Seeding
                 NumOfGuests = 12,
                 ConfirmationNumber = 21914,
                 ReservationStatus = true,
+
             });
 
             AllReservations.Add(new Reservation
@@ -290,6 +305,7 @@ namespace Files.Seeding
                 NumOfGuests = 11,
                 ConfirmationNumber = 21915,
                 ReservationStatus = true,
+
             });
 
             AllReservations.Add(new Reservation
@@ -306,6 +322,7 @@ namespace Files.Seeding
                 NumOfGuests = 3,
                 ConfirmationNumber = 21916,
                 ReservationStatus = true,
+
             });
 
             AllReservations.Add(new Reservation
@@ -322,6 +339,7 @@ namespace Files.Seeding
                 NumOfGuests = 10,
                 ConfirmationNumber = 21917,
                 ReservationStatus = true,
+
             });
 
             AllReservations.Add(new Reservation
@@ -338,6 +356,7 @@ namespace Files.Seeding
                 NumOfGuests = 11,
                 ConfirmationNumber = 21918,
                 ReservationStatus = true,
+
             });
 
             AllReservations.Add(new Reservation
@@ -354,6 +373,7 @@ namespace Files.Seeding
                 NumOfGuests = 12,
                 ConfirmationNumber = 21919,
                 ReservationStatus = true,
+
             });
 
             AllReservations.Add(new Reservation
@@ -370,6 +390,7 @@ namespace Files.Seeding
                 NumOfGuests = 10,
                 ConfirmationNumber = 21919,
                 ReservationStatus = true,
+
             });
 
             AllReservations.Add(new Reservation
@@ -386,6 +407,7 @@ namespace Files.Seeding
                 NumOfGuests = 12,
                 ConfirmationNumber = 21919,
                 ReservationStatus = true,
+
             });
 
             AllReservations.Add(new Reservation
@@ -402,6 +424,7 @@ namespace Files.Seeding
                 NumOfGuests = 10,
                 ConfirmationNumber = 21919,
                 ReservationStatus = true,
+
             });
 
             AllReservations.Add(new Reservation
@@ -418,6 +441,7 @@ namespace Files.Seeding
                 NumOfGuests = 1,
                 ConfirmationNumber = 21920,
                 ReservationStatus = true,
+
             });
 
             AllReservations.Add(new Reservation
@@ -434,6 +458,7 @@ namespace Files.Seeding
                 NumOfGuests = 8,
                 ConfirmationNumber = 21921,
                 ReservationStatus = true,
+
             });
 
             AllReservations.Add(new Reservation
@@ -450,6 +475,7 @@ namespace Files.Seeding
                 NumOfGuests = 10,
                 ConfirmationNumber = 21921,
                 ReservationStatus = true,
+
             });
 
             AllReservations.Add(new Reservation
@@ -466,6 +492,7 @@ namespace Files.Seeding
                 NumOfGuests = 3,
                 ConfirmationNumber = 21923,
                 ReservationStatus = true,
+
             });
 
             AllReservations.Add(new Reservation
@@ -481,7 +508,8 @@ namespace Files.Seeding
                 DiscountRate = 0.09m,
                 NumOfGuests = 13,
                 ConfirmationNumber = 21923,
-                ReservationStatus = true,
+                ReservationStatus = false,
+
             });
 
             AllReservations.Add(new Reservation
@@ -498,6 +526,7 @@ namespace Files.Seeding
                 NumOfGuests = 1,
                 ConfirmationNumber = 21924,
                 ReservationStatus = true,
+
             });
 
             AllReservations.Add(new Reservation
@@ -514,6 +543,7 @@ namespace Files.Seeding
                 NumOfGuests = 5,
                 ConfirmationNumber = 21925,
                 ReservationStatus = true,
+
             });
 
             AllReservations.Add(new Reservation
@@ -530,6 +560,7 @@ namespace Files.Seeding
                 NumOfGuests = 8,
                 ConfirmationNumber = 21925,
                 ReservationStatus = true,
+
             });
 
             AllReservations.Add(new Reservation
@@ -546,6 +577,7 @@ namespace Files.Seeding
                 NumOfGuests = 4,
                 ConfirmationNumber = 21925,
                 ReservationStatus = true,
+
             });
 
             AllReservations.Add(new Reservation
@@ -561,7 +593,8 @@ namespace Files.Seeding
                 DiscountRate = 0.00m,
                 NumOfGuests = 6,
                 ConfirmationNumber = 21925,
-                ReservationStatus = true,
+                ReservationStatus = false,
+
             });
 
             AllReservations.Add(new Reservation
@@ -578,6 +611,7 @@ namespace Files.Seeding
                 NumOfGuests = 1,
                 ConfirmationNumber = 21925,
                 ReservationStatus = true,
+
             });
 
             AllReservations.Add(new Reservation
@@ -594,6 +628,7 @@ namespace Files.Seeding
                 NumOfGuests = 13,
                 ConfirmationNumber = 21926,
                 ReservationStatus = true,
+
             });
 
             AllReservations.Add(new Reservation
@@ -610,6 +645,7 @@ namespace Files.Seeding
                 NumOfGuests = 9,
                 ConfirmationNumber = 21927,
                 ReservationStatus = true,
+
             });
 
             AllReservations.Add(new Reservation
@@ -626,6 +662,7 @@ namespace Files.Seeding
                 NumOfGuests = 8,
                 ConfirmationNumber = 21928,
                 ReservationStatus = true,
+
             });
 
             AllReservations.Add(new Reservation
@@ -642,6 +679,7 @@ namespace Files.Seeding
                 NumOfGuests = 13,
                 ConfirmationNumber = 21929,
                 ReservationStatus = true,
+
             });
 
             AllReservations.Add(new Reservation
@@ -657,7 +695,8 @@ namespace Files.Seeding
                 DiscountRate = 0.00m,
                 NumOfGuests = 14,
                 ConfirmationNumber = 21929,
-                ReservationStatus = true,
+                ReservationStatus = false,
+
             });
 
             AllReservations.Add(new Reservation
@@ -674,6 +713,7 @@ namespace Files.Seeding
                 NumOfGuests = 1,
                 ConfirmationNumber = 21929,
                 ReservationStatus = true,
+
             });
 
             AllReservations.Add(new Reservation
@@ -689,7 +729,8 @@ namespace Files.Seeding
                 DiscountRate = 0.00m,
                 NumOfGuests = 1,
                 ConfirmationNumber = 21930,
-                ReservationStatus = true,
+                ReservationStatus = false,
+
             });
 
             AllReservations.Add(new Reservation
@@ -706,6 +747,7 @@ namespace Files.Seeding
                 NumOfGuests = 12,
                 ConfirmationNumber = 21931,
                 ReservationStatus = true,
+
             });
 
             AllReservations.Add(new Reservation
@@ -722,6 +764,7 @@ namespace Files.Seeding
                 NumOfGuests = 4,
                 ConfirmationNumber = 21932,
                 ReservationStatus = true,
+
             });
 
             AllReservations.Add(new Reservation
@@ -738,6 +781,7 @@ namespace Files.Seeding
                 NumOfGuests = 1,
                 ConfirmationNumber = 21932,
                 ReservationStatus = true,
+
             });
 
             AllReservations.Add(new Reservation
@@ -754,6 +798,7 @@ namespace Files.Seeding
                 NumOfGuests = 8,
                 ConfirmationNumber = 21932,
                 ReservationStatus = true,
+
             });
 
             AllReservations.Add(new Reservation
@@ -770,6 +815,7 @@ namespace Files.Seeding
                 NumOfGuests = 13,
                 ConfirmationNumber = 21933,
                 ReservationStatus = true,
+
             });
 
             AllReservations.Add(new Reservation
@@ -786,6 +832,7 @@ namespace Files.Seeding
                 NumOfGuests = 1,
                 ConfirmationNumber = 21934,
                 ReservationStatus = true,
+
             });
 
             AllReservations.Add(new Reservation
@@ -801,7 +848,8 @@ namespace Files.Seeding
                 DiscountRate = 0.06m,
                 NumOfGuests = 6,
                 ConfirmationNumber = 21935,
-                ReservationStatus = true,
+                ReservationStatus = false,
+
             });
 
             // Create a counter and flag to help with debugging
