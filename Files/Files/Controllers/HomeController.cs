@@ -227,7 +227,7 @@ namespace Files.Controllers
             }).ToList();
 
             // Populate ViewBag with counts
-            ViewBag.AllProperties = _context.Properties.Count();
+            ViewBag.AllProperties = _context.Properties.Count(p => p.PropertyStatus);
             ViewBag.SelectedProperties = results.Count;
 
             // Return the results
