@@ -406,6 +406,9 @@ namespace Files.Controllers
         // Cancel reservation
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Customer")]
+        [Authorize(Roles = "Host")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Cancel(int id)
         {
             var reservation = await _context.Reservations.FindAsync(id);

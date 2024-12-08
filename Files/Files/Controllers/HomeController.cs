@@ -277,7 +277,11 @@ namespace Files.Controllers
                 TotalReservations = p.Reservations
                     .Where(r => (!startDate.HasValue || !endDate.HasValue ||
                                  r.CheckIn <= endDate && r.CheckOut >= startDate))
-                    .Count()
+                    .Count(),
+                 Reservations = p.Reservations
+                     .Where(r => (!startDate.HasValue || !endDate.HasValue ||
+                     r.CheckIn <= endDate && r.CheckOut >= startDate))
+        .ToList() // Ensure reservations are included
             }).ToList();
 
             // Prepare the view model

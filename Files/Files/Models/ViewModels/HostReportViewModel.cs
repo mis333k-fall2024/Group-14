@@ -18,6 +18,9 @@ namespace Files.Models
         public decimal TotalCleaningFees { get; set; }
         public decimal TotalCombinedRevenue { get; set; }
         public int TotalReservations { get; set; }
+
+        // Add a list of reservations for detailed information
+        public List<Reservation> Reservations { get; set; } = new();
     }
 }
 
