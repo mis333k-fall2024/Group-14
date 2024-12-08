@@ -62,23 +62,7 @@ else
     </p>
 }
 
-@if (User.IsInRole("Host"))
-{
-    <div>
-        <a asp-action="HostDispute" asp-route-propertyId="@ViewData["PropertyId"]"style="color: #CC5500;">
-            Dispute Reviews
-        </a>
-        
-    </div>
-}
 
-@if (User.IsInRole("Admin"))
-{
-    <div>
-
-        <a asp-action="HostDispute" style="color: #CC5500;">Dispute</a>
-    </div>
-}
 
 <div>
     <a asp-action="Index" style="color: #CC5500;">Back to List</a>

@@ -1,0 +1,49 @@
+﻿@model IEnumerable<Files.Models.Review>
+
+
+
+<h2>Dispute Reviews for @ViewData["PropertyName"]</h2>
+
+@if (!Model.Any())
+{
+    <p>No reviews are being for disputed for this property.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Review ID</th>
+                <th>Rating</th>
+                <th>Review Text</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var review in Model)
+            {
+                <tr>
+                    <td>@review.ReviewID</td>
+                    <td>@review.Rating</td>
+                    <td>@review.TextReview</td>
+                    <td>
+                        <form asp-action="AdminDisputeResolution" method="post" style="display:inline;">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="reviewId" value="@review.ReviewID" />
+                            <input type="hidden" name="propertyId" value="@ViewData["PropertyId"]" />
+                            <input type="hidden" name="newStatus" value="ValidDispute" />
+                            <button type="submit" class="btn btn-success">Mark as Valid</button>
+                        </form>
+                        <form asp-action="AdminDisputeResolution" method="post" style="display:inline;">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="reviewId" value="@review.ReviewID" />
+                            <input type="hidden" name="propertyId" value="@ViewData["PropertyId"]" />
+                            <input type="hidden" name="newStatus" value="InvalidDispute" />
+                            <button type="submit" class="btn btn-danger">Mark as Invalid</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

@@ -50,6 +50,11 @@ namespace Files.Controllers
                 reviewsQuery = reviewsQuery.Where(r => r.DisputeStatus == StatusDispute.NoDispute || r.DisputeStatus == StatusDispute.InvalidDispute);
             }
 
+            if (User.IsInRole("Admin"))
+            {
+                reviewsQuery = reviewsQuery.Where(r => r.DisputeStatus == StatusDispute.NoDispute || r.DisputeStatus == StatusDispute.InvalidDispute || r.DisputeStatus == StatusDispute.ValidDispute || r.DisputeStatus == StatusDispute.Disputed);
+            }
+
             // Execute the query to get the filtered or unfiltered reviews
             var reviews = await reviewsQuery.ToListAsync();
             // Pass the necessary data to the view using ViewModel or ViewData
@@ -434,154 +439,88 @@ namespace Files.Controllers
             return View(reviewsToDispute);
         }
 
-        //based off detail method
-        //[Authorize(Roles = "Host")]
-        // public async Task<IActionResult> HostDispute(int? id)
-        //{
-        // if (id == null)
-        // {
-        //return NotFound();
-        //}
-
-        // Retrieve the review for the given ID, including its associated property
-        //var review = await _context.Reviews
-        // .Include(r => r.AppUsers) // Eager load AppUsers
-        // .Include(r => r.Properties) // Include navigation property
-        // .FirstOrDefaultAsync(m => m.ReviewID == id);
-
-        //if (review == null)
-        //{
-        //return NotFound("Review not found.");
-        // }
-
-        // Retrieve the property associated with the review, including all its reviews
-        //var property = await _context.Properties
-        //.Include(p => p.Reviews) // Include the Reviews navigation property
-        //.FirstOrDefaultAsync(p => p.PropertyID == review.Properties.PropertyID);
-
-        //if (property == null)
-        //{
-        //return NotFound("Property not found.");
-        //}
-
-        // Filter reviews that are eligible for dispute (DisputeStatus = NoDispute)
-        //var reviewsToDispute = property.Reviews
-        //.Where(r => r.DisputeStatus == StatusDispute.NoDispute)
-        //.ToList();
-
-        //if (!reviewsToDispute.Any())
-        //{
-        //return NotFound("No reviews eligible for dispute.");
-        //}
-
-        // Calculate the average guest rating for the property excluding certain disputes
-        //var averageRating = property.Reviews
-        //.Where(r => r.DisputeStatus != StatusDispute.ValidDispute && r.DisputeStatus != StatusDispute.Disputed)
-        //.Any()
-        //? (decimal?)property.Reviews
-        //.Where(r => r.DisputeStatus != StatusDispute.ValidDispute && r.DisputeStatus != StatusDispute.Disputed)
-        //.Average(r => r.Rating)
-        //: null;
-
-        // Pass data to the view
-        //ViewData["AverageRating"] = averageRating;
-        //ViewData["PropertyName"] = $"{property.Street}, {property.City}";
-
-        //return View(reviewsToDispute);
-        //}
-        //if we had propetyid working as a foregin key in here
-        //public async Task<IActionResult> HostDispute(int propertyId)
-        //{
-        // Log the received Property ID for debugging
-        //Console.WriteLine($"Received Property ID: {propertyId}");
-
-        // Retrieve reviews for the given property with their associated properties
-        //var reviewsToDispute = await _context.Reviews
-        //.Include(r => r.Properties) // Include the associated property
-        //.Where(r => r.Properties.PropertyID == propertyId && r.DisputeStatus == StatusDispute.NoDispute) // Filter by property and dispute status
-        //.ToListAsync();
-
-        //if (!reviewsToDispute.Any())
-        //{
-        //Console.WriteLine($"No reviews eligible for dispute for Property ID: {propertyId}");
-        //return NotFound($"No reviews eligible for dispute for Property ID: {propertyId}");
-        //}
-
-        // Get the property details (first one will be enough since all reviews belong to the same property)
-        //var property = reviewsToDispute.First().Properties;
-
-        // Pass data to the view
-        // ViewData["PropertyId"] = property.PropertyID;
-        //ViewData["PropertyName"] = $"{property.Street}, {property.City}";
-
-        //return View(reviewsToDispute);
-        //}
-
-        //[Authorize(Roles = "Host")]
-        //public async Task<IActionResult> HostDispute(int id)
-        //{
-        // Log the received Property ID for debugging
-        //Console.WriteLine($"Received Property ID: {id}");
-
-        // Retrieve the property details along with its reviews
-        //var property = await _context.Properties
-        //.Include(p => p.Reviews) // Include the associated reviews
-        //.FirstOrDefaultAsync(p => p.PropertyID == id);
-
-        //if (property == null)
-        //{
-        //Console.WriteLine($"Property with ID {id} not found.");
-        //return NotFound("Property not found.");
-        //}
-
-        // Filter reviews that are eligible to be disputed (status is NoDispute)
-        //var reviewsToDispute = property.Reviews
-        //.Where(r => r.DisputeStatus == StatusDispute.NoDispute)
-        //.ToList();
-
-        //if (!reviewsToDispute.Any())
-        //{
-        // Console.WriteLine($"No reviews eligible for dispute for Property ID: {id}");
-        //}
-
-        // Pass data to the view using ViewData and the filtered list
-        //ViewData["PropertyId"] = property.PropertyID;
-        //ViewData["PropertyName"] = $"{property.Street}, {property.City}";
-
-        //return View(reviewsToDispute);
-        //}
-
-        //code for to HostDisput
-        //[Authorize(Roles = "Host")]
-        //public async Task<IActionResult> HostDispute(int id)
-        //{
-        // Retrieve the property details
-        //var property = await _context.Properties
-        //.Include(p => p.Reviews) // Include the associated reviews
-        //.FirstOrDefaultAsync(p => p.PropertyID == id);
-
-        //if (property == null)
-        // {
-        // Console.WriteLine($"Received Property ID: {id}");
-        //return NotFound("Property not found.");
-        // }
-
-        // Filter reviews that are eligible to be disputed (status is NoDispute)
-        // var reviewsToDispute = property.Reviews
-        //.Where(r => r.DisputeStatus == StatusDispute.NoDispute)
-        //.ToList();
-        //var review = await _context.Reviews
-        //.Include(r => r.Properties) // Include navigation property
-        //.FirstOrDefaultAsync(r => r.ReviewID == id);
-
-        // Pass data to the view
-        //ViewData["PropertyId"] = property.PropertyID;
-        //ViewData["Properties"] = reviewsToDispute.Properties;
-
-        // return View(property);
-        //}
 
         //code for to Admin
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> AdminDispute(int? propertyId)
+        {
+            if (propertyId == null)
+            {
+                return NotFound("Property ID is required.");
+            }
+
+            // Retrieve the property by its ID, including its reviews
+            var property = await _context.Properties
+                .Include(p => p.Reviews) // Include associated reviews
+                .FirstOrDefaultAsync(p => p.PropertyID == propertyId);
+
+            if (property == null)
+            {
+                return NotFound("Property not found.");
+            }
+
+            // Filter reviews to only include those with DisputeStatus = Disputed
+            var disputedReviews = property.Reviews
+                .Where(r => r.DisputeStatus == StatusDispute.Disputed)
+                .ToList();
+
+            if (!disputedReviews.Any())
+            {
+                return NotFound("No reviews with Disputed status found.");
+            }
+
+            // Pass data to the view
+            ViewData["PropertyId"] = property.PropertyID; // Pass PropertyID for further actions
+            ViewData["PropertyName"] = $"{property.Street}, {property.City}";
+
+            return View(disputedReviews);
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AdminDisputeResolution(int reviewId, int propertyId, StatusDispute newStatus)
+        {
+            // Validate the new status to ensure it's either ValidDispute or InvalidDispute
+            if (newStatus != StatusDispute.ValidDispute && newStatus != StatusDispute.InvalidDispute)
+            {
+                return BadRequest("Invalid status provided. Only ValidDispute or InvalidDispute are allowed.");
+            }
+
+            // Retrieve the review by ID, including its associated property
+            var review = await _context.Reviews
+                .Include(r => r.Properties) // Include associated property
+                .FirstOrDefaultAsync(r => r.ReviewID == reviewId && r.Properties.PropertyID == propertyId);
+
+            if (review == null)
+            {
+                return NotFound("Review not found for the given property.");
+            }
+
+            // Ensure the current status is Disputed
+            if (review.DisputeStatus != StatusDispute.Disputed)
+            {
+                return BadRequest("Only reviews with Disputed status can be updated.");
+            }
+
+            // Update the dispute status
+            review.DisputeStatus = newStatus;
+
+            try
+            {
+                _context.Update(review);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error updating review ID {reviewId}: {ex.Message}");
+                return StatusCode(500, "An error occurred while updating the review status.");
+            }
+
+            // Redirect back to the AdminDispute page with the associated propertyId
+            return RedirectToAction("AdminDispute", new { propertyId });
+        }
+
 
     }
 }
