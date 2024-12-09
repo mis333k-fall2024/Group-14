@@ -60,10 +60,10 @@ namespace Files.Models
         public AppUser AppUsers { get; set; }
 
         [Display(Name = "City")]
-        public string City { get; set; }
+        public string? City { get; set; }
 
         [Display(Name = "State")]
-        public string State { get; set; }
+        public string? State { get; set; }
 
 
         public decimal CalculatePreDiscountPrice()
