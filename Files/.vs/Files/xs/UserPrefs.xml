@@ -64,6 +64,7 @@
               <Node name="Controllers" expanded="True">
                 <Node name="HomeController.cs" selected="True" />
               </Node>
+              <Node name="Migrations" expanded="True" />
               <Node name="Views" expanded="True">
                 <Node name="Home" expanded="True" />
                 <Node name="Properties" expanded="True" />
